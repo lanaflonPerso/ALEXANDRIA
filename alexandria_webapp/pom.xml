@@ -65,11 +65,11 @@
                     <webResources>
                         <resource>
                             <filtering>true</filtering>
-                            <directory>src/main/webapp</directory>
+                            <directory>src/main/webapp/WEB-INF/jsp/</directory>
                             <includes>
-                                <include>jsp/_include/header.jsp</include>
-                                <include>jsp/_include/footer.jsp</include>
-                                <include>jsp/about.jsp</include>
+                                <!--<include>_include/header.jsp</include>-->
+                                <!--<include>_include/footer.jsp</include>-->
+                                <include>about.jsp</include>
                             </includes>
                         </resource>
                     </webResources>
