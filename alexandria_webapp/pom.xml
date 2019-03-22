@@ -27,7 +27,7 @@
     <!-- =============================================================== -->
     <properties>
         <!-- Le nom "public" de l'application -->
-        <application.name>TicketTac</application.name>
+        <application.name>My little library</application.name>
         <!-- Le format à utiliser pour afficher la date du build -->
         <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
         <!-- Propriété servant à contourner le bug du non remplacement
