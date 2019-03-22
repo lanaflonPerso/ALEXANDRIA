@@ -35,8 +35,6 @@
   <!-- =============================================================== -->
   <properties>
     <java.version>11</java.version>
-    <!-- The main class to start by executing "java -jar" -->
-    <start-class>com.alexandria.Main</start-class>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -278,27 +276,9 @@
             </argLine>
           </configuration>
         </plugin>
-        <!-- Build an executable JAR -->
-        <!-- the following commands can invoke Maven JAR Plugin:  -->
-        <!-- mvn clean install -->
-        <!-- mvn clean package -->
-        <!-- mvn clean verify -->
-
-        <!-- Execution : java -classpath ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar com.alexandria.Main -->
-        <!-- Execution : java -jar ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar -->
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.1.1</version>
-          <configuration>
-            <archive>
-              <!-- Create MANIFEST.MF file -->
-              <!--          <manifest>
-                              <mainClass>${start-class}</mainClass>
-                            </manifest> -->
-              <!-- Get an already created MANIFEST.MF file -->
-              <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-            </archive>
-          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -342,29 +322,11 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.3</version>
         </plugin>
-
-        <!-- https://www.baeldung.com/executable-jar-with-maven -->
-        <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html -->
-        <!-- Require Maven 3.2+ -->
-        <!-- mvn clean package spring-boot:repackage -->
-        <!-- mvn spring-boot:run -> Application runs in an exploded form -->
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>2.1.3.RELEASE</version>
-          <configuration>
-            <!-- In order to execute mvn spring-boot:run -->
-            <mainClass>${start-class}</mainClass>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>repackage</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
-
       </plugins>
     </pluginManagement>
   </build>

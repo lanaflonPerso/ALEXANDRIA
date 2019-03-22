@@ -2,27 +2,35 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- Project informations -->
+    <!-- =============================================================== -->
+    <!-- ===== Maven Informations ===== -->
     <parent>
         <artifactId>alexandria</artifactId>
         <groupId>com.alexandria</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>alexandria-back</artifactId>
 
+    <!-- ===== General Informations ===== -->
     <name>alexandria-back</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
+    <!-- =============================================================== -->
+    <!-- Generic properties -->
+    <!-- =============================================================== -->
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <!-- The main class to start by executing "java -jar" -->
+        <start-class>com.alexandria.Main</start-class>
     </properties>
 
     <!-- =============================================================== -->
-    <!-- Dépendances -->
+    <!-- Dependencies -->
     <!-- =============================================================== -->
     <dependencies>
         <!-- ===== Modules ===== -->
@@ -35,8 +43,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.4.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -45,105 +51,95 @@
             Use hibernate-core instead of hibernate-agroal -->
             <!-- <artifactId>hibernate-agroal</artifactId> -->
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.1.Final</version>
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>7.2.1.jre11</version>
         </dependency>
         <dependency>
             <groupId>org.jdesktop</groupId>
             <artifactId>beansbinding</artifactId>
-            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.24.1-GA</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
-            <version>3.2.10</version>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.4.0-b180830.0359</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>2.4.0-b180830.0438</version>
         </dependency>
         <dependency>
             <groupId>com.bulenkov</groupId>
             <artifactId>darcula</artifactId>
-            <version>2018.2</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j18-impl</artifactId>
-            <version>2.11.2</version>
         </dependency>
-
-
     </dependencies>
 
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-            <plugins>
-                <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <!-- Build an executable JAR -->
+            <!-- the following commands can invoke Maven JAR Plugin:  -->
+            <!-- mvn clean install -->
+            <!-- mvn clean package -->
+            <!-- mvn clean verify -->
+
+            <!-- Execution : java -classpath ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar com.alexandria.Main -->
+            <!-- Execution : java -jar ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <!-- Create MANIFEST.MF file -->
+                        <!--          <manifest>
+                                        <mainClass>${start-class}</mainClass>
+                                      </manifest> -->
+                        <!-- Get an already created MANIFEST.MF file -->
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- https://www.baeldung.com/executable-jar-with-maven -->
+            <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html -->
+            <!-- Require Maven 3.2+ -->
+            <!-- mvn clean package spring-boot:repackage -->
+            <!-- mvn spring-boot:run -> Application runs in an exploded form -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- In order to execute mvn spring-boot:run -->
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
