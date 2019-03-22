@@ -23,6 +23,19 @@
     <url>http://www.example.com</url>
 
     <!-- =============================================================== -->
+    <!-- Generic properties -->
+    <!-- =============================================================== -->
+    <properties>
+        <!-- Le nom "public" de l'application -->
+        <application.name>TicketTac</application.name>
+        <!-- Le format à utiliser pour afficher la date du build -->
+        <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+        <!-- Propriété servant à contourner le bug du non remplacement
+             de la propriété maven.build.timestamp lors du filtrage des ressources -->
+        <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
+    </properties>
+
+    <!-- =============================================================== -->
     <!-- Dependencies -->
     <!-- =============================================================== -->
     <dependencies>
@@ -41,6 +54,23 @@
     <build>
         <finalName>alexandria-webapp</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>jsp/_include/header.jsp</include>
+                                <include>jsp/_include/footer.jsp</include>
+                                <include>jsp/about.jsp</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
             <!-- https://www.baeldung.com/executable-jar-with-maven -->
             <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html -->
             <!-- Require Maven 3.2+ -->

@@ -17,7 +17,7 @@
   <packaging>pom</packaging>
 
   <!-- ===== General Informations ===== -->
-  <name>My little library</name>
+  <name>alexandria</name>
   <description>
     La super application qui sert à faire ceci/cela...
   </description>
