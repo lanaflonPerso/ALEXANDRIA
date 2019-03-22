@@ -1,6 +1,6 @@
 package com.alexandria.entities;
 
-import com.alexandria.windows.util.AbstractModelObject;
+import com.alexandria.util.AbstractModelObject;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 

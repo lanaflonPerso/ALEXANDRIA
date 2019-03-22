@@ -1,6 +1,6 @@
 package com.alexandria.entities;
 
-import com.alexandria.windows.util.AbstractModelObject;
+import com.alexandria.util.AbstractModelObject;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

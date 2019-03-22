@@ -3,7 +3,7 @@
  * All Rights Reserved
  */
 
-package com.alexandria.windows.util;
+package com.alexandria.util;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

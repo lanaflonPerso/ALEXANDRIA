@@ -1,7 +1,7 @@
 package com.alexandria.entities;
 
 import antlr.Utils;
-import com.alexandria.windows.util.AbstractModelObject;
+import com.alexandria.util.AbstractModelObject;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.imageio.ImageIO;
