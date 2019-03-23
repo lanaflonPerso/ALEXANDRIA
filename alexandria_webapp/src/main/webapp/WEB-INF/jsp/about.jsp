@@ -1,10 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
 <div>
     <ul>
         <li>Application : ${application.name}</li>
@@ -14,5 +7,3 @@
     </ul>
 </div>
 
-</body>
-</html>

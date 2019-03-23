@@ -4,15 +4,23 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>My little library</display-name> <!-- Récupéré par request.getServletContext().getServletContextName() -->
 
   <jsp-config>
 
     <jsp-property-group>
+      <description>All the pages</description>
       <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
       <include-prelude>/WEB-INF/jsp/_include/taglibs.jspf</include-prelude>
+      <include-prelude>/WEB-INF/jsp/_include/prelude.jspf</include-prelude>
+      <include-prelude>/WEB-INF/jsp/_include/css.jspf</include-prelude>
+
       <!--<include-prelude>/WEB-INF/jsp/_include/header.jspf</include-prelude>-->
       <!--<include-coda>/WEB-INF/jsp/_include/footer.jspf</include-coda>-->
+      <include-coda>/WEB-INF/jsp/_include/js.jspf</include-coda>
+      <include-coda>/WEB-INF/jsp/_include/coda.jspf</include-coda>
+
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
 
