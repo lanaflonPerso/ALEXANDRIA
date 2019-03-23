@@ -1,2 +1,3 @@
-<h2>Hello World!</h2>
+<c:redirect url="/about" />
 
+<h2>Hello World!</h2>
