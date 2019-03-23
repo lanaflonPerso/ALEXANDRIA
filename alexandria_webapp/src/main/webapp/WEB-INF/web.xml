@@ -7,7 +7,6 @@
   <display-name>My little library</display-name> <!-- Récupéré par request.getServletContext().getServletContextName() -->
 
   <jsp-config>
-
     <jsp-property-group>
       <description>All the pages</description>
       <url-pattern>*.jsp</url-pattern>
@@ -19,10 +18,29 @@
       <include-coda>/WEB-INF/jsp/_include/js.jspf</include-coda>
       <include-coda>/WEB-INF/jsp/_include/footer.jspf</include-coda>
       <include-coda>/WEB-INF/jsp/_include/coda.jspf</include-coda>
-
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
     </jsp-property-group>
-
   </jsp-config>
+
+  <listener>
+    <listener-class>com.alexandria.config.InitialisationPersistence</listener-class>
+  </listener>
+
+  <!-- Force the web application to handle all requests and responses in UTF-8.
+Connector Configuration
+Character Set Filter
+Server Page Encoding
+HTML Page Encoding
+cf: https://www.baeldung.com/tomcat-utf-8
+-->
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.alexandria.config.EncodingFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
 </web-app>
