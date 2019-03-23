@@ -1,0 +1,42 @@
+<head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+
+<!-- Header -->
+<header>
+
+    <%-- Définitions des constantes symboliques des URLs
+        La directive JSTL url avec "/" génère une url absolue (le prefixe ${pageContext.request.contextPath} est implicite) et gère les cookies/sessions.
+        De plus la directive param transforme les caractères spéciaux en codes Html (évite injections de code) --%>
+    <c:url scope="application" value="/" var="URL_HOME"><c:param name="nom" value="Lebahar"/><c:param name="prenom" value="Josselin"/><c:param name="prenom" value="Florian"/></c:url>
+    <c:url value="/displayDevis" var="URL_DISPLAY_DEVIS"/>
+    <c:url value="/about" var="URL_ABOUT"/>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="${applicationScope.URL_HOME}">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="${pageScope.URL_DISPLAY_DEVIS}">Devis</a>
+                <a class="nav-item nav-link" href="${pageScope.URL_ABOUT}">About</a>
+            </div>
+        </div>
+    </nav>
+
+</header>
+<!-- Header -->
