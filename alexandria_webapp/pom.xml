@@ -76,7 +76,7 @@
                             <directory>src/main/webapp/WEB-INF/jsp</directory>
                             <targetPath>WEB-INF/jsp</targetPath>
                             <includes>
-                                <!--<include>_include/header.jsp</include>-->
+                                <include>_include/header.jspf</include>
                                 <!--<include>_include/footer.jsp</include>-->
                                 <include>about.jsp</include>
                             </includes>
