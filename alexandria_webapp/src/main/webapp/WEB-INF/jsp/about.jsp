@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <ul>
         <li>Application : ${application.name}</li>
         <li>Version     : ${project.version}</li>

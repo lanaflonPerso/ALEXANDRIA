@@ -77,7 +77,7 @@
                             <targetPath>WEB-INF/jsp</targetPath>
                             <includes>
                                 <include>_include/header.jspf</include>
-                                <!--<include>_include/footer.jsp</include>-->
+                                <include>_include/footer.jspf</include>
                                 <include>about.jsp</include>
                             </includes>
                         </resource>

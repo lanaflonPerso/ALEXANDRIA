@@ -1,15 +1,13 @@
-<!-- Footer -->
-    <br>
+<%
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy");
+    request.setAttribute("year", sdf.format(new java.util.Date()));
+%>
 
-    <%
-        request.setAttribute("organization_name", config.getServletContext().getInitParameter("organization.name"));
-        request.setAttribute("organization_url", config.getServletContext().getInitParameter("organization.url"));
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy");
-        request.setAttribute("year", sdf.format(new java.util.Date()));
-    %>
-    <footer class="footer fixed-bottom bg-primary">
-        <div class="footer-copyright text-center text-white">&copy; ${year} Copyright
-            <a href="${requestScope.organization_url}">${requestScope.organization_name}</a> All Rights Reserved
-        </div>
-    </footer >
-<!-- Footer -->
+<footer class="footer fixed-bottom bg-primary">
+    <div class="container">
+        <p>
+            ${year} - ${application.name} - version ${project.version}
+            &copy; <a href="${organization.url}">${organization.name}</a>
+        </p>
+    </div>
+</footer>
