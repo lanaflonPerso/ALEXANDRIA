@@ -4,7 +4,7 @@
 %>
 
 <footer class="footer fixed-bottom bg-primary">
-    <div class="container">
+    <div class="container text-center text-white">
         <p>
             ${year} - ${application.name} - version ${project.version}
             &copy; <a href="${organization.url}">${organization.name}</a>
