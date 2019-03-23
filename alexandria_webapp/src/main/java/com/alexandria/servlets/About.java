@@ -13,6 +13,8 @@ public class About extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
+        request.setAttribute("serverInfo", getServletContext().getServerInfo());
+
         this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
     }
 }
