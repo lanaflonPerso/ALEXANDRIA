@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Map;
 
 public class PersistenceUtils {
 
@@ -41,6 +42,11 @@ public class PersistenceUtils {
             throw new ExceptionInInitializerError(ex);
         }
         logger.trace("CONFIG_OK");
+    }
+
+    public static String getJdbcUrl() throws HibernateException {
+        Map<String, Object> emfProperties = ourSessionFactory.getProperties();
+        return (String) emfProperties.get("javax.persistence.jdbc.url");
     }
 
     private static EntityManagerFactory getSessionFactory() throws HibernateException {
