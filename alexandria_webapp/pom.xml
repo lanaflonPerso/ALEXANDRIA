@@ -65,7 +65,8 @@
                     <webResources>
                         <resource>
                             <filtering>true</filtering>
-                            <directory>src/main/webapp/WEB-INF/jsp/</directory>
+                            <directory>src/main/webapp/WEB-INF/jsp</directory>
+                            <targetPath>WEB-INF/jsp</targetPath>
                             <includes>
                                 <!--<include>_include/header.jsp</include>-->
                                 <!--<include>_include/footer.jsp</include>-->
