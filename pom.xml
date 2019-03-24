@@ -51,9 +51,9 @@
   <!-- Modules -->
   <!-- =============================================================== -->
   <modules>
-    <module>alexandria_back</module>
-    <module>alexandria_webapp</module>
-    <module>alexandria_consumer</module>
+    <module>alexandria-back</module>
+    <module>alexandria-webapp</module>
+    <module>alexandria-consumer</module>
   </modules>
 
   <!-- =============================================================== -->
