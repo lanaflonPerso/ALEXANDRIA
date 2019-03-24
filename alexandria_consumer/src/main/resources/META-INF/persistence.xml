@@ -56,6 +56,9 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
 
+            <!--check if database is consistent with annotated entities
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>-->
+
         </properties>
     </persistence-unit>
 </persistence>
