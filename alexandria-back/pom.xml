@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- Project informations -->
+    <!-- =============================================================== -->
+    <!-- ===== Maven Informations ===== -->
+    <parent>
+        <artifactId>alexandria</artifactId>
+        <groupId>com.alexandria</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>alexandria-back</artifactId>
+
+    <!-- ===== General Informations ===== -->
+    <name>alexandria-back</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <!-- =============================================================== -->
+    <!-- Generic properties -->
+    <!-- =============================================================== -->
+    <properties>
+        <!-- The main class to start by executing "java -jar" -->
+        <start-class>com.alexandria.Main</start-class>
+    </properties>
+
+    <!-- =============================================================== -->
+    <!-- Dependencies -->
+    <!-- =============================================================== -->
+    <dependencies>
+        <!-- ===== Modules ===== -->
+        <dependency>
+            <groupId>com.alexandria</groupId>
+            <artifactId>alexandria-consumer</artifactId>
+        </dependency>
+
+        <!-- ===== Bibliothèques tierces ===== -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jdesktop</groupId>
+            <artifactId>beansbinding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bulenkov</groupId>
+            <artifactId>darcula</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <plugins>
+            <!-- Build an executable JAR -->
+            <!-- the following commands can invoke Maven JAR Plugin:  -->
+            <!-- mvn clean install -->
+            <!-- mvn clean package -->
+            <!-- mvn clean verify -->
+
+            <!-- Execution : java -classpath ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar com.alexandria.Main -->
+            <!-- Execution : java -jar ALEXANDRIA/target/ALEXANDRIA-1.0-SNAPSHOT.jar -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <!-- Create MANIFEST.MF file -->
+                        <!--          <manifest>
+                                        <mainClass>${start-class}</mainClass>
+                                      </manifest> -->
+                        <!-- Get an already created MANIFEST.MF file -->
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- https://www.baeldung.com/executable-jar-with-maven -->
+            <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html -->
+            <!-- Require Maven 3.2+ -->
+            <!-- mvn clean package spring-boot:repackage -->
+            <!-- mvn spring-boot:run -> Application runs in an exploded form -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- In order to execute mvn spring-boot:run -->
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

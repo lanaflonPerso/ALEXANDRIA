@@ -1,0 +1,450 @@
+JFDML JFormDesigner: "7.0.0.0.170" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+/*
+  This file is part of JFormDesigner.
+  Copyright (C) 2011 Karl Tauber <karl@jformdesigner.com>
+  All Rights Reserved
+*/
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$alignTop": true
+			"$alignLeft": true
+			"$columnSpecs": "107, 0:1.0"
+			"$rowSpecs": "0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0"
+			"$hGap": 5
+			"$vGap": 5
+		} ) {
+			name: "this"
+			"preferredSize": new java.awt.Dimension( 800, 600 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "orderInfoLabel"
+				"font": new java.awt.Font( "Dialog", 0, 24 )
+				"text": "Order Info:"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 6
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "usernameLabel"
+				"font": new java.awt.Font( "Dialog", 1, 24 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"gridy": 6
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "orderInfoPane"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 205, 150"
+					"$rowSpecs": "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "clientPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "titleLabel"
+						"text": "Title"
+						"displayedMnemonic": 84
+						"labelFor": new FormReference( "titleField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "titleField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "firstNameLabel"
+						"text": "FirstName"
+						"displayedMnemonic": 70
+						"labelFor": new FormReference( "firstNameField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "firstNameField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lastNameLabel"
+						"text": "LastName"
+						"displayedMnemonic": 76
+						"labelFor": new FormReference( "lastNameField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "lastNameField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "emailLabel"
+						"text": "Email"
+						"displayedMnemonic": 69
+						"labelFor": new FormReference( "emailField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 3
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "emailField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 3
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "phoneLabel"
+						"text": "Phone"
+						"displayedMnemonic": 80
+						"labelFor": new FormReference( "phoneField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "phoneField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "passwordLabel"
+						"text": "Password"
+						"displayedMnemonic": 80
+						"labelFor": new FormReference( "passwordField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 5
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "passwordField"
+						"toolTipText": "Your password must be at least 8 characters in length.\nYour password must contain at least 3 out of the 4 following items:\nUppercase letters (A-Z)\nLowercase letters (a-z)\nNumbers (0-9)\nSymbols or special characters"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 5
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "paymentMethodLabel"
+						"text": "Payment method"
+						"displayedMnemonic": 80
+						"labelFor": new FormReference( "paymentMethodField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 6
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "paymentMethodField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 6
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "searchClientsLabel"
+						"displayedMnemonic": 67
+						"labelFor": new FormReference( "searchClientsField" )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/icons/Search_24px.png" )
+						"text": "Clients"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 8
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "searchClientsField"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "searchClients", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 8
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "searchClientsResLabel"
+						"text": "Search result"
+						"displayedMnemonic": 83
+						"labelFor": new FormReference( "searchClientsTable" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 9
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "searchClientsScrollPane"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "searchClientsTable"
+							"preferredScrollableViewportSize": new java.awt.Dimension( 1024, 768 )
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 9
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "selectClientButton"
+						"text": "Select..."
+						"mnemonic": 83
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "selectClient", false ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 10
+						"gridx": 1
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "Client"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 270"
+					"$rowSpecs": "0, 0, 0, 0, 0, 0, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "orderPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "datePlacedLabel"
+						"text": "Date placed"
+						"displayedMnemonic": 76
+						"labelFor": new FormReference( "datePlacedField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+					add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+						name: "datePlacedField"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "dateShippedLabel"
+						"text": "Date shipped"
+						"displayedMnemonic": 76
+						"labelFor": new FormReference( "dateShippedField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+						name: "dateShippedField"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "dateDeliveredLabel"
+						"text": "Date delivered"
+						"displayedMnemonic": 67
+						"labelFor": new FormReference( "dateDeliveredField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 2
+					} )
+					add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+						name: "dateDeliveredField"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 2
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "commentLabel"
+						"text": "Comment"
+						"displayedMnemonic": 83
+						"labelFor": new FormReference( "commentField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 3
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "commentField"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "shippingMethodLabel"
+						"text": "Shipping method"
+						"displayedMnemonic": 80
+						"labelFor": new FormReference( "shippingMethodField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "shippingMethodField"
+						auxiliary() {
+							"JavaCodeGenerator.typeParameters": "ShippingMethodEntity"
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 4
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "shippingMethodChargesLabel"
+						"text": "Shipping method charges"
+						"displayedMnemonic": 83
+						"labelFor": new FormReference( "shippingMethodChargesField" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 5
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "shippingMethodChargesField"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+						"gridy": 5
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "Order"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0, 24, 713"
+					"$rowSpecs": "426, 0, 0, 0, 0, 0"
+					"$hGap": 5
+					"$vGap": 5
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "orderLinesPanel"
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "orderLinesScrollPane"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "orderLinesTable"
+							"rowHeight": 250
+							"autoCreateRowSorter": true
+							"preferredScrollableViewportSize": new java.awt.Dimension( 750, 550 )
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridwidth": 3
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+						"$columnSpecs": "0:1.0, 80, 80, 80"
+						"$rowSpecs": "center:0:1.0"
+						"$alignTop": true
+						"$alignLeft": true
+						"$hGap": 5
+						"$vGap": 5
+					} ) {
+						name: "buttonPanel"
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "windowLabel"
+							"font": new java.awt.Font( "Dialog", 0, 24 )
+							"text": "Total Cost Ex Vat"
+							"foreground": new java.awt.Color( 255, 102, 0, 255 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "newOrderLineButton"
+							"text": "New..."
+							"mnemonic": 78
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newOrderLine", false ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "editOrderLineButton"
+							"text": "Edit..."
+							"mnemonic": 69
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "editOrderLine", false ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 2
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "deleteOrderLineButton"
+							"text": "Delete"
+							"mnemonic": 68
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteOrderLine", false ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridx": 3
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridy": 1
+						"gridwidth": 3
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "Order lines"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 8
+				"gridwidth": 2
+				"gridheight": 10
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 505, 730 )
+		} )
+		addBindingGroup( new FormBindingGroup( class org.jdesktop.beansbinding.BindingGroup ) {
+			"name": "bindingGroup"
+			addBinding( new FormBinding( "this", "${order.clientByClientId.firstName} ${order.clientByClientId.lastName}", "usernameLabel", "text" ) {
+				"name": "displayNameTitle"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.firstName", "firstNameField", "text" ) {
+				"name": "firstName"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.lastName", "lastNameField", "text" ) {
+				"name": "lastName"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.email", "emailField", "text" ) {
+				"name": "email"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.phone", "phoneField", "text" ) {
+				"name": "phone"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.password", "passwordField", "text" ) {
+				"name": "password"
+			} )
+			addBinding( new FormBinding( "this", "order.comment", "commentField", "text" ) {
+				"name": "addressByDeliveryAddressId.state"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.titleByTitleId.description", "titleField", "text" ) {
+				"name": "selectedTitle"
+			} )
+			addBinding( new FormBinding( "this", "order.clientByClientId.paymentMethodByPaymentMethodId.description", "paymentMethodField", "text" ) {
+				"name": "selectedShippingMethod"
+			} )
+			addBinding( new FormBinding( "this", "shippingMethods", "shippingMethodField", "elements" ) )
+			addBinding( new FormBinding( "this", "order.shippingMethodByShippingMethodId", "shippingMethodField", "selectedItem" ) )
+			addBinding( new FormBinding( "this", "order.orderLinesByIdOrderHeader", "orderLinesTable", "elements" ) {
+				"subBindings": new com.jformdesigner.model.FormBinding[ new FormBinding( null, "orderHeaderId", null, null ) {
+					"columnName": "Order Header Id"
+					"columnClass": "java.lang.Integer"
+					"editable": false
+				}, new FormBinding( null, "productId", null, null ) {
+					"columnName": "Product Id"
+					"columnClass": "java.lang.Integer"
+					"editable": false
+				}, new FormBinding( null, "productByProductId.name", null, null ) {
+					"columnName": "Name"
+					"columnClass": "java.lang.String"
+					"editable": false
+				}, new FormBinding( null, "productByProductId.priceExVat", null, null ) {
+					"columnName": "Price Ex Vat"
+					"columnClass": "java.math.BigDecimal"
+					"editable": false
+				}, new FormBinding( null, "quantity", null, null ) {
+					"columnName": "Quantity"
+					"columnClass": "java.lang.Integer"
+					"editable": false
+				}, new FormBinding( null, "productByProductId.image", null, null ) {
+					"columnName": "Image"
+					"columnClass": "javax.swing.ImageIcon"
+					"editable": false
+				} ]
+				"editable": false
+			} )
+			addBinding( new FormBinding( "this", "order.datePlaced", "datePlacedField", "value" ) )
+			addBinding( new FormBinding( "this", "order.dateShipped", "dateShippedField", "value" ) )
+			addBinding( new FormBinding( "this", "order.dateDelivered", "dateDeliveredField", "value" ) )
+			addBinding( new FormBinding( "orderLinesTable", "${selectedElement != null}", "editOrderLineButton", "enabled" ) )
+			addBinding( new FormBinding( "orderLinesTable", "${selectedElement != null}", "deleteOrderLineButton", "enabled" ) )
+			addBinding( new FormBinding( "this", "Total Cost Ex Vat : ${order.totalCostExVat} $", "windowLabel", "text" ) )
+			addBinding( new FormBinding( "searchClientsTable", "${selectedElement != null}", "selectClientButton", "enabled" ) )
+			addBinding( new FormBinding( "shippingMethodField", "selectedItem.charges", "shippingMethodChargesField", "text" ) )
+		} )
+		addBindingGroup( new FormBindingGroup( class org.jdesktop.beansbinding.BindingGroup ) {
+			"name": "enablementBindingGroup"
+			addBinding( new FormBinding( "this", "${order != null}", "datePlacedField", "editable" ) )
+			addBinding( new FormBinding( "this", "${order != null}", "dateShippedField", "editable" ) )
+			addBinding( new FormBinding( "this", "${order != null}", "dateDeliveredField", "editable" ) )
+			addBinding( new FormBinding( "this", "${order != null}", "commentField", "editable" ) )
+			addBinding( new FormBinding( "datePlacedField", "editable", "datePlacedLabel", "enabled" ) )
+			addBinding( new FormBinding( "dateShippedField", "editable", "dateShippedLabel", "enabled" ) )
+			addBinding( new FormBinding( "dateDeliveredField", "editable", "dateDeliveredLabel", "enabled" ) )
+			addBinding( new FormBinding( "commentField", "editable", "commentLabel", "enabled" ) )
+			addBinding( new FormBinding( "titleField", "enabled", "titleLabel", "enabled" ) )
+			addBinding( new FormBinding( "paymentMethodField", "enabled", "paymentMethodLabel", "enabled" ) )
+		} )
+	}
+}

@@ -1,0 +1,100 @@
+JFDML JFormDesigner: "7.0.0.0.170" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+/*
+  This file is part of JFormDesigner.
+  Copyright (C) 2011 Karl Tauber <karl@jformdesigner.com>
+  All Rights Reserved
+*/
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "0:1.0"
+			"$rowSpecs": "0:1.0, 0"
+			"$alignTop": true
+			"$alignLeft": true
+			"$hGap": 5
+			"$vGap": 5
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "productsScrollPane"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "productsTable"
+					"preferredScrollableViewportSize": new java.awt.Dimension( 1024, 768 )
+					"rowHeight": 250
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+				"$columnSpecs": "0:1.0, 80, 80, 80"
+				"$rowSpecs": "center:0:1.0"
+				"$alignTop": true
+				"$alignLeft": true
+				"$hGap": 5
+				"$vGap": 5
+			} ) {
+				name: "buttonPanel"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "windowLabel"
+					"font": new java.awt.Font( "Dialog", 0, 24 )
+					"text": "Products"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "newProductButton"
+					"text": "New..."
+					"mnemonic": 78
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "newProduct", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 1
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "editProductButton"
+					"text": "Edit..."
+					"mnemonic": 69
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "editProduct", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 2
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "deleteProductButton"
+					"text": "Delete"
+					"mnemonic": 68
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteProduct", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+					"gridx": 3
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 580, 315 )
+		} )
+		addBindingGroup( new FormBindingGroup( class org.jdesktop.beansbinding.BindingGroup ) {
+			"name": "bindingGroup"
+			addBinding( new FormBinding( "this", "products", "productsTable", "elements" ) {
+				"subBindings": new com.jformdesigner.model.FormBinding[ new FormBinding( null, "idProduct", null, null ) {
+					"columnName": "Id Product"
+					"columnClass": "java.lang.Integer"
+					"editable": false
+				}, new FormBinding( null, "name", null, null ) {
+					"columnName": "name"
+					"columnClass": "java.lang.String"
+				}, new FormBinding( null, "stock", null, null ) {
+					"columnName": "Stock"
+					"columnClass": "java.lang.Integer"
+				}, new FormBinding( null, "priceExVat", null, null ) {
+					"columnName": "Price Ex Vat $"
+					"columnClass": "java.math.BigDecimal"
+				}, new FormBinding( null, "image", null, null ) {
+					"columnName": "Image"
+					"columnClass": "javax.swing.ImageIcon"
+					"editable": false
+				} ]
+			} )
+			addBinding( new FormBinding( "productsTable", "${selectedElement != null}", "editProductButton", "enabled" ) )
+			addBinding( new FormBinding( "productsTable", "${selectedElement != null}", "deleteProductButton", "enabled" ) )
+		} )
+	}
+}

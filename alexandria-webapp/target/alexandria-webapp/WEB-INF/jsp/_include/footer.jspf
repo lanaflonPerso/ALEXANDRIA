@@ -1,0 +1,13 @@
+<%
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy");
+    request.setAttribute("year", sdf.format(new java.util.Date()));
+%>
+
+<footer class="footer fixed-bottom bg-primary">
+    <div class="container text-center text-white">
+        <p>
+            ${year} - My little library - version 1.0-SNAPSHOT
+            &copy; <a href="https://yanomami.synology.me">Josselin Lebahar</a>
+        </p>
+    </div>
+</footer>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/alexandria_webapp" />
+    <file type="web" url="file://$PROJECT_DIR$/alexandria-webapp" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

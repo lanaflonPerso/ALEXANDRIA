@@ -1,0 +1,17 @@
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/AbstractModelObject.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/product/ProductView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/DateConverter.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/EmailValidator.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/MaritalStatusConverter.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/order/OrdersView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/order/OrderView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/client/ClientView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/RequiredStringValidator.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/AgeValidator.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/mainwindow/MainWindow.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/order/OrderLineView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/AgeConverter.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/client/ClientsView.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/Main.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/util/LoggingBindingListener.java
+/Users/josselinlebahar/IdeaProjects/ALEXANDRIA/alexandria_back/src/main/java/com/alexandria/windows/product/ProductsView.java
