@@ -18,16 +18,6 @@ public class PersistenceUtils {
     // For debug purpose
     private static int idTransaction;
 
-//    log4j:
-//    import org.apache.logging.log4j.LogManager;
-//    import org.apache.logging.log4j.Logger;
-//    private static final Logger logger = LogManager.getLogger(PersistenceUtils.class);
-//    logger.info("Info level log");
-//    logger.debug("Debug level log");
-//    logger.warn("Warn level log");
-//    logger.error("Error level log");
-//    logger.trace("Trace level log");
-
     public static void init() {
 
         // Singleton
@@ -60,7 +50,8 @@ public class PersistenceUtils {
     public static void shutdown() throws HibernateException {
         logger.trace("SHUT_DOWN");
         // Close caches and connection pools
-        ourSessionFactory.close();
+        if(ourSessionFactory != null)
+            ourSessionFactory.close();
     }
 
     public static EntityManager beginTransaction() {
