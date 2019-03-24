@@ -1,22 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="alexandria_webapp:war exploded">
-    <output-path>$PROJECT_DIR$/alexandria_webapp/target/alexandria-webapp</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>alexandria_webapp</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
+  <artifact type="exploded-war" name="alexandria-webapp:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/alexandria_webapp_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="alexandria-webapp" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="alexandria-consumer-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="alexandria-consumer" />
-          </element>
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.4.2.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" />
           <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
@@ -46,9 +36,6 @@
           <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.5" />
           <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/alexandria-webapp/target/alexandria-webapp/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="alexandria-webapp/web/Web" />
     </root>
