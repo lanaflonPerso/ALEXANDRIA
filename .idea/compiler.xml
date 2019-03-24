@@ -6,6 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="alexandria-back" />
+        <module name="alexandria-consumer" />
+        <module name="alexandria-webapp" />
         <module name="alexandria_back" />
         <module name="alexandria_consumer" />
         <module name="alexandria_webapp" />
