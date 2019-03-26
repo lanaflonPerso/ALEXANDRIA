@@ -259,8 +259,7 @@ public class OrderView extends JPanel {
 
         EntityManager session = beginTransaction();
 
-        OrderLineEntity orderLine_ = session.merge(orderLine);
-        session.persist(orderLine_);
+        session.merge(orderLine);
 
         commitTransaction();
 
