@@ -90,10 +90,6 @@ new FormModel {
 					"columnName": "Client Last Name"
 					"columnClass": "java.lang.String"
 					"editable": false
-				}, new FormBinding( null, "nbOrderLines", null, null ) {
-					"columnName": "Nb Order Lines"
-					"columnClass": "java.lang.Integer"
-					"editable": false
 				}, new FormBinding( null, "datePlaced", null, null ) {
 					"columnName": "Date Placed"
 					"columnClass": "java.sql.Date"

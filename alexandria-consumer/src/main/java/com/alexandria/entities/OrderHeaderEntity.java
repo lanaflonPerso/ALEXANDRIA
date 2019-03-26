@@ -147,7 +147,7 @@ public class OrderHeaderEntity extends AbstractModelObject {
         this.shippingMethodByShippingMethodId = shippingMethodByShippingMethodId;
     }
 
-    @OneToMany(mappedBy = "orderHeaderByOrderHeaderId", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // TODO : TBC
+    @OneToMany(mappedBy = "orderHeaderByOrderHeaderId", cascade = CascadeType.ALL)
     public List<OrderLineEntity> getOrderLinesByIdOrderHeader() {
         return orderLinesByIdOrderHeader;
     }

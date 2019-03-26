@@ -163,6 +163,9 @@ public class OrdersView extends JPanel {
 
 		OrderHeaderEntity order = session.find(OrderHeaderEntity.class, idOrderHeader);
 
+		// Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
+		order.getOrderLinesByIdOrderHeader().size();
+
 		commitTransaction();
 
 		logger.info("DB_FIND_ORDER END " + "idOrderHeader: " + idOrderHeader);
@@ -318,10 +321,6 @@ public class OrdersView extends JPanel {
             binding.addColumnBinding(BeanProperty.create("clientByClientId.lastName"))
                 .setColumnName("Client Last Name")
                 .setColumnClass(String.class)
-                .setEditable(false);
-            binding.addColumnBinding(BeanProperty.create("nbOrderLines"))
-                .setColumnName("Nb Order Lines")
-                .setColumnClass(Integer.class)
                 .setEditable(false);
             binding.addColumnBinding(BeanProperty.create("datePlaced"))
                 .setColumnName("Date Placed")
