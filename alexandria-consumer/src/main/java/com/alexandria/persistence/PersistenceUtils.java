@@ -15,7 +15,7 @@ public class PersistenceUtils {
     private static final Logger logger = LogManager.getLogger(PersistenceUtils.class);
 
     private static EntityManagerFactory emf;
-    private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
+    private static EntityManager em;
 
     // For debug purpose
     private static int idTransaction;
@@ -48,17 +48,13 @@ public class PersistenceUtils {
     }
 
     private static EntityManager getEntityManager() throws HibernateException {
-        EntityManager manager = threadLocal.get();
-        if (manager == null || !manager.isOpen()) {
-            manager = emf.createEntityManager();
-            threadLocal.set(manager);
+        if (em == null || !em.isOpen()) {
+            em = emf.createEntityManager();
         }
-        return manager;
+        return em;
     }
 
     private static void closeEntityManager() throws HibernateException {
-        EntityManager em = threadLocal.get();
-        threadLocal.set(null);
         if (em != null) em.close();
     }
 
@@ -70,8 +66,8 @@ public class PersistenceUtils {
 
     public static EntityManager beginTransaction() {
         logger.trace("BEGIN_TRANSACTION " + idTransaction);
-        EntityManager em = getEntityManager();
         try {
+            em = getEntityManager();
             if (!em.getTransaction().isActive())
                 em.getTransaction().begin();
         } catch (HibernateException e) {
@@ -83,7 +79,7 @@ public class PersistenceUtils {
     public static void commitTransaction() {
         logger.trace("COMMIT_TRANSACTION " + idTransaction++);
         try {
-            getEntityManager().getTransaction().commit();
+            em.getTransaction().commit();
             closeEntityManager();
         } catch (HibernateException e) {
             rollbackTransaction();
@@ -93,7 +89,7 @@ public class PersistenceUtils {
     private static void rollbackTransaction() {
         logger.trace("ROLLBACK_TRANSACTION " + idTransaction);
         try {
-            getEntityManager().getTransaction().rollback();
+            em.getTransaction().rollback();
             closeEntityManager();
         } catch (HibernateException e) {
             e.printStackTrace();
