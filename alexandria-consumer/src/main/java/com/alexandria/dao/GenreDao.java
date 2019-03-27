@@ -13,7 +13,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class GenreDao {
 
-    private static final Logger logger = LogManager.getLogger(GenreEntity.class);
+    private static final Logger logger = LogManager.getLogger(GenreDao.class);
 
     public List<GenreEntity> doGenresList() {
 

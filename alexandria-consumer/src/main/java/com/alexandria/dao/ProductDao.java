@@ -14,7 +14,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class ProductDao {
 
-    private static final Logger logger = LogManager.getLogger(ProductEntity.class);
+    private static final Logger logger = LogManager.getLogger(ProductDao.class);
 
     public List<ProductEntity> doProductsList() {
 

@@ -13,7 +13,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class CountryDao {
 
-    private static final Logger logger = LogManager.getLogger(CountryEntity.class);
+    private static final Logger logger = LogManager.getLogger(CountryDao.class);
 
     public List<CountryEntity> doCountriesList() {
 

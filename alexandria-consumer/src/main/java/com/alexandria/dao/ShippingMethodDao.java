@@ -13,7 +13,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class ShippingMethodDao {
 
-    private static final Logger logger = LogManager.getLogger(ShippingMethodEntity.class);
+    private static final Logger logger = LogManager.getLogger(ShippingMethodDao.class);
 
     public List<ShippingMethodEntity> doShippingMethodsList() {
 

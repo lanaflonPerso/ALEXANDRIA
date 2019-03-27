@@ -13,7 +13,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class AuthorDao {
 
-    private static final Logger logger = LogManager.getLogger(AuthorEntity.class);
+    private static final Logger logger = LogManager.getLogger(AuthorDao.class);
 
     public List<AuthorEntity> doAuthorsList() {
 

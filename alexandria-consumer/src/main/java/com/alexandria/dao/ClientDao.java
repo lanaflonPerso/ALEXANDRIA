@@ -14,7 +14,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class ClientDao {
 
-    private static final Logger logger = LogManager.getLogger(ClientEntity.class);
+    private static final Logger logger = LogManager.getLogger(ClientDao.class);
 
     public List<ClientEntity> doClientsList() {
 

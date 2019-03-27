@@ -12,7 +12,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class OrderLineDao {
 
-    private static final Logger logger = LogManager.getLogger(OrderLineEntity.class);
+    private static final Logger logger = LogManager.getLogger(OrderLineDao.class);
 
     // FIXME : crash if used (Entity not managed)
     public void dbRefreshOrderLine(OrderLineEntity orderLine) {

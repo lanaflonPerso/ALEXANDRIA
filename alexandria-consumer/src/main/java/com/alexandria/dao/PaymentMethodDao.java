@@ -13,7 +13,7 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class PaymentMethodDao {
 
-    private static final Logger logger = LogManager.getLogger(PaymentMethodEntity.class);
+    private static final Logger logger = LogManager.getLogger(PaymentMethodDao.class);
 
     public List<PaymentMethodEntity> doPaymentMethodsList() {
 

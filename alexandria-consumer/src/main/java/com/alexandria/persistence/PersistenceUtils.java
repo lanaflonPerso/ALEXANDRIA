@@ -7,26 +7,28 @@ import org.hibernate.HibernateException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.Map;
 
 public class PersistenceUtils {
 
     private static final Logger logger = LogManager.getLogger(PersistenceUtils.class);
 
-    private static EntityManagerFactory ourSessionFactory;
-    private static EntityManager session;
+    private static EntityManagerFactory emf;
+    private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
+
     // For debug purpose
     private static int idTransaction;
 
     public static void init() {
 
         // Singleton
-        if(ourSessionFactory != null) {
+        if(emf != null) {
             return;
         }
 
         try {
-            ourSessionFactory = Persistence.createEntityManagerFactory( "PersistenceUnit" );
+            emf = Persistence.createEntityManagerFactory( "PersistenceUnit" );
 
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
@@ -35,52 +37,70 @@ public class PersistenceUtils {
     }
 
     public static String getJdbcUrl() throws HibernateException {
-        Map<String, Object> emfProperties = ourSessionFactory.getProperties();
-        return (String) emfProperties.get("javax.persistence.jdbc.url");
+        String jdbcUrl;
+        if(emf != null) {
+            Map<String, Object> emfProperties = emf.getProperties();
+            jdbcUrl = (String) emfProperties.get("javax.persistence.jdbc.url");
+        } else {
+            jdbcUrl = "EntityManagerFactory not created";
+        }
+        return jdbcUrl;
     }
 
-    private static EntityManagerFactory getSessionFactory() throws HibernateException {
-        return ourSessionFactory;
+    private static EntityManager getEntityManager() throws HibernateException {
+        EntityManager manager = threadLocal.get();
+        if (manager == null || !manager.isOpen()) {
+            manager = emf.createEntityManager();
+            threadLocal.set(manager);
+        }
+        return manager;
     }
 
-    private static EntityManager getSession() throws HibernateException {
-        return ourSessionFactory.createEntityManager();
+    private static void closeEntityManager() throws HibernateException {
+        EntityManager em = threadLocal.get();
+        threadLocal.set(null);
+        if (em != null) em.close();
     }
 
     public static void shutdown() throws HibernateException {
         logger.trace("SHUT_DOWN");
         // Close caches and connection pools
-        if(ourSessionFactory != null)
-            ourSessionFactory.close();
+        if(emf != null) emf.close();
     }
 
     public static EntityManager beginTransaction() {
         logger.trace("BEGIN_TRANSACTION " + idTransaction);
         try {
-            session = getSession();
-            session.getTransaction().begin();
+            EntityManager em = getEntityManager();
+            if (!em.getTransaction().isActive())
+                em.getTransaction().begin();
         } catch (HibernateException e) {
             rollbackTransaction();
         }
-        return session;
+        return getEntityManager();
     }
 
     public static void commitTransaction() {
         logger.trace("COMMIT_TRANSACTION " + idTransaction++);
         try {
-            session.getTransaction().commit();
-            session.close();
+            getEntityManager().getTransaction().commit();
+            closeEntityManager();
         } catch (HibernateException e) {
             rollbackTransaction();
         }
     }
 
-    static void rollbackTransaction() {
+    private static void rollbackTransaction() {
         logger.trace("ROLLBACK_TRANSACTION " + idTransaction);
         try {
-            session.getTransaction().rollback();
+            getEntityManager().getTransaction().rollback();
+            closeEntityManager();
         } catch (HibernateException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Query createQuery(String query) {
+        return getEntityManager().createQuery(query);
     }
 }
