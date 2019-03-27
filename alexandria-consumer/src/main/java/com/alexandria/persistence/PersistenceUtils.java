@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import java.util.Map;
 
 public class PersistenceUtils {
@@ -36,7 +35,7 @@ public class PersistenceUtils {
         logger.trace("CONFIG_OK");
     }
 
-    public static String getJdbcUrl() throws HibernateException {
+    public static String getJdbcUrl() {
         String jdbcUrl;
         if(emf != null) {
             Map<String, Object> emfProperties = emf.getProperties();
@@ -47,18 +46,18 @@ public class PersistenceUtils {
         return jdbcUrl;
     }
 
-    private static EntityManager getEntityManager() throws HibernateException {
+    public static EntityManager getEntityManager() throws HibernateException {
         if (em == null || !em.isOpen()) {
             em = emf.createEntityManager();
         }
         return em;
     }
 
-    private static void closeEntityManager() throws HibernateException {
+    public static void closeEntityManager() throws HibernateException {
         if (em != null) em.close();
     }
 
-    public static void shutdown() throws HibernateException {
+    public static void shutdown() {
         logger.trace("SHUT_DOWN");
         // Close caches and connection pools
         if(emf != null) emf.close();
@@ -94,9 +93,5 @@ public class PersistenceUtils {
         } catch (HibernateException e) {
             e.printStackTrace();
         }
-    }
-
-    public static Query createQuery(String query) {
-        return getEntityManager().createQuery(query);
     }
 }
