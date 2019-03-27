@@ -98,7 +98,7 @@ public class ClientsView extends JPanel {
 			return;
 
 		// Find in database
-		ClientEntity client = clientDao.dbFindClient(clients.get(selectedRow).getIdClient());
+		ClientEntity client = clientDao.find(clients.get(selectedRow).getIdClient());
 
 		// Call dialog box
 		ClientEntity newClient = showClientDialog("Edit Client", new ClientEntity(client));

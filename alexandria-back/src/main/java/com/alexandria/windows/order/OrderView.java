@@ -254,7 +254,7 @@ public class OrderView extends JPanel {
 
         // Find in database
         ClientDao clientDao = new DAOFactory().getClientDao();
-        ClientEntity client = clientDao.dbFindClient(searchClientsList.get(selectedRow).getIdClient());
+        ClientEntity client = clientDao.find(searchClientsList.get(selectedRow).getIdClient());
 
         // Replace in model
         order.setClientByClientId(client);

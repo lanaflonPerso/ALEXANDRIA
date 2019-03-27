@@ -34,21 +34,6 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         logger.info("DB_REMOVE END " + "idClient: " + idClient);
     }
 
-    public ClientEntity dbFindClient(Integer idClient) {
-
-        logger.info("DB_FIND_CLIENT BEGIN " + "idClient: " + idClient);
-
-        EntityManager session = beginTransaction();
-
-        ClientEntity client = session.find(ClientEntity.class, idClient);
-
-        commitTransaction();
-
-        logger.info("DB_FIND_CLIENT END " + "idClient: " + idClient);
-
-        return client;
-    }
-
     public List<ClientEntity> searchClients(String str) {
 
         logger.info("DB_SEARCH_CLIENTS BEGIN");

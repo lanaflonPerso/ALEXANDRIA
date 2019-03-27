@@ -120,7 +120,7 @@ public class OrderLineView extends JPanel {
             return;
 
         // Find in database
-        ProductEntity product = productDao.dbFindProduct(searchProductsList.get(selectedRow).getIdProduct());
+        ProductEntity product = productDao.find(searchProductsList.get(selectedRow).getIdProduct());
 
         // Replace in model
         orderLine.setProductByProductId(product);

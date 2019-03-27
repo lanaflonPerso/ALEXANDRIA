@@ -36,21 +36,6 @@ public class ProductDao extends AbstractDao<ProductEntity> {
         return searchProductsList;
     }
 
-    public ProductEntity dbFindProduct(Integer idProduct) {
-
-        logger.info("DB_FIND_PRODUCT BEGIN " + "idProduct: " + idProduct);
-
-        EntityManager session = beginTransaction();
-
-        ProductEntity product = session.find(ProductEntity.class, idProduct);
-
-        commitTransaction();
-
-        logger.info("DB_FIND_PRODUCT END " + "idProduct: " + idProduct);
-
-        return product;
-    }
-
     public void dbRemoveProduct(Integer idProduct)
     {
         logger.info("DB_REMOVE BEGIN " + "idProduct: " + idProduct);

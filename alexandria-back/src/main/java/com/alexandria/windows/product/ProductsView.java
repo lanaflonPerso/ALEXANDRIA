@@ -94,7 +94,7 @@ public class ProductsView extends JPanel {
 			return;
 
 		// Find in database
-		ProductEntity product = productDao.dbFindProduct(products.get(selectedRow).getIdProduct());
+		ProductEntity product = productDao.find(products.get(selectedRow).getIdProduct());
 
 		// Call dialog box
 		ProductEntity newProduct = showProductDialog("Edit Product", new ProductEntity(product));
