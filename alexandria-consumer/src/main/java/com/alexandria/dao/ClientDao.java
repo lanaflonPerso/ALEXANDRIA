@@ -8,8 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
+import static com.alexandria.persistence.PersistenceUtils.*;
 
 public class ClientDao extends AbstractDao<ClientEntity> {
 
@@ -34,17 +33,17 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         logger.info("DB_REMOVE END " + "idClient: " + idClient);
     }
 
-    public List<ClientEntity> searchClients(String str) {
+    public List<ClientEntity> searchClients(String param) {
 
         logger.info("DB_SEARCH_CLIENTS BEGIN");
 
-        EntityManager session = beginTransaction();
+        EntityManager em = getEntityManager();
 
-        TypedQuery<ClientEntity> query = session.createNamedQuery("ClientEntity.findFromFirstNameLastName", ClientEntity.class);
-        query.setParameter("name", str);
+        TypedQuery<ClientEntity> query = em.createNamedQuery("ClientEntity.findFromFirstNameLastName", ClientEntity.class);
+        query.setParameter("name", param);
         List<ClientEntity> searchClientsList = query.getResultList();
 
-        commitTransaction();
+        closeEntityManager();
 
         logger.info("DB_SEARCH_CLIENTS END");
 

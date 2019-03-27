@@ -8,8 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
+import static com.alexandria.persistence.PersistenceUtils.*;
 
 public class ProductDao extends AbstractDao<ProductEntity> {
 
@@ -19,17 +18,17 @@ public class ProductDao extends AbstractDao<ProductEntity> {
         super(ProductEntity.class);
     }
 
-    public List<ProductEntity> searchProducts(String str) {
+    public List<ProductEntity> searchProducts(String param) {
 
         logger.info("DB_SEARCH_PRODUCTS BEGIN");
 
-        EntityManager session = beginTransaction();
+        EntityManager em = getEntityManager();
 
-        TypedQuery<ProductEntity> query = session.createNamedQuery("ProductEntity.findFromName", ProductEntity.class);
-        query.setParameter("name", str);
+        TypedQuery<ProductEntity> query = em.createNamedQuery("ProductEntity.findFromName", ProductEntity.class);
+        query.setParameter("name", param);
         List<ProductEntity> searchProductsList = query.getResultList();
 
-        commitTransaction();
+        closeEntityManager();
 
         logger.info("DB_SEARCH_PRODUCTS END");
         
