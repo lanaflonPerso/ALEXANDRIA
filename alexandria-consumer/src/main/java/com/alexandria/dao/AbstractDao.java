@@ -50,6 +50,17 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_REMOVE END");
 	}
 
+	// TODO : unify remove methods
+	public void remove2(Object id) {
+		logger.info(entityClass + " DB_REMOVE2 BEGIN " + "id: " + id);
+
+		EntityManager em = beginTransaction();
+		em.remove(em.find(entityClass, id));
+		commitTransaction();
+
+		logger.info(entityClass + " DB_REMOVE2 END " + "id: " + id);
+	}
+
 	public T find(Object id) {
 		logger.info(entityClass + " DB_FIND BEGIN " + "id: " + id);
 

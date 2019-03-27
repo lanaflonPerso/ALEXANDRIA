@@ -185,7 +185,7 @@ public class OrderView extends JPanel {
 
         // remove items from database
         for(int selectedRow : selectedRows)
-            orderLineDao.dbRemoveOrderLine(orderLines.get(selectedRow));
+            orderLineDao.remove(orderLines.get(selectedRow));
 
         // remove items from memory
         for (int i = selectedRows.length - 1; i >= 0; i--)
@@ -230,7 +230,7 @@ public class OrderView extends JPanel {
 
         // Search in database
         ClientDao clientDao = new DAOFactory().getClientDao();
-        searchClientsList = clientDao.searchClients(e.getActionCommand());
+        searchClientsList = clientDao.findFromFirstNameLastName(e.getActionCommand());
 
         // FIXME : Workaround as searchClientsList cannot be mapped in the JTable in JFormDesigner (bug?)
         //  - the select from JTable (selectClient) is bypased and we set the model with the first result of the searchClientsList

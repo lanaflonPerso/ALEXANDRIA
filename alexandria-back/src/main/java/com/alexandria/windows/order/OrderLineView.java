@@ -65,7 +65,7 @@ public class OrderLineView extends JPanel {
         logger.info("DB_SEARCH_PRODUCTS BEGIN");
 
         // Search in database
-        searchProductsList = productDao.searchProducts(e.getActionCommand());
+        searchProductsList = productDao.findFromName(e.getActionCommand());
 
         // Log searchProductsList
         if(searchProductsList.size() > 1)

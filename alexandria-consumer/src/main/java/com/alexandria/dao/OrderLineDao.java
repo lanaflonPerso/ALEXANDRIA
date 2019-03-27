@@ -31,18 +31,4 @@ public class OrderLineDao extends AbstractDao<OrderLineEntity> {
 
         logger.info("DB_REFRESH_ORDER_LINE END " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
     }
-
-    public void dbRemoveOrderLine(OrderLineEntity orderLine)
-    {
-        logger.info("DB_REMOVE_ORDER_LINE BEGIN " + "iOrderLine: ");
-
-        EntityManager session = beginTransaction();
-
-        OrderHeaderEntity order = session.getReference(OrderHeaderEntity.class, orderLine.getOrderHeaderByOrderHeaderId().getIdOrderHeader());
-        order.getOrderLinesByIdOrderHeader().remove(0);
-
-        commitTransaction();
-
-        logger.info("DB_REMOVE_ORDER_LINE END " + "iOrderLine: ");
-    }
 }

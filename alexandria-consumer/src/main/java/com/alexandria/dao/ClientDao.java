@@ -18,34 +18,19 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         super(ClientEntity.class);
     }
 
-    public void dbRemoveClient(Integer idClient)
-    {
-        logger.info("DB_REMOVE BEGIN " + "idClient: " + idClient);
+    public List<ClientEntity> findFromFirstNameLastName(String name) {
 
-        EntityManager session = beginTransaction();
-
-        ClientEntity client = session.find(ClientEntity.class, idClient);
-
-        session.remove(client);
-
-        commitTransaction();
-
-        logger.info("DB_REMOVE END " + "idClient: " + idClient);
-    }
-
-    public List<ClientEntity> searchClients(String param) {
-
-        logger.info("DB_SEARCH_CLIENTS BEGIN");
+        logger.info("DB_FIND_FROM_FIRST_NAME_LAST_NAME BEGIN");
 
         EntityManager em = getEntityManager();
 
         TypedQuery<ClientEntity> query = em.createNamedQuery("ClientEntity.findFromFirstNameLastName", ClientEntity.class);
-        query.setParameter("name", param);
+        query.setParameter("name", name);
         List<ClientEntity> searchClientsList = query.getResultList();
 
         closeEntityManager();
 
-        logger.info("DB_SEARCH_CLIENTS END");
+        logger.info("DB_FIND_FROM_FIRST_NAME_LAST_NAME END");
 
         return searchClientsList;
     }

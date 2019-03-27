@@ -115,7 +115,7 @@ public class ProductsView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			productDao.dbRemoveProduct(products.get(selectedRow).getIdProduct());
+			productDao.remove2(products.get(selectedRow).getIdProduct());
 
 		// remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)

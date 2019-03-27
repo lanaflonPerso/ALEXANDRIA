@@ -18,35 +18,20 @@ public class ProductDao extends AbstractDao<ProductEntity> {
         super(ProductEntity.class);
     }
 
-    public List<ProductEntity> searchProducts(String param) {
+    public List<ProductEntity> findFromName(String name) {
 
-        logger.info("DB_SEARCH_PRODUCTS BEGIN");
+        logger.info("DB_FIND_FROM_NAME BEGIN");
 
         EntityManager em = getEntityManager();
 
         TypedQuery<ProductEntity> query = em.createNamedQuery("ProductEntity.findFromName", ProductEntity.class);
-        query.setParameter("name", param);
+        query.setParameter("name", name);
         List<ProductEntity> searchProductsList = query.getResultList();
 
         closeEntityManager();
 
-        logger.info("DB_SEARCH_PRODUCTS END");
+        logger.info("DB_FIND_FROM_NAME END");
         
         return searchProductsList;
-    }
-
-    public void dbRemoveProduct(Integer idProduct)
-    {
-        logger.info("DB_REMOVE BEGIN " + "idProduct: " + idProduct);
-
-        EntityManager session = beginTransaction();
-
-        ProductEntity product = session.find(ProductEntity.class, idProduct);
-
-        session.remove(product);
-
-        commitTransaction();
-
-        logger.info("DB_REMOVE END " + "idProduct: " + idProduct);
     }
 }
