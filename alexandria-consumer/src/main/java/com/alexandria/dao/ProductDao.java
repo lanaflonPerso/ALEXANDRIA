@@ -1,7 +1,6 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.ProductEntity;
-import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
