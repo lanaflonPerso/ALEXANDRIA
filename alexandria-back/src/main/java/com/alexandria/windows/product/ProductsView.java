@@ -85,7 +85,7 @@ public class ProductsView extends JPanel {
 		productsTable.scrollRectToVisible(productsTable.getCellRect(row, 0, true));
 
 		// Create in database
-		productDao.dbCreateProduct(product);
+		productDao.create(product);
 	}
 
 	private void editProduct() {

@@ -115,7 +115,7 @@ public class OrderView extends JPanel {
         orderLinesTable.scrollRectToVisible(orderLinesTable.getCellRect(row, 0, true));
 
         // Create in database
-        orderLineDao.dbCreateOrderLine(orderLine);
+        orderLineDao.create(orderLine);
 
         logger.info("NEW_ORDER_LINE END ");
     }
@@ -239,7 +239,7 @@ public class OrderView extends JPanel {
 
             // Create new order in database Cf. comments in OrdersView -> newOrder
             OrderHeaderDao orderHeaderDao = new DAOFactory().getOrderHeaderDao();
-            orderHeaderDao.dbCreateOrder(order);
+            orderHeaderDao.create(order);
         }
 
         logger.info("DB_SEARCH_CLIENTS END");

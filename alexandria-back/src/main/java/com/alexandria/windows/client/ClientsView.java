@@ -89,7 +89,7 @@ public class ClientsView extends JPanel {
 		clientsTable.scrollRectToVisible(clientsTable.getCellRect(row, 0, true));
 
 		// Create in database
-		clientDao.dbCreateClient(client);
+		clientDao.create(client);
 	}
 
 	private void editClient() {

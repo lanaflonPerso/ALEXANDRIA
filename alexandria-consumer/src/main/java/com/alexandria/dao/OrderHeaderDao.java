@@ -17,19 +17,6 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
         super(OrderHeaderEntity.class);
     }
 
-    public void dbCreateOrder(OrderHeaderEntity order) {
-
-        logger.info("DB_CREATE_ORDER BEGIN ");
-
-        EntityManager session = beginTransaction();
-
-        session.persist(order);
-
-        commitTransaction();
-
-        logger.info("DB_CREATE_ORDER END ");
-    }
-
     public OrderHeaderEntity dbFindOrder(Integer idOrderHeader) {
 
         logger.info("DB_FIND_ORDER BEGIN " + "idOrderHeader: " + idOrderHeader);

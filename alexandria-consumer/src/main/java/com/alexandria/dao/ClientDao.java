@@ -19,19 +19,6 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         super(ClientEntity.class);
     }
 
-    public void dbCreateClient(ClientEntity client) {
-
-        logger.info("DB_CREATE BEGIN ");
-
-        EntityManager session = beginTransaction();
-
-        session.persist(client);
-
-        commitTransaction();
-
-        logger.info("DB_CREATE END ");
-    }
-
     public void dbUpdateClient(ClientEntity client) {
         logger.info("DB_UPDATE BEGIN " + "idClient: " + client.getIdClient());
 
