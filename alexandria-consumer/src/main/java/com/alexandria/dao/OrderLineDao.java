@@ -10,9 +10,13 @@ import javax.persistence.EntityManager;
 import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
 import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
-public class OrderLineDao {
+public class OrderLineDao extends AbstractDao<OrderLineEntity> {
 
     private static final Logger logger = LogManager.getLogger(OrderLineDao.class);
+
+    public OrderLineDao() {
+        super(OrderLineEntity.class);
+    }
 
     // FIXME : crash if used (Entity not managed)
     public void dbRefreshOrderLine(OrderLineEntity orderLine) {

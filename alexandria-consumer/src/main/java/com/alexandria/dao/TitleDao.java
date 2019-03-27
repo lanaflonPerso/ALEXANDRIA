@@ -11,9 +11,13 @@ import java.util.List;
 import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
 import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
-public class TitleDao {
+public class TitleDao extends AbstractDao<TitleEntity> {
 
     private static final Logger logger = LogManager.getLogger(TitleDao.class);
+
+    public TitleDao() {
+        super(TitleEntity.class);
+    }
 
     public List<TitleEntity> doTitlesList() {
 

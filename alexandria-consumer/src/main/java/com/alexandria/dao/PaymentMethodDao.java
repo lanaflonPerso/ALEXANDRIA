@@ -11,9 +11,13 @@ import java.util.List;
 import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
 import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
-public class PaymentMethodDao {
+public class PaymentMethodDao extends AbstractDao<PaymentMethodEntity> {
 
     private static final Logger logger = LogManager.getLogger(PaymentMethodDao.class);
+
+    public PaymentMethodDao() {
+        super(PaymentMethodEntity.class);
+    }
 
     public List<PaymentMethodEntity> doPaymentMethodsList() {
 

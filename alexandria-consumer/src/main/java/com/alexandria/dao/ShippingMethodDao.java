@@ -11,9 +11,13 @@ import java.util.List;
 import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
 import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
-public class ShippingMethodDao {
+public class ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
 
     private static final Logger logger = LogManager.getLogger(ShippingMethodDao.class);
+
+    public ShippingMethodDao() {
+        super(ShippingMethodEntity.class);
+    }
 
     public List<ShippingMethodEntity> doShippingMethodsList() {
 

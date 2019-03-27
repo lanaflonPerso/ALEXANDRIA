@@ -11,9 +11,13 @@ import java.util.List;
 import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
 import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
-public class CountryDao {
+public class CountryDao extends AbstractDao<CountryEntity> {
 
     private static final Logger logger = LogManager.getLogger(CountryDao.class);
+
+    public CountryDao() {
+        super(CountryEntity.class);
+    }
 
     public List<CountryEntity> doCountriesList() {
 
