@@ -24,7 +24,7 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_CREATE BEGIN");
 
 		EntityManager em = beginTransaction();
-		getEntityManager().persist(entity);
+		em.persist(entity);
 		commitTransaction();
 
 		logger.info(entityClass + " DB_CREATE END");
@@ -34,7 +34,7 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_UPDATE BEGIN");
 
 		EntityManager em = beginTransaction();
-		getEntityManager().merge(entity);
+		em.merge(entity);
 		commitTransaction();
 
 		logger.info(entityClass + " DB_UPDATE END");
@@ -44,7 +44,7 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_REMOVE BEGIN");
 
 		EntityManager em = beginTransaction();
-		getEntityManager().remove(getEntityManager().merge(entity));
+		em.remove(em.merge(entity));
 		commitTransaction();
 
 		logger.info(entityClass + " DB_REMOVE END");
@@ -101,10 +101,10 @@ public abstract class AbstractDao<T> {
 
 		EntityManager em = getEntityManager();
 
-		CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
+		CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
 		javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
-		cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-		javax.persistence.Query q = getEntityManager().createQuery(cq);
+		cq.select(em.getCriteriaBuilder().count(rt));
+		javax.persistence.Query q = em.createQuery(cq);
 		int count = ((Long) q.getSingleResult()).intValue();
 
 		closeEntityManager();
