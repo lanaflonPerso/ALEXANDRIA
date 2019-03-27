@@ -35,19 +35,6 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
         return order;
     }
 
-    public void dbUpdateOrder(OrderHeaderEntity order) {
-
-        logger.info("DB_UPDATE_ORDER BEGIN " + "idOrderHeader: " + order.getIdOrderHeader());
-
-        EntityManager session = beginTransaction();
-
-        session.merge(order);
-
-        commitTransaction();
-
-        logger.info("DB_UPDATE_ORDER END " + "idOrderHeader: " + order.getIdOrderHeader());
-    }
-
     public void dbRemoveOrder(Integer idOrderHeader)
     {
         logger.info("DB_REMOVE_ORDER BEGIN " + "idOrderHeader: " + idOrderHeader);

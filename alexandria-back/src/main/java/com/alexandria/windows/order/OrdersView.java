@@ -104,7 +104,7 @@ public class OrdersView extends JPanel {
 		ordersTable.scrollRectToVisible(ordersTable.getCellRect(row, 0, true));
 
 		// Update in database
-		orderHeaderDao.dbUpdateOrder(order);
+		orderHeaderDao.edit(order);
 	}
 
 	private void editOrder() {
@@ -124,7 +124,7 @@ public class OrdersView extends JPanel {
 		orders.set(selectedRow, newOrder);
 
 		// Update in database
-		orderHeaderDao.dbUpdateOrder(newOrder);
+		orderHeaderDao.edit(newOrder);
 	}
 
 	private void deleteOrder() {

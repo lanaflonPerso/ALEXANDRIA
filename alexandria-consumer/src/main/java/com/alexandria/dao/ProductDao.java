@@ -51,21 +51,6 @@ public class ProductDao extends AbstractDao<ProductEntity> {
         return product;
     }
 
-    public void dbUpdateProduct(ProductEntity product) {
-        
-        logger.info("DB_UPDATE BEGIN " + "idProduct: " + product.getIdProduct());
-
-        EntityManager session = beginTransaction();
-
-        ProductEntity product_ = session.merge(product);
-        
-        session.persist(product_);
-
-        commitTransaction();
-
-        logger.info("DB_UPDATE END " + "idProduct: " + product.getIdProduct());
-    }
-
     public void dbRemoveProduct(Integer idProduct)
     {
         logger.info("DB_REMOVE BEGIN " + "idProduct: " + idProduct);

@@ -19,19 +19,6 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         super(ClientEntity.class);
     }
 
-    public void dbUpdateClient(ClientEntity client) {
-        logger.info("DB_UPDATE BEGIN " + "idClient: " + client.getIdClient());
-
-        EntityManager session = beginTransaction();
-
-        ClientEntity client_ = session.merge(client);
-        session.persist(client_);
-
-        commitTransaction();
-
-        logger.info("DB_UPDATE END " + "idClient: " + client.getIdClient());
-    }
-
     public void dbRemoveClient(Integer idClient)
     {
         logger.info("DB_REMOVE BEGIN " + "idClient: " + idClient);
