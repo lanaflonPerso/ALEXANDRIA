@@ -17,20 +17,21 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
         super(OrderHeaderEntity.class);
     }
 
-    public OrderHeaderEntity dbFindOrder(Integer idOrderHeader) {
+    @Override
+    public OrderHeaderEntity find(Object id) {
 
-        logger.info("DB_FIND_ORDER BEGIN " + "idOrderHeader: " + idOrderHeader);
+        logger.info("DB_FIND BEGIN " + "id: " + id);
 
         EntityManager session = beginTransaction();
 
-        OrderHeaderEntity order = session.find(OrderHeaderEntity.class, idOrderHeader);
+        OrderHeaderEntity order = session.find(OrderHeaderEntity.class, id);
 
         // Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
         order.getOrderLinesByIdOrderHeader().size();
 
         commitTransaction();
 
-        logger.info("DB_FIND_ORDER END " + "idOrderHeader: " + idOrderHeader);
+        logger.info("DB_FIND END " + "id: " + id);
 
         return order;
     }

@@ -113,7 +113,7 @@ public class OrdersView extends JPanel {
 			return;
 
 		// Find in database
-		OrderHeaderEntity order = orderHeaderDao.dbFindOrder(orders.get(selectedRow).getIdOrderHeader());
+		OrderHeaderEntity order = orderHeaderDao.find(orders.get(selectedRow).getIdOrderHeader());
 
 		// Call dialog box
 		OrderHeaderEntity newOrder = showClientDialog("Edit Order", new OrderHeaderEntity(order));
