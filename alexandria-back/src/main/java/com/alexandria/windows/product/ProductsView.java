@@ -105,7 +105,7 @@ public class ProductsView extends JPanel {
 		products.set(selectedRow, newProduct);
 
 		// Update in database
-		productDao.edit(newProduct);
+		productDao.update(newProduct);
 	}
 
 	private void deleteProduct() {

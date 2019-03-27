@@ -161,7 +161,7 @@ public class OrderView extends JPanel {
         orderLines.set(selectedRow, newOrderLine);
 
         // Update in database
-        orderLineDao.edit(newOrderLine);
+        orderLineDao.update(newOrderLine);
 
         logger.info("EDIT_ORDER_LINE END ");
     }

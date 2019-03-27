@@ -30,14 +30,14 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_CREATE END");
 	}
 
-	public void edit(T entity) {
-		logger.info(entityClass + " DB_EDIT BEGIN");
+	public void update(T entity) {
+		logger.info(entityClass + " DB_UPDATE BEGIN");
 
 		EntityManager em = beginTransaction();
 		getEntityManager().merge(entity);
 		commitTransaction();
 
-		logger.info(entityClass + " DB_EDIT END");
+		logger.info(entityClass + " DB_UPDATE END");
 	}
 
 	public void remove(T entity) {

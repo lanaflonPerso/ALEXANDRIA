@@ -109,7 +109,7 @@ public class ClientsView extends JPanel {
 		clients.set(selectedRow, newClient);
 
 		// Update in database
-		clientDao.edit(newClient);
+		clientDao.update(newClient);
 	}
 
 	private void deleteClient() {
