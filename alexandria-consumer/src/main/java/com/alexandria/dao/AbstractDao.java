@@ -1,5 +1,8 @@
 package com.alexandria.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,6 +12,8 @@ import static com.alexandria.persistence.PersistenceUtils.*;
 
 public abstract class AbstractDao<T> {
 
+	private static final Logger logger = LogManager.getLogger(AbstractDao.class);
+
 	private Class<T> entityClass;
 
 	public AbstractDao(Class<T> entityClass) {
@@ -16,30 +21,49 @@ public abstract class AbstractDao<T> {
 	}
 	
 	public void create(T entity) {
+		logger.info(entityClass + " DB_CREATE BEGIN");
+
 		EntityManager em = beginTransaction();
 		getEntityManager().persist(entity);
 		commitTransaction();
+
+		logger.info(entityClass + " DB_CREATE END");
 	}
 
 	public void edit(T entity) {
+		logger.info(entityClass + " DB_EDIT BEGIN");
+
 		EntityManager em = beginTransaction();
 		getEntityManager().merge(entity);
 		commitTransaction();
+
+		logger.info(entityClass + " DB_EDIT END");
 	}
 
 	public void remove(T entity) {
+		logger.info(entityClass + " DB_REMOVE BEGIN");
+
 		EntityManager em = beginTransaction();
 		getEntityManager().remove(getEntityManager().merge(entity));
 		commitTransaction();
+
+		logger.info(entityClass + " DB_REMOVE END");
 	}
 
 	public T find(Object id) {
+		logger.info(entityClass + " DB_FIND BEGIN " + "id: " + id);
+
 		T obj = getEntityManager().find(entityClass, id);
 		closeEntityManager();
+
+		logger.info(entityClass + " DB_FIND END " + "id: " + id);
+
 		return obj;
 	}
 
 	public List<T> findAll() {
+		logger.info(entityClass + " DB_FIND_ALL BEGIN");
+
 		EntityManager em = getEntityManager();
 
 		CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
@@ -47,10 +71,15 @@ public abstract class AbstractDao<T> {
 		List<T> list = (List<T>) em.createQuery(cq).getResultList();
 
 		closeEntityManager();
+
+		logger.info(entityClass + " DB_FIND_ALL END");
+
 		return list;
 	}
 
 	public List<T> findRange(int[] range) {
+		logger.info(entityClass + " DB_FIND_RANGE BEGIN");
+
 		EntityManager em = getEntityManager();
 
 		CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
@@ -61,10 +90,15 @@ public abstract class AbstractDao<T> {
 		List<T> list = (List<T>) q.getResultList();
 
 		closeEntityManager();
+
+		logger.info(entityClass + " DB_FIND_RANGE END");
+
 		return list;
 	}
 
 	public int count() {
+		logger.info(entityClass + " DB_COUNT BEGIN");
+
 		EntityManager em = getEntityManager();
 
 		CriteriaQuery<Object> cq = getEntityManager().getCriteriaBuilder().createQuery();
@@ -74,6 +108,9 @@ public abstract class AbstractDao<T> {
 		int count = ((Long) q.getSingleResult()).intValue();
 
 		closeEntityManager();
+
+		logger.info(entityClass + " DB_COUNT END");
+
 		return count;
 	}
 }
