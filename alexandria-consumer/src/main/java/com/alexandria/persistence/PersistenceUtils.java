@@ -70,14 +70,14 @@ public class PersistenceUtils {
 
     public static EntityManager beginTransaction() {
         logger.trace("BEGIN_TRANSACTION " + idTransaction);
+        EntityManager em = getEntityManager();
         try {
-            EntityManager em = getEntityManager();
             if (!em.getTransaction().isActive())
                 em.getTransaction().begin();
         } catch (HibernateException e) {
             rollbackTransaction();
         }
-        return getEntityManager();
+        return em;
     }
 
     public static void commitTransaction() {
