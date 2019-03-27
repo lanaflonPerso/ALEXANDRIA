@@ -1,5 +1,6 @@
 package com.alexandria.windows.client;
 
+import com.alexandria.dao.DAOFactory;
 import com.alexandria.entities.*;
 import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
@@ -11,14 +12,10 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows/edits a single client.
@@ -33,17 +30,13 @@ public class ClientView extends JPanel {
     private static final Logger logger = LogManager.getLogger(ClientView.class);
 
     private ClientEntity client;
-    private List<CountryEntity> countries;
-    private List<PaymentMethodEntity> paymentMethods;
-    private List<TitleEntity> titles;
+
+    /// COMBOBOXES
+    private List<CountryEntity> countries = new DAOFactory().getCountryDao().doCountriesList();
+    private List<PaymentMethodEntity> paymentMethods = new DAOFactory().getPaymentMethodDao().doPaymentMethodsList();
+    private List<TitleEntity> titles = new DAOFactory().getTitleDao().doTitlesList();
 
     public ClientView() {
-
-        doTitlesList();
-
-        doCountriesList();
-
-        doPaymentMethodsList();
 
         initComponents();
 	}
@@ -61,19 +54,6 @@ public class ClientView extends JPanel {
 
     /// COMBOBOXES ///BEGIN
     // Combobox titles //
-    private void doTitlesList() {
-
-        logger.info("DB_DO_LIST_TITLES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        titles = session.createNamedQuery("TitleEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_TITLES END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #titleField} combobox.
@@ -84,19 +64,6 @@ public class ClientView extends JPanel {
     }
 
     // Combobox countries //
-    private void doCountriesList() {
-
-        logger.info("DB_DO_LIST_COUNTRIES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        countries = session.createNamedQuery("CountryEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_COUNTRIES END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #addressInvoiceCountryField #addressDeliveryCountryField} combobox.
@@ -107,18 +74,6 @@ public class ClientView extends JPanel {
     }
 
     // Combobox paymentMethods //
-    private void doPaymentMethodsList() {
-
-        logger.info("DB_DO_LIST_PAYMENT_METHODS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        paymentMethods = session.createNamedQuery("PaymentMethodEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_PAYMENT_METHODS END");
-    }
     /**
      * Returns a list of available paymentMethods.
      * Used to fill list of {@link #paymentMethods} combobox.

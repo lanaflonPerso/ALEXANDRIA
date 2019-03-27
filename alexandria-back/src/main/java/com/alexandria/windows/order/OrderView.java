@@ -1,5 +1,9 @@
 package com.alexandria.windows.order;
 
+import com.alexandria.dao.ClientDao;
+import com.alexandria.dao.DAOFactory;
+import com.alexandria.dao.OrderHeaderDao;
+import com.alexandria.dao.OrderLineDao;
 import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.OrderHeaderEntity;
 import com.alexandria.entities.OrderLineEntity;
@@ -14,8 +18,6 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -23,9 +25,6 @@ import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows/edits a single order.
@@ -40,14 +39,17 @@ public class OrderView extends JPanel {
     private static final Logger logger = LogManager.getLogger(OrderView.class);
 
     private OrderHeaderEntity order;
-    private List<ShippingMethodEntity> shippingMethods;
+
+    private OrderLineDao orderLineDao = new DAOFactory().getOrderLineDao();
+
+    /// COMBOBOXE
+    private List<ShippingMethodEntity> shippingMethods = new DAOFactory().getShippingMethodDao().doShippingMethodsList();
+
     private List<ClientEntity> searchClientsList;
     // Shortcut to orderLines (set in setOrder method)
     private List<OrderLineEntity> orderLines;
 
     public OrderView() {
-
-        doShippingMethodsList();
 
         initComponents();
 	}
@@ -72,18 +74,6 @@ public class OrderView extends JPanel {
     /// COMBOBOXES ///BEGIN
 
     // Combobox shippingMethods //
-    private void doShippingMethodsList() {
-
-        logger.info("DB_DO_LIST_SHIPPING_METHODS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        shippingMethods = session.createNamedQuery("ShippingMethodEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_SHIPPING_METHODS END");
-    }
     /**
      * Returns a list of available shippingMethods.
      * Used to fill list of {@link #shippingMethods} combobox.
@@ -125,7 +115,7 @@ public class OrderView extends JPanel {
         orderLinesTable.scrollRectToVisible(orderLinesTable.getCellRect(row, 0, true));
 
         // Create in database
-        dbCreateOrderLine(orderLine);
+        orderLineDao.dbCreateOrderLine(orderLine);
 
         logger.info("NEW_ORDER_LINE END ");
     }
@@ -142,7 +132,7 @@ public class OrderView extends JPanel {
         OrderLineEntity orderLine = orderLines.get(selectedRow);
 
         // Refresh in case of desynchronization with database (eg product/stock)
-        // dbRefreshOrderLine(orderLine); // FIXME : crash if used (Entity not managed)
+        // orderLineDao.dbRefreshOrderLine(orderLine); // FIXME : crash if used (Entity not managed)
 
         // Backup the old order line quantity in case it is updated
         Integer oldQuantity = orderLine.getQuantity();
@@ -171,7 +161,7 @@ public class OrderView extends JPanel {
         orderLines.set(selectedRow, newOrderLine);
 
         // Update in database
-        dbUpdateOrderLine(newOrderLine);
+        orderLineDao.dbUpdateOrderLine(newOrderLine);
 
         logger.info("EDIT_ORDER_LINE END ");
     }
@@ -195,7 +185,7 @@ public class OrderView extends JPanel {
 
         // remove items from database
         for(int selectedRow : selectedRows)
-            dbRemoveOrderLine(orderLines.get(selectedRow));
+            orderLineDao.dbRemoveOrderLine(orderLines.get(selectedRow));
 
         // remove items from memory
         for (int i = selectedRows.length - 1; i >= 0; i--)
@@ -212,91 +202,6 @@ public class OrderView extends JPanel {
     }
 
     /// ACTION LISTENER HANDLER Methods ///END
-
-    /// DATABASE MANAGEMENT Methods ///BEGIN
-
-    private void dbCreateOrder(OrderHeaderEntity order) {
-
-        logger.info("DB_CREATE_ORDER BEGIN ");
-
-        EntityManager session = beginTransaction();
-
-        session.persist(order);
-
-        commitTransaction();
-
-        logger.info("DB_CREATE_ORDER END ");
-    }
-
-    // FIXME : crash if used (Entity not managed)
-    private void dbRefreshOrderLine(OrderLineEntity orderLine) {
-        logger.info("DB_REFRESH_ORDER_LINE BEGIN " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
-
-        EntityManager session = beginTransaction();
-
-        session.refresh(orderLine);
-
-        commitTransaction();
-
-        logger.info("DB_REFRESH_ORDER_LINE END " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
-    }
-
-    private void dbCreateOrderLine(OrderLineEntity orderLine) {
-
-        logger.info("DB_CREATE_ORDER_LINE BEGIN ");
-
-        EntityManager session = beginTransaction();
-
-        session.persist(orderLine);
-
-        commitTransaction();
-
-        logger.info("DB_CREATE_ORDER_LINE END ");
-    }
-
-    private void dbUpdateOrderLine(OrderLineEntity orderLine) {
-        logger.info("DB_UPDATE_ORDER_LINE BEGIN " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
-
-        EntityManager session = beginTransaction();
-
-        session.merge(orderLine);
-
-        commitTransaction();
-
-        logger.info("DB_UPDATE_ORDER_LINE END " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
-    }
-
-    private void dbRemoveOrderLine(OrderLineEntity orderLine)
-    {
-        logger.info("DB_REMOVE_ORDER_LINE BEGIN " + "iOrderLine: ");
-
-        EntityManager session = beginTransaction();
-
-        OrderHeaderEntity order = session.getReference(OrderHeaderEntity.class, orderLine.getOrderHeaderByOrderHeaderId().getIdOrderHeader());
-        order.getOrderLinesByIdOrderHeader().remove(0);
-
-        commitTransaction();
-
-        logger.info("DB_REMOVE_ORDER_LINE END " + "iOrderLine: ");
-    }
-
-    // From JTable
-    private ClientEntity dbFindClient(Integer idClient) {
-
-        logger.info("DB_FIND_CLIENT BEGIN " + "idClient: " + idClient);
-
-        EntityManager session = beginTransaction();
-
-        ClientEntity client = session.find(ClientEntity.class, idClient);
-
-        commitTransaction();
-
-        logger.info("DB_FIND_CLIENT END " + "idClient: " + idClient);
-
-        return client;
-    }
-
-    /// DATABASE MANAGEMENT Methods ///END
 
     /// DIALOG BOXES ///BEGIN
     /**
@@ -323,13 +228,9 @@ public class OrderView extends JPanel {
 
         logger.info("DB_SEARCH_CLIENTS BEGIN");
 
-        EntityManager session = beginTransaction();
-
-        TypedQuery<ClientEntity> query = session.createNamedQuery("ClientEntity.findFromFirstNameLastName", ClientEntity.class);
-        query.setParameter("name", e.getActionCommand());
-        searchClientsList = query.getResultList();
-
-        commitTransaction();
+        // Search in database
+        ClientDao clientDao = new DAOFactory().getClientDao();
+        searchClientsList = clientDao.searchClients(e.getActionCommand());
 
         // FIXME : Workaround as searchClientsList cannot be mapped in the JTable in JFormDesigner (bug?)
         //  - the select from JTable (selectClient) is bypased and we set the model with the first result of the searchClientsList
@@ -337,7 +238,8 @@ public class OrderView extends JPanel {
             order.setClientByClientId(searchClientsList.get(0));
 
             // Create new order in database Cf. comments in OrdersView -> newOrder
-            dbCreateOrder(order);
+            OrderHeaderDao orderHeaderDao = new DAOFactory().getOrderHeaderDao();
+            orderHeaderDao.dbCreateOrder(order);
         }
 
         logger.info("DB_SEARCH_CLIENTS END");
@@ -351,7 +253,8 @@ public class OrderView extends JPanel {
             return;
 
         // Find in database
-        ClientEntity client = dbFindClient(searchClientsList.get(selectedRow).getIdClient());
+        ClientDao clientDao = new DAOFactory().getClientDao();
+        ClientEntity client = clientDao.dbFindClient(searchClientsList.get(selectedRow).getIdClient());
 
         // Replace in model
         order.setClientByClientId(client);

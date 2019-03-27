@@ -1,5 +1,7 @@
 package com.alexandria.windows.product;
 
+import com.alexandria.dao.DAOFactory;
+import com.alexandria.dao.ProductDao;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,16 +14,12 @@ import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows a list of products in a JTable and provides
@@ -40,6 +38,8 @@ public class ProductsView extends JPanel {
 
 	private List<ProductEntity> products = ObservableCollections.observableList(new ArrayList<ProductEntity>());
 
+	private ProductDao productDao = new DAOFactory().getProductDao();
+
 	public ProductsView() {
 
 		doProductsList();
@@ -50,17 +50,9 @@ public class ProductsView extends JPanel {
 	// Init
 	private void doProductsList() {
 
-		logger.info("DB_DO_LIST BEGIN");
-
-		EntityManager session = beginTransaction();
-
-		List<ProductEntity> productsList = session.createNamedQuery("ProductEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
+		List<ProductEntity> productsList = productDao.doProductsList();
 
 		setProducts(ObservableCollections.observableList(productsList));
-
-		logger.info("DB_DO_LIST END");
 	}
 
 	// Call by parent window
@@ -93,7 +85,7 @@ public class ProductsView extends JPanel {
 		productsTable.scrollRectToVisible(productsTable.getCellRect(row, 0, true));
 
 		// Create in database
-		dbCreateProduct(product);
+		productDao.dbCreateProduct(product);
 	}
 
 	private void editProduct() {
@@ -102,7 +94,7 @@ public class ProductsView extends JPanel {
 			return;
 
 		// Find in database
-		ProductEntity product = dbFindProduct(products.get(selectedRow).getIdProduct());
+		ProductEntity product = productDao.dbFindProduct(products.get(selectedRow).getIdProduct());
 
 		// Call dialog box
 		ProductEntity newProduct = showProductDialog("Edit Product", new ProductEntity(product));
@@ -113,7 +105,7 @@ public class ProductsView extends JPanel {
 		products.set(selectedRow, newProduct);
 
 		// Update in database
-		dbUpdateProduct(newProduct);
+		productDao.dbUpdateProduct(newProduct);
 	}
 
 	private void deleteProduct() {
@@ -123,7 +115,7 @@ public class ProductsView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			dbRemoveProduct(products.get(selectedRow).getIdProduct());
+			productDao.dbRemoveProduct(products.get(selectedRow).getIdProduct());
 
 		// remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)
@@ -138,65 +130,6 @@ public class ProductsView extends JPanel {
 	}
 
 	/// ACTION LISTENER HANDLER Methods ///END
-
-	/// DATABASE MANAGEMENT Methods ///BEGIN
-
-	private void dbCreateProduct(ProductEntity product) {
-
-		logger.info("DB_CREATE BEGIN ");
-
-		EntityManager session = beginTransaction();
-
-		session.persist(product);
-
-		commitTransaction();
-
-		logger.info("DB_CREATE END ");
-	}
-
-	private ProductEntity dbFindProduct(Integer idProduct) {
-		logger.info("DB_FIND BEGIN " + "idProduct: " + idProduct);
-
-		EntityManager session = beginTransaction();
-
-		ProductEntity product = session.find(ProductEntity.class, idProduct);
-
-		commitTransaction();
-
-		logger.info("DB_FIND END " + "idProduct: " + idProduct);
-
-		return product;
-	}
-
-	private void dbUpdateProduct(ProductEntity product) {
-		logger.info("DB_UPDATE BEGIN " + "idProduct: " + product.getIdProduct());
-
-		EntityManager session = beginTransaction();
-
-		ProductEntity product_ = session.merge(product);
-		session.persist(product_);
-
-		commitTransaction();
-
-		logger.info("DB_UPDATE END " + "idProduct: " + product.getIdProduct());
-	}
-
-	private void dbRemoveProduct(Integer idProduct)
-	{
-		logger.info("DB_REMOVE BEGIN " + "idProduct: " + idProduct);
-
-		EntityManager session = beginTransaction();
-
-		ProductEntity product = session.find(ProductEntity.class, idProduct);
-
-		session.remove(product);
-
-		commitTransaction();
-
-		logger.info("DB_REMOVE END " + "idProduct: " + idProduct);
-	}
-
-	/// DATABASE MANAGEMENT Methods ///BEGIN
 
 	/// DIALOG BOXES ///BEGIN
 	/**

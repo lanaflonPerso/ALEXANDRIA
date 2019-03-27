@@ -1,5 +1,7 @@
 package com.alexandria.windows.order;
 
+import com.alexandria.dao.DAOFactory;
+import com.alexandria.dao.OrderHeaderDao;
 import com.alexandria.entities.OrderHeaderEntity;
 import com.alexandria.entities.ShippingMethodEntity;
 import com.alexandria.persistence.PersistenceUtils;
@@ -42,6 +44,8 @@ public class OrdersView extends JPanel {
 
 	private List<OrderHeaderEntity> orders = ObservableCollections.observableList(new ArrayList<OrderHeaderEntity>());
 
+	private OrderHeaderDao orderHeaderDao = new DAOFactory().getOrderHeaderDao();
+
 	public OrdersView() {
 
 		doOrdersList();
@@ -52,17 +56,9 @@ public class OrdersView extends JPanel {
 	// Init
 	private void doOrdersList() {
 
-		logger.info("DB_DO_LIST_ORDERS BEGIN");
-
-		EntityManager session = beginTransaction();
-
-		List<OrderHeaderEntity> ordersList = session.createNamedQuery("OrderHeaderEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
+		List<OrderHeaderEntity> ordersList = orderHeaderDao.doOrdersList();
 
 		setOrders(ObservableCollections.observableList(ordersList));
-
-		logger.info("DB_DO_LIST_ORDERS END");
 	}
 
 	// Call by parent window
@@ -108,7 +104,7 @@ public class OrdersView extends JPanel {
 		ordersTable.scrollRectToVisible(ordersTable.getCellRect(row, 0, true));
 
 		// Update in database
-		dbUpdateOrder(order);
+		orderHeaderDao.dbUpdateOrder(order);
 	}
 
 	private void editOrder() {
@@ -117,7 +113,7 @@ public class OrdersView extends JPanel {
 			return;
 
 		// Find in database
-		OrderHeaderEntity order = dbFindOrder(orders.get(selectedRow).getIdOrderHeader());
+		OrderHeaderEntity order = orderHeaderDao.dbFindOrder(orders.get(selectedRow).getIdOrderHeader());
 
 		// Call dialog box
 		OrderHeaderEntity newOrder = showClientDialog("Edit Order", new OrderHeaderEntity(order));
@@ -128,7 +124,7 @@ public class OrdersView extends JPanel {
 		orders.set(selectedRow, newOrder);
 
 		// Update in database
-		dbUpdateOrder(newOrder);
+		orderHeaderDao.dbUpdateOrder(newOrder);
 	}
 
 	private void deleteOrder() {
@@ -138,7 +134,7 @@ public class OrdersView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			dbRemoveOrder(orders.get(selectedRow).getIdOrderHeader());
+			orderHeaderDao.dbRemoveOrder(orders.get(selectedRow).getIdOrderHeader());
 
 		// remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)
@@ -153,54 +149,6 @@ public class OrdersView extends JPanel {
 	}
 
 	/// ACTION LISTENER HANDLER Methods ///END
-
-	/// DATABASE MANAGEMENT Methods ///BEGIN
-
-	private OrderHeaderEntity dbFindOrder(Integer idOrderHeader) {
-		logger.info("DB_FIND_ORDER BEGIN " + "idOrderHeader: " + idOrderHeader);
-
-		EntityManager session = beginTransaction();
-
-		OrderHeaderEntity order = session.find(OrderHeaderEntity.class, idOrderHeader);
-
-		// Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
-		order.getOrderLinesByIdOrderHeader().size();
-
-		commitTransaction();
-
-		logger.info("DB_FIND_ORDER END " + "idOrderHeader: " + idOrderHeader);
-
-		return order;
-	}
-
-	private void dbUpdateOrder(OrderHeaderEntity order) {
-		logger.info("DB_UPDATE_ORDER BEGIN " + "idOrderHeader: " + order.getIdOrderHeader());
-
-		EntityManager session = beginTransaction();
-
-		session.merge(order);
-
-		commitTransaction();
-
-		logger.info("DB_UPDATE_ORDER END " + "idOrderHeader: " + order.getIdOrderHeader());
-	}
-
-	private void dbRemoveOrder(Integer idOrderHeader)
-	{
-		logger.info("DB_REMOVE_ORDER BEGIN " + "idOrderHeader: " + idOrderHeader);
-
-		EntityManager session = beginTransaction();
-
-		OrderHeaderEntity order = session.find(OrderHeaderEntity.class, idOrderHeader);
-
-		session.remove(order);
-
-		commitTransaction();
-
-		logger.info("DB_REMOVE_ORDER END " + "idOrderHeader: " + idOrderHeader);
-	}
-
-	/// DATABASE MANAGEMENT Methods ///END
 
 	/// DIALOG BOXES ///BEGIN
 	/**

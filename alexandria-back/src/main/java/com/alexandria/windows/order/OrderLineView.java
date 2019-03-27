@@ -1,5 +1,7 @@
 package com.alexandria.windows.order;
 
+import com.alexandria.dao.DAOFactory;
+import com.alexandria.dao.ProductDao;
 import com.alexandria.entities.*;
 import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
@@ -11,17 +13,12 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows/edits a single orderLine.
@@ -34,6 +31,8 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 public class OrderLineView extends JPanel {
 
     private static final Logger logger = LogManager.getLogger(OrderLineView.class);
+
+    private ProductDao productDao = new DAOFactory().getProductDao();
 
     private OrderLineEntity orderLine;
     private List<ProductEntity> searchProductsList;
@@ -54,11 +53,6 @@ public class OrderLineView extends JPanel {
 		firePropertyChange("orderLine", oldOrderLine, orderLine);
 	}
 
-    /// COMBOBOXES ///BEGIN
-
-
-    /// COMBOBOXES ///END
-
     @Override
     public boolean requestFocusInWindow() {
         return productNameField.requestFocusInWindow();
@@ -70,13 +64,8 @@ public class OrderLineView extends JPanel {
 
         logger.info("DB_SEARCH_PRODUCTS BEGIN");
 
-        EntityManager session = beginTransaction();
-
-        TypedQuery<ProductEntity> query = session.createNamedQuery("ProductEntity.findFromName", ProductEntity.class);
-        query.setParameter("name", e.getActionCommand());
-        searchProductsList = query.getResultList();
-
-        commitTransaction();
+        // Search in database
+        searchProductsList = productDao.searchProducts(e.getActionCommand());
 
         // Log searchProductsList
         if(searchProductsList.size() > 1)
@@ -105,7 +94,6 @@ public class OrderLineView extends JPanel {
                 // Warning to user
                 productNameField.setText(forcedSelectedProduct.getName() + " already in order");
             }
-
         }
         /// FIXME END
 
@@ -132,7 +120,7 @@ public class OrderLineView extends JPanel {
             return;
 
         // Find in database
-        ProductEntity product = dbFindProduct(searchProductsList.get(selectedRow).getIdProduct());
+        ProductEntity product = productDao.dbFindProduct(searchProductsList.get(selectedRow).getIdProduct());
 
         // Replace in model
         orderLine.setProductByProductId(product);
@@ -145,25 +133,6 @@ public class OrderLineView extends JPanel {
     }
 
     /// ACTION LISTENER HANDLER Methods ///END
-
-    /// DATABASE MANAGEMENT Methods ///BEGIN
-
-    private ProductEntity dbFindProduct(Integer idProduct) {
-
-        logger.info("DB_FIND_PRODUCT BEGIN " + "idProduct: " + idProduct);
-
-        EntityManager session = beginTransaction();
-
-        ProductEntity product = session.find(ProductEntity.class, idProduct);
-
-        commitTransaction();
-
-        logger.info("DB_FIND_PRODUCT END " + "idProduct: " + idProduct);
-
-        return product;
-    }
-
-    /// DATABASE MANAGEMENT Methods ///END
 
     // Following code is generated //
 

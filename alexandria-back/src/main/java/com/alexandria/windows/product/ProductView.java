@@ -1,5 +1,6 @@
 package com.alexandria.windows.product;
 
+import com.alexandria.dao.DAOFactory;
 import com.alexandria.entities.*;
 import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
@@ -11,14 +12,10 @@ import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows/edits a single product.
@@ -34,26 +31,15 @@ public class ProductView extends JPanel {
 
     private ProductEntity product;
 
-    private List<BookEntity> books;
-    private List<AuthorEntity> authors;
-    private List<GenreEntity> genres;
-    private List<CollectionEntity> collections;
-    private List<PublisherEntity> publishers;
-    private List<CategoryEntity> categories;
+    /// COMBOBOXES
+    private List<BookEntity> books = new DAOFactory().getBookDao().doBooksList();
+    private List<AuthorEntity> authors = new DAOFactory().getAuthorDao().doAuthorsList();
+    private List<GenreEntity> genres = new DAOFactory().getGenreDao().doGenresList();
+    private List<CollectionEntity> collections = new DAOFactory().getCollectionDao().doCollectionsList();
+    private List<PublisherEntity> publishers = new DAOFactory().getPublisherDao().doPublishersList();
+    private List<CategoryEntity> categories = new DAOFactory().getCategoryDao().doCategoriesList();
 
     public ProductView() {
-
-        doBooksList();
-
-        doAuthorsList();
-
-        doGenresList();
-
-        doCollectionsList();
-
-        doPublishersList();
-
-        doCategoriesList();
 
         initComponents();
 	}
@@ -72,19 +58,6 @@ public class ProductView extends JPanel {
     /// COMBOBOXES ///BEGIN
 
     // Combobox books //
-    private void doBooksList() {
-
-        logger.info("DB_DO_LIST_BOOKS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        books = session.createNamedQuery("BookEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_BOOKS END");
-    }
-
     /**
      * Returns a list of available books.
      * Used to fill list of {@link #titleField} combobox.
@@ -96,19 +69,6 @@ public class ProductView extends JPanel {
 
 
     // Combobox authors //
-    private void doAuthorsList() {
-
-        logger.info("DB_DO_LIST_AUTHORS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        authors = session.createNamedQuery("AuthorEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_AUTHORS END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #titleField} combobox.
@@ -119,19 +79,6 @@ public class ProductView extends JPanel {
     }
 
     // CheckBox categories //
-    private void doCategoriesList() {
-
-        logger.info("DB_DO_LIST_CATEGORIES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        categories = session.createNamedQuery("CategoryEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_CATEGORIES END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #addressInvoiceCountryField #addressDeliveryCountryField} combobox.
@@ -142,18 +89,6 @@ public class ProductView extends JPanel {
     }
 
     // Combobox Genres //
-    private void doGenresList() {
-
-        logger.info("DB_DO_LIST_GENRE BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        genres = session.createNamedQuery("GenreEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_GENRE END");
-    }
     /**
      * Returns a list of available paymentMethods.
      * Used to fill list of {@link #genres} combobox.
@@ -164,19 +99,6 @@ public class ProductView extends JPanel {
     }
 
     // Combobox authors //
-    private void doCollectionsList() {
-
-        logger.info("DB_DO_LIST_COLLECTIONS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        authors = session.createNamedQuery("CollectionEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_COLLECTIONS END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #titleField} combobox.
@@ -187,19 +109,6 @@ public class ProductView extends JPanel {
     }
 
     // Combobox authors //
-    private void doPublishersList() {
-
-        logger.info("DB_DO_LIST_PUBLISHERS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        authors = session.createNamedQuery("PublisherEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_PUBLISHERS END");
-    }
-
     /**
      * Returns a list of available countries.
      * Used to fill list of {@link #titleField} combobox.

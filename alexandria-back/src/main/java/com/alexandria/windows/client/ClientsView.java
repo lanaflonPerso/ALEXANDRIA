@@ -1,5 +1,7 @@
 package com.alexandria.windows.client;
 
+import com.alexandria.dao.ClientDao;
+import com.alexandria.dao.DAOFactory;
 import com.alexandria.entities.*;
 import com.alexandria.persistence.PersistenceUtils;
 import org.apache.logging.log4j.LogManager;
@@ -12,15 +14,11 @@ import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows a list of clients in a JTable and provides
@@ -34,6 +32,8 @@ import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
  * Use the {@link #main} method to test this view.
  */
 public class ClientsView extends JPanel {
+
+	private ClientDao clientDao = new DAOFactory().getClientDao();
 
 	private static final Logger logger = LogManager.getLogger(ClientsView.class);
 
@@ -49,17 +49,9 @@ public class ClientsView extends JPanel {
 	// Init
 	private void doClientsList() {
 
-		logger.info("DB_DO_LIST BEGIN");
-
-		EntityManager session = beginTransaction();
-
-		List<ClientEntity> clientsList = session.createNamedQuery("ClientEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
+		List<ClientEntity> clientsList = clientDao.doClientsList();
 
 		setClients(ObservableCollections.observableList(clientsList));
-
-		logger.info("DB_DO_LIST END");
 	}
 
 	// Call by parent window
@@ -97,7 +89,7 @@ public class ClientsView extends JPanel {
 		clientsTable.scrollRectToVisible(clientsTable.getCellRect(row, 0, true));
 
 		// Create in database
-		dbCreateClient(client);
+		clientDao.dbCreateClient(client);
 	}
 
 	private void editClient() {
@@ -106,7 +98,7 @@ public class ClientsView extends JPanel {
 			return;
 
 		// Find in database
-		ClientEntity client = dbFindClient(clients.get(selectedRow).getIdClient());
+		ClientEntity client = clientDao.dbFindClient(clients.get(selectedRow).getIdClient());
 
 		// Call dialog box
 		ClientEntity newClient = showClientDialog("Edit Client", new ClientEntity(client));
@@ -117,7 +109,7 @@ public class ClientsView extends JPanel {
 		clients.set(selectedRow, newClient);
 
 		// Update in database
-		dbUpdateClient(newClient);
+		clientDao.dbUpdateClient(newClient);
 	}
 
 	private void deleteClient() {
@@ -127,7 +119,7 @@ public class ClientsView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			dbRemoveClient(clients.get(selectedRow).getIdClient());
+			clientDao.dbRemoveClient(clients.get(selectedRow).getIdClient());
 
 		// remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)
@@ -142,65 +134,6 @@ public class ClientsView extends JPanel {
 	}
 
 	/// ACTION LISTENER HANDLER Methods ///END
-
-	/// DATABASE MANAGEMENT Methods ///BEGIN
-
-	private void dbCreateClient(ClientEntity client) {
-
-		logger.info("DB_CREATE BEGIN ");
-
-		EntityManager session = beginTransaction();
-
-		session.persist(client);
-
-		commitTransaction();
-
-		logger.info("DB_CREATE END ");
-	}
-
-	private ClientEntity dbFindClient(Integer idClient) {
-		logger.info("DB_FIND BEGIN " + "idClient: " + idClient);
-
-		EntityManager session = beginTransaction();
-
-		ClientEntity client = session.find(ClientEntity.class, idClient);
-
-		commitTransaction();
-
-		logger.info("DB_FIND END " + "idClient: " + idClient);
-
-		return client;
-	}
-
-	private void dbUpdateClient(ClientEntity client) {
-		logger.info("DB_UPDATE BEGIN " + "idClient: " + client.getIdClient());
-
-		EntityManager session = beginTransaction();
-
-		ClientEntity client_ = session.merge(client);
-		session.persist(client_);
-
-		commitTransaction();
-
-		logger.info("DB_UPDATE END " + "idClient: " + client.getIdClient());
-	}
-
-	private void dbRemoveClient(Integer idClient)
-	{
-		logger.info("DB_REMOVE BEGIN " + "idClient: " + idClient);
-
-		EntityManager session = beginTransaction();
-
-		ClientEntity client = session.find(ClientEntity.class, idClient);
-
-		session.remove(client);
-
-		commitTransaction();
-
-		logger.info("DB_REMOVE END " + "idClient: " + idClient);
-	}
-
-	/// DATABASE MANAGEMENT Methods ///END
 
 	/// DIALOG BOXES ///BEGIN
 	/**
