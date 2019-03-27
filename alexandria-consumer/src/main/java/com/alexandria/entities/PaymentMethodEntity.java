@@ -8,9 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "payment_method", schema = "dbo", catalog = "DB_ALEXANDRIA")
-@NamedQueries({
-        @NamedQuery(name="PaymentMethodEntity.findAll", query ="from PaymentMethodEntity")
-})
 public class PaymentMethodEntity extends AbstractModelObject {
     private Integer idPaymentMethod;
     private String description;

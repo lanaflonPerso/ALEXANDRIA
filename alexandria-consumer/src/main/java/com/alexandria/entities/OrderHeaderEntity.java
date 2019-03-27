@@ -12,16 +12,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "order_header", schema = "dbo", catalog = "DB_ALEXANDRIA")
-@NamedQueries({
-        @NamedQuery(
-                name = "OrderHeaderEntity.findAll",
-                query = "from OrderHeaderEntity"),
-        @NamedQuery(
-                name = "OrderHeaderEntity.findAllDisplayed",
-                query =
-                "select o from OrderHeaderEntity as o "
-        )
-})
 public class OrderHeaderEntity extends AbstractModelObject {
     private Integer idOrderHeader;
     private Date datePlaced;

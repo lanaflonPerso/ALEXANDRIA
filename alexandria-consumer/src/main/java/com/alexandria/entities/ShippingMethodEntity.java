@@ -9,9 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "shipping_method", schema = "dbo", catalog = "DB_ALEXANDRIA")
-@NamedQueries({
-        @NamedQuery(name="ShippingMethodEntity.findAll", query ="from ShippingMethodEntity")
-})
 public class ShippingMethodEntity extends AbstractModelObject {
     private Integer idShippingMethod;
     private String description;

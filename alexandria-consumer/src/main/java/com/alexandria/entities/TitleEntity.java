@@ -8,9 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "title", schema = "dbo", catalog = "DB_ALEXANDRIA")
-@NamedQueries({
-        @NamedQuery(name="TitleEntity.findAll", query ="from TitleEntity")
-})
 public class TitleEntity extends AbstractModelObject {
     private Integer idTitle;
     private String description;

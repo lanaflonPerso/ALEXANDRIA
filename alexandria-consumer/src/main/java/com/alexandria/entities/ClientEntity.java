@@ -10,15 +10,6 @@ import java.util.Set;
 @Table(name = "client", schema = "dbo", catalog = "DB_ALEXANDRIA")
 @NamedQueries({
         @NamedQuery(
-                name = "ClientEntity.findAll",
-                query = "from ClientEntity"),
-        @NamedQuery(
-                name = "ClientEntity.findAllDisplayed",
-                query =
-                "select c from ClientEntity as c " +
-                "join fetch c.titleByTitleId as t"
-                ),
-        @NamedQuery(
                 name = "ClientEntity.findFromFirstNameLastName",
                 query = "from ClientEntity as c where (" +
                         "upper(c.firstName) like upper(concat('%', :name, '%')) " +

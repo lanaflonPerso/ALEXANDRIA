@@ -10,11 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "book", schema = "dbo", catalog = "DB_ALEXANDRIA")
-@NamedQueries({
-        @NamedQuery(
-                name="BookEntity.findAll",
-                query ="from BookEntity ")
-})
 public class BookEntity extends AbstractModelObject {
     private Integer idBook;
     private String isbn;

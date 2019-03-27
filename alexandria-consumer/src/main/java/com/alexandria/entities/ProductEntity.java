@@ -17,11 +17,6 @@ import java.util.*;
 @Entity
 @Table(name = "product", schema = "dbo", catalog = "DB_ALEXANDRIA")
 @NamedQueries({
-        @NamedQuery(name="ProductEntity.findAll", query ="from ProductEntity"),
-        @NamedQuery(
-                name = "ProductEntity.findAllDisplayed",
-                query = "from ProductEntity as p "
-        ),
         @NamedQuery(
                 name = "ProductEntity.findFromName",
                 query = "from ProductEntity as p where upper(p.name) like upper(concat('%', :name, '%'))"
