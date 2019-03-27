@@ -20,21 +20,6 @@ public class ClientDao extends AbstractDao<ClientEntity> {
         super(ClientEntity.class);
     }
 
-    public List<ClientEntity> doClientsList() {
-
-        logger.info("DB_DO_LIST BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<ClientEntity> clientsList = session.createNamedQuery("ClientEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
-
-        logger.info("DB_DO_LIST END");
-
-        return clientsList;
-    }
-
     public void dbCreateClient(ClientEntity client) {
 
         logger.info("DB_CREATE BEGIN ");

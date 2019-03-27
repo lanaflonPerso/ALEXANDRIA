@@ -32,12 +32,12 @@ public class ProductView extends JPanel {
     private ProductEntity product;
 
     /// COMBOBOXES
-    private List<BookEntity> books = new DAOFactory().getBookDao().doBooksList();
-    private List<AuthorEntity> authors = new DAOFactory().getAuthorDao().doAuthorsList();
-    private List<GenreEntity> genres = new DAOFactory().getGenreDao().doGenresList();
-    private List<CollectionEntity> collections = new DAOFactory().getCollectionDao().doCollectionsList();
-    private List<PublisherEntity> publishers = new DAOFactory().getPublisherDao().doPublishersList();
-    private List<CategoryEntity> categories = new DAOFactory().getCategoryDao().doCategoriesList();
+    private List<BookEntity> books = new DAOFactory().getBookDao().findAll();
+    private List<AuthorEntity> authors = new DAOFactory().getAuthorDao().findAll();
+    private List<GenreEntity> genres = new DAOFactory().getGenreDao().findAll();
+    private List<CollectionEntity> collections = new DAOFactory().getCollectionDao().findAll();
+    private List<PublisherEntity> publishers = new DAOFactory().getPublisherDao().findAll();
+    private List<CategoryEntity> categories = new DAOFactory().getCategoryDao().findAll();
 
     public ProductView() {
 

@@ -18,19 +18,4 @@ public class CountryDao extends AbstractDao<CountryEntity> {
     public CountryDao() {
         super(CountryEntity.class);
     }
-
-    public List<CountryEntity> doCountriesList() {
-
-        logger.info("DB_DO_LIST_COUNTRIES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<CountryEntity> countries = session.createNamedQuery("CountryEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_COUNTRIES END");
-
-        return countries;
-    }
 }

@@ -18,19 +18,4 @@ public class AuthorDao extends AbstractDao<AuthorEntity> {
     public AuthorDao() {
         super(AuthorEntity.class);
     }
-
-    public List<AuthorEntity> doAuthorsList() {
-
-        logger.info("DB_DO_LIST_AUTHORS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<AuthorEntity> authors = session.createNamedQuery("AuthorEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_AUTHORS END");
-
-        return authors;
-    }
 }

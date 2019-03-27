@@ -32,9 +32,9 @@ public class ClientView extends JPanel {
     private ClientEntity client;
 
     /// COMBOBOXES
-    private List<CountryEntity> countries = new DAOFactory().getCountryDao().doCountriesList();
-    private List<PaymentMethodEntity> paymentMethods = new DAOFactory().getPaymentMethodDao().doPaymentMethodsList();
-    private List<TitleEntity> titles = new DAOFactory().getTitleDao().doTitlesList();
+    private List<CountryEntity> countries = new DAOFactory().getCountryDao().findAll();
+    private List<PaymentMethodEntity> paymentMethods = new DAOFactory().getPaymentMethodDao().findAll();
+    private List<TitleEntity> titles = new DAOFactory().getTitleDao().findAll();
 
     public ClientView() {
 

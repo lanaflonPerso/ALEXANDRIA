@@ -18,19 +18,4 @@ public class PublisherDao extends AbstractDao<PublisherEntity> {
     public PublisherDao() {
         super(PublisherEntity.class);
     }
-
-    public List<PublisherEntity> doPublishersList() {
-
-        logger.info("DB_DO_LIST_PUBLISHERS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<PublisherEntity> publishers = session.createNamedQuery("PublisherEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_PUBLISHERS END");
-
-        return publishers;
-    }
 }

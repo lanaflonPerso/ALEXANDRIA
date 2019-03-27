@@ -18,19 +18,4 @@ public class ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
     public ShippingMethodDao() {
         super(ShippingMethodEntity.class);
     }
-
-    public List<ShippingMethodEntity> doShippingMethodsList() {
-
-        logger.info("DB_DO_LIST_SHIPPING_METHODS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<ShippingMethodEntity> shippingMethods = session.createNamedQuery("ShippingMethodEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_SHIPPING_METHODS END");
-
-        return shippingMethods;
-    }
 }

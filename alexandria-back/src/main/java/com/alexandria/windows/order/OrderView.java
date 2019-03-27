@@ -43,7 +43,7 @@ public class OrderView extends JPanel {
     private OrderLineDao orderLineDao = new DAOFactory().getOrderLineDao();
 
     /// COMBOBOXE
-    private List<ShippingMethodEntity> shippingMethods = new DAOFactory().getShippingMethodDao().doShippingMethodsList();
+    private List<ShippingMethodEntity> shippingMethods = new DAOFactory().getShippingMethodDao().findAll();
 
     private List<ClientEntity> searchClientsList;
     // Shortcut to orderLines (set in setOrder method)

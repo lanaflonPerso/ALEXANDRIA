@@ -18,19 +18,4 @@ public class BookDao extends AbstractDao<BookEntity> {
     public BookDao() {
         super(BookEntity.class);
     }
-
-    public List<BookEntity> doBooksList() {
-
-        logger.info("DB_DO_LIST_BOOKS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<BookEntity> books = session.createNamedQuery("BookEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_BOOKS END");
-
-        return books;
-    }
 }

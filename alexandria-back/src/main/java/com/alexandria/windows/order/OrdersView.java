@@ -56,7 +56,7 @@ public class OrdersView extends JPanel {
 	// Init
 	private void doOrdersList() {
 
-		List<OrderHeaderEntity> ordersList = orderHeaderDao.doOrdersList();
+		List<OrderHeaderEntity> ordersList = orderHeaderDao.findAll();
 
 		setOrders(ObservableCollections.observableList(ordersList));
 	}

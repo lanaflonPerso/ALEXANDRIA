@@ -50,7 +50,7 @@ public class ProductsView extends JPanel {
 	// Init
 	private void doProductsList() {
 
-		List<ProductEntity> productsList = productDao.doProductsList();
+		List<ProductEntity> productsList = productDao.findAll();
 
 		setProducts(ObservableCollections.observableList(productsList));
 	}

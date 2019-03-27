@@ -19,21 +19,6 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
         super(OrderHeaderEntity.class);
     }
 
-    public List<OrderHeaderEntity> doOrdersList() {
-
-        logger.info("DB_DO_LIST_ORDERS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<OrderHeaderEntity> ordersList = session.createNamedQuery("OrderHeaderEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
-
-        logger.info("DB_DO_LIST_ORDERS END");
-
-        return ordersList;
-    }
-
     public void dbCreateOrder(OrderHeaderEntity order) {
 
         logger.info("DB_CREATE_ORDER BEGIN ");

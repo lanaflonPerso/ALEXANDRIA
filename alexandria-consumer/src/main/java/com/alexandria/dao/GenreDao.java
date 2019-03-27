@@ -18,19 +18,4 @@ public class GenreDao extends AbstractDao<GenreEntity> {
     public GenreDao() {
         super(GenreEntity.class);
     }
-
-    public List<GenreEntity> doGenresList() {
-
-        logger.info("DB_DO_LIST_GENRE BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<GenreEntity> genres = session.createNamedQuery("GenreEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_GENRE END");
-
-        return genres;
-    }
 }

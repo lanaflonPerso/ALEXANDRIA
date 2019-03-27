@@ -18,19 +18,4 @@ public class CollectionDao extends AbstractDao<CollectionEntity> {
     public CollectionDao() {
         super(CollectionEntity.class);
     }
-
-    public List<CollectionEntity> doCollectionsList() {
-
-        logger.info("DB_DO_LIST_COLLECTIONS BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<CollectionEntity> authors = session.createNamedQuery("CollectionEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_COLLECTIONS END");
-
-        return authors;
-    }
 }

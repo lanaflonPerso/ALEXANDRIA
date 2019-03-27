@@ -49,7 +49,7 @@ public class ClientsView extends JPanel {
 	// Init
 	private void doClientsList() {
 
-		List<ClientEntity> clientsList = clientDao.doClientsList();
+		List<ClientEntity> clientsList = clientDao.findAll();
 
 		setClients(ObservableCollections.observableList(clientsList));
 	}

@@ -20,21 +20,6 @@ public class ProductDao extends AbstractDao<ProductEntity> {
         super(ProductEntity.class);
     }
 
-    public List<ProductEntity> doProductsList() {
-
-        logger.info("DB_DO_LIST BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<ProductEntity> productsList = session.createNamedQuery("ProductEntity.findAllDisplayed").getResultList();
-
-        PersistenceUtils.commitTransaction();
-        
-        logger.info("DB_DO_LIST END");
-
-        return productsList;
-    }
-
     public List<ProductEntity> searchProducts(String str) {
 
         logger.info("DB_SEARCH_PRODUCTS BEGIN");

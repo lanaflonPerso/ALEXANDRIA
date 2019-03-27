@@ -18,19 +18,4 @@ public class TitleDao extends AbstractDao<TitleEntity> {
     public TitleDao() {
         super(TitleEntity.class);
     }
-
-    public List<TitleEntity> doTitlesList() {
-
-        logger.info("DB_DO_LIST_TITLES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<TitleEntity> titles = session.createNamedQuery("TitleEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_TITLES END");
-
-        return titles;
-    }
 }

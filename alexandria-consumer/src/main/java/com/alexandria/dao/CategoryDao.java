@@ -18,19 +18,4 @@ public class CategoryDao extends AbstractDao<CategoryEntity> {
     public CategoryDao() {
         super(CategoryEntity.class);
     }
-
-    public List<CategoryEntity> doCategoriesList() {
-
-        logger.info("DB_DO_LIST_CATEGORIES BEGIN");
-
-        EntityManager session = beginTransaction();
-
-        List<CategoryEntity> categories = session.createNamedQuery("CategoryEntity.findAll").getResultList();
-
-        commitTransaction();
-
-        logger.info("DB_DO_LIST_CATEGORIES END");
-
-        return categories;
-    }
 }
