@@ -67,8 +67,7 @@ public class PersistenceUtils {
         logger.trace("BEGIN_TRANSACTION " + idTransaction);
         try {
             em = getEntityManager();
-            if (!em.getTransaction().isActive())
-                em.getTransaction().begin();
+            em.getTransaction().begin();
         } catch (HibernateException e) {
             rollbackTransaction();
         }
