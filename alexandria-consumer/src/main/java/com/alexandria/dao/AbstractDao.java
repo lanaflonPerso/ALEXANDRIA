@@ -41,24 +41,24 @@ public abstract class AbstractDao<T> {
 	}
 
 	public void remove_(T entity) {
-		logger.info(entityClass + " DB_REMOVE BEGIN");
+		logger.info(entityClass + " DB_REMOVE_ BEGIN");
 
 		EntityManager em = beginTransaction();
 		em.remove(em.merge(entity));
 		commitTransaction();
 
-		logger.info(entityClass + " DB_REMOVE END");
+		logger.info(entityClass + " DB_REMOVE_ END");
 	}
 
 	// TODO : unify remove methods
 	public void remove(Object id) {
-		logger.info(entityClass + " DB_REMOVE2 BEGIN " + "id: " + id);
+		logger.info(entityClass + " DB_REMOVE BEGIN " + "id: " + id);
 
 		EntityManager em = beginTransaction();
 		em.remove(em.find(entityClass, id));
 		commitTransaction();
 
-		logger.info(entityClass + " DB_REMOVE2 END " + "id: " + id);
+		logger.info(entityClass + " DB_REMOVE END " + "id: " + id);
 	}
 
 	public T find(Object id) {
