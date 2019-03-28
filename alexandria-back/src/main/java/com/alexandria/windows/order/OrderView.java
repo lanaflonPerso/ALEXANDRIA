@@ -185,7 +185,7 @@ public class OrderView extends JPanel {
 
         // remove items from database
         for(int selectedRow : selectedRows)
-            orderLineDao.remove(orderLines.get(selectedRow));
+            orderLineDao.remove_(orderLines.get(selectedRow));
 
         // remove items from memory
         for (int i = selectedRows.length - 1; i >= 0; i--)

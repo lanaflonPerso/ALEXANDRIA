@@ -134,7 +134,7 @@ public class OrdersView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			orderHeaderDao.remove2(orders.get(selectedRow).getIdOrderHeader());
+			orderHeaderDao.remove(orders.get(selectedRow).getIdOrderHeader());
 
 		// remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)

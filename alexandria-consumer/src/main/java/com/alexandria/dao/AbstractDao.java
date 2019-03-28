@@ -40,7 +40,7 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_UPDATE END");
 	}
 
-	public void remove(T entity) {
+	public void remove_(T entity) {
 		logger.info(entityClass + " DB_REMOVE BEGIN");
 
 		EntityManager em = beginTransaction();
@@ -51,7 +51,7 @@ public abstract class AbstractDao<T> {
 	}
 
 	// TODO : unify remove methods
-	public void remove2(Object id) {
+	public void remove(Object id) {
 		logger.info(entityClass + " DB_REMOVE2 BEGIN " + "id: " + id);
 
 		EntityManager em = beginTransaction();
