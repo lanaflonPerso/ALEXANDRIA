@@ -4,10 +4,7 @@ import com.alexandria.entities.OrderHeaderEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.persistence.EntityManager;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
+import static com.alexandria.persistence.PersistenceUtils.*;
 
 public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
@@ -22,14 +19,12 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
         logger.info("DB_FIND BEGIN " + "id: " + id);
 
-        EntityManager session = beginTransaction();
-
-        OrderHeaderEntity order = session.find(OrderHeaderEntity.class, id);
+        OrderHeaderEntity order = getEntityManager().find(OrderHeaderEntity.class, id);
 
         // Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
         order.getOrderLinesByIdOrderHeader().size();
 
-        commitTransaction();
+        closeEntityManager();
 
         logger.info("DB_FIND END " + "id: " + id);
 
