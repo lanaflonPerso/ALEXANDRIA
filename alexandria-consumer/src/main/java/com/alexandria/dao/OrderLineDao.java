@@ -1,6 +1,7 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.OrderLineEntity;
+import com.alexandria.entities.OrderLineEntityPK;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,5 +30,19 @@ public class OrderLineDao extends AbstractDao<OrderLineEntity> {
         commitTransaction();
 
         logger.info("DB_REFRESH_ORDER_LINE END " + "orderHeaderId: " + orderLine.getOrderHeaderId() + " productId: " + orderLine.getProductId());
+    }
+
+    @Override
+    public void remove_(OrderLineEntity orderLine) {
+
+        logger.info( " DB_REMOVE_OVERRIDE BEGIN");
+
+        OrderLineEntityPK orderLineEntityPK = new OrderLineEntityPK();
+        orderLineEntityPK.setProductId(orderLine.getProductId());
+        orderLineEntityPK.setOrderHeaderId(orderLine.getOrderHeaderId());
+
+        super.remove(orderLineEntityPK);
+
+        logger.info( " DB_REMOVE_OVERRIDE END");
     }
 }
