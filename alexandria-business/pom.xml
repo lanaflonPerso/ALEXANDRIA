@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- Project informations -->
+    <!-- =============================================================== -->
+    <!-- ===== Maven Informations ===== -->
+    <parent>
+        <artifactId>alexandria</artifactId>
+        <groupId>com.alexandria</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>alexandria-business</artifactId>
+
+    <!-- ===== General Informations ===== -->
+    <name>alexandria-business</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <!-- =============================================================== -->
+    <!-- Dependencies -->
+    <!-- =============================================================== -->
+    <dependencies>
+        <!-- ===== Modules ===== -->
+        <dependency>
+            <groupId>com.alexandria</groupId>
+            <artifactId>alexandria-consumer</artifactId>
+        </dependency>
+
+        <!-- ===== Bibliothèques tierces ===== -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <plugins>
+            <!-- https://www.baeldung.com/executable-jar-with-maven -->
+            <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html -->
+            <!-- Require Maven 3.2+ -->
+            <!-- mvn clean package spring-boot:repackage -->
+            <!-- mvn spring-boot:run -> Application runs in an exploded form -->
+            <!--               <plugin>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <configuration>
+                                &lt;!&ndash; In order to execute mvn spring-boot:run &ndash;&gt;
+                                <mainClass>${start-class}</mainClass>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>repackage</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>-->
+        </plugins>
+    </build>
+</project>

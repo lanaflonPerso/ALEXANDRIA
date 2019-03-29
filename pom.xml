@@ -53,6 +53,7 @@
   <modules>
     <module>alexandria-back</module>
     <module>alexandria-webapp</module>
+    <module>alexandria-business</module>
     <module>alexandria-consumer</module>
   </modules>
 
@@ -108,6 +109,11 @@
       <dependency>
         <groupId>com.alexandria</groupId>
         <artifactId>alexandria-webapp</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alexandria</groupId>
+        <artifactId>alexandria-business</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>

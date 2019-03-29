@@ -36,7 +36,7 @@
         <!-- ===== Modules ===== -->
         <dependency>
             <groupId>com.alexandria</groupId>
-            <artifactId>alexandria-consumer</artifactId>
+            <artifactId>alexandria-business</artifactId>
         </dependency>
 
         <!-- ===== Bibliothèques tierces ===== -->
