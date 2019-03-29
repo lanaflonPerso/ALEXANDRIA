@@ -50,7 +50,7 @@ public abstract class AbstractDao<T> {
 		logger.info(entityClass + " DB_REMOVE_ END");
 	}
 
-	// TODO : unify remove methods
+	// TODO : unify remove methods -> cf. comments in OrderHeaderDao
 	public void remove(Object id) {
 		logger.info(entityClass + " DB_REMOVE BEGIN " + "id: " + id);
 

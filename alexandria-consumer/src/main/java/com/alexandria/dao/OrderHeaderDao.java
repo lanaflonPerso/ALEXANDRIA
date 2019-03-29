@@ -30,4 +30,17 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
         return order;
     }
+
+    @Override
+    public void remove_(OrderHeaderEntity orderHeader) {
+
+        logger.info("DB_REMOVE_OVERRIDE BEGIN");
+
+        // FIXME : as the abstract Dao method "remove(merge(obj))" doesn't work (i.e only orderHeaderLine's are removed but not orderHeader)
+        //  we wrap the remove method to call the abstract Dao method "remove(find(...))"
+        //  so that in business code only one homogeneous abstract method "remove" is used.
+        super.remove(orderHeader.getIdOrderHeader());
+
+        logger.info("DB_REMOVE_OVERRIDE END");
+    }
 }
