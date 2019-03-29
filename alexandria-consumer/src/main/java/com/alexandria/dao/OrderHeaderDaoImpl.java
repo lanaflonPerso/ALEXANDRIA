@@ -39,7 +39,7 @@ public class OrderHeaderDaoImpl extends AbstractDaoImpl<OrderHeaderEntity> imple
         // FIXME : as the abstract Dao method "remove(merge(obj))" doesn't work (i.e only orderHeaderLine's are removed but not orderHeader)
         //  we wrap the remove method to call the abstract Dao method "remove(find(...))"
         //  so that in business code only one homogeneous abstract method "remove" is used.
-        super.remove(orderHeader.getIdOrderHeader());
+        super.remove__(orderHeader.getIdOrderHeader());
 
         logger.info("DB_REMOVE_OVERRIDE END");
     }

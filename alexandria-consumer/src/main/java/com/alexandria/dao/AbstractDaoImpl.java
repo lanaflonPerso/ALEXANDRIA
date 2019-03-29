@@ -54,7 +54,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	// TODO : unify remove methods -> cf. comments in OrderHeaderDao
-	void remove(Object id) {
+	void remove__(Object id) {
 		logger.info(entityClass + " DB_REMOVE BEGIN " + "id: " + id);
 
 		EntityManager em = beginTransaction();

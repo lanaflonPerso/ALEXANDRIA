@@ -23,7 +23,7 @@ public class OrderLineDaoImpl extends AbstractDaoImpl<OrderLineEntity> implement
         orderLineEntityPK.setProductId(orderLine.getProductId());
         orderLineEntityPK.setOrderHeaderId(orderLine.getOrderHeaderId());
 
-        super.remove(orderLineEntityPK);
+        super.remove__(orderLineEntityPK);
 
         logger.info( " DB_REMOVE_OVERRIDE END");
     }
