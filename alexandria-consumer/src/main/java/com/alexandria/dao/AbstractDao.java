@@ -51,7 +51,7 @@ public abstract class AbstractDao<T> {
 	}
 
 	// TODO : unify remove methods -> cf. comments in OrderHeaderDao
-	public void remove(Object id) {
+	void remove(Object id) {
 		logger.info(entityClass + " DB_REMOVE BEGIN " + "id: " + id);
 
 		EntityManager em = beginTransaction();
