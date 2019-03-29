@@ -37,6 +37,7 @@ public class OrderLineDao extends AbstractDao<OrderLineEntity> {
 
         logger.info( " DB_REMOVE_OVERRIDE BEGIN");
 
+        // NB : order_line is an associative table
         OrderLineEntityPK orderLineEntityPK = new OrderLineEntityPK();
         orderLineEntityPK.setProductId(orderLine.getProductId());
         orderLineEntityPK.setOrderHeaderId(orderLine.getOrderHeaderId());
