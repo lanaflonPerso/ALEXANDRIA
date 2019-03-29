@@ -132,7 +132,7 @@ public class OrderView extends JPanel {
         OrderLineEntity orderLine = orderLines.get(selectedRow);
 
         // Refresh in case of desynchronization with database (eg product/stock)
-        // orderLineDao.dbRefreshOrderLine(orderLine); // FIXME : crash if used (Entity not managed)
+        // orderLineDao.find(orderLinePK); // TODO
 
         // Backup the old order line quantity in case it is updated
         Integer oldQuantity = orderLine.getQuantity();
