@@ -55,13 +55,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 
 	// TODO : unify remove methods -> cf. comments in OrderHeaderDao
 	void remove__(Object id) {
-		logger.info(entityClass + " DB_REMOVE BEGIN " + "id: " + id);
+		logger.info(entityClass + " DB_REMOVE__ BEGIN " + "id: " + id);
 
 		EntityManager em = beginTransaction();
 		em.remove(em.find(entityClass, id));
 		commitTransaction();
 
-		logger.info(entityClass + " DB_REMOVE END " + "id: " + id);
+		logger.info(entityClass + " DB_REMOVE__ END " + "id: " + id);
 	}
 
 	@Override
