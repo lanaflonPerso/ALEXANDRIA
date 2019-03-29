@@ -157,6 +157,7 @@ public class BookEntity extends AbstractModelObject {
     //  -> Cf. https://stackoverflow.com/questions/4334970/hibernate-cannot-simultaneously-fetch-multiple-bags
     //      -> Cf. https://stackoverflow.com/questions/29368563/jpa-equivalent-command-to-hibernate-initialize
     //      -> Cf. https://stackoverflow.com/questions/4306463/how-to-test-whether-lazy-loaded-jpa-collection-is-initialized
+    // TODO 3 : try  @OrderColumn(name="orderIndex")
     @OneToMany(mappedBy = "bookByBookId", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     public List<BookGenreEntity> getBookGenresByIdBook() {
