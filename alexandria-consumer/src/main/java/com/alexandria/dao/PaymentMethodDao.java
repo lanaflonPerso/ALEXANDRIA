@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.PaymentMethodEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class PaymentMethodDao extends AbstractDao<PaymentMethodEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(PaymentMethodDao.class);
+public interface PaymentMethodDao extends AbstractDao<PaymentMethodEntity> {
 
-    PaymentMethodDao() {
-        super(PaymentMethodEntity.class);
-    }
+    void create(PaymentMethodEntity entity);
+
+    void update(PaymentMethodEntity entity);
+
+    void remove_(PaymentMethodEntity entity);
+
+    PaymentMethodEntity find(Object id);
+
+    List<PaymentMethodEntity> findAll();
+
+    List<PaymentMethodEntity> findRange(int[] range);
+
+    int count();
 }

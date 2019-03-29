@@ -1,46 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.OrderHeaderEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import static com.alexandria.persistence.PersistenceUtils.*;
+import java.util.List;
 
-public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
+public interface OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
-    private static final Logger logger = LogManager.getLogger(OrderHeaderDao.class);
+    void create(OrderHeaderEntity entity);
 
-    OrderHeaderDao() {
-        super(OrderHeaderEntity.class);
-    }
+    void update(OrderHeaderEntity entity);
 
-    @Override
-    public OrderHeaderEntity find(Object id) {
+    void remove_(OrderHeaderEntity entity);
 
-        logger.info("DB_FIND BEGIN " + "id: " + id);
+    OrderHeaderEntity find(Object id);
 
-        OrderHeaderEntity order = getEntityManager().find(OrderHeaderEntity.class, id);
+    List<OrderHeaderEntity> findAll();
 
-        // Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
-        order.getOrderLinesByIdOrderHeader().size();
+    List<OrderHeaderEntity> findRange(int[] range);
 
-        closeEntityManager();
-
-        logger.info("DB_FIND END " + "id: " + id);
-
-        return order;
-    }
-
-    @Override
-    public void remove_(OrderHeaderEntity orderHeader) {
-
-        logger.info("DB_REMOVE_OVERRIDE BEGIN");
-
-        // FIXME : as the abstract Dao method "remove(merge(obj))" doesn't work (i.e only orderHeaderLine's are removed but not orderHeader)
-        //  we wrap the remove method to call the abstract Dao method "remove(find(...))"
-        //  so that in business code only one homogeneous abstract method "remove" is used.
-        super.remove(orderHeader.getIdOrderHeader());
-
-        logger.info("DB_REMOVE_OVERRIDE END");
-    }
+    int count();
 }

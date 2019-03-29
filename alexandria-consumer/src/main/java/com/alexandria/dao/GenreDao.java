@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.GenreEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class GenreDao extends AbstractDao<GenreEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(GenreDao.class);
+public interface GenreDao extends AbstractDao<GenreEntity> {
 
-    GenreDao() {
-        super(GenreEntity.class);
-    }
+    void create(GenreEntity entity);
+
+    void update(GenreEntity entity);
+
+    void remove_(GenreEntity entity);
+
+    GenreEntity find(Object id);
+
+    List<GenreEntity> findAll();
+
+    List<GenreEntity> findRange(int[] range);
+
+    int count();
 }

@@ -1,37 +1,24 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.ProductEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
-import static com.alexandria.persistence.PersistenceUtils.*;
+public interface ProductDao extends AbstractDao<ProductEntity> {
 
-public class ProductDao extends AbstractDao<ProductEntity> {
+    void create(ProductEntity entity);
 
-    private static final Logger logger = LogManager.getLogger(ProductDao.class);
+    void update(ProductEntity entity);
 
-    ProductDao() {
-        super(ProductEntity.class);
-    }
+    void remove_(ProductEntity entity);
 
-    public List<ProductEntity> findFromName(String name) {
+    ProductEntity find(Object id);
 
-        logger.info("DB_FIND_FROM_NAME BEGIN");
+    List<ProductEntity> findAll();
 
-        EntityManager em = getEntityManager();
+    List<ProductEntity> findRange(int[] range);
 
-        TypedQuery<ProductEntity> query = em.createNamedQuery("ProductEntity.findFromName", ProductEntity.class);
-        query.setParameter("name", name);
-        List<ProductEntity> searchProductsList = query.getResultList();
+    List<ProductEntity> findFromName(String name);
 
-        closeEntityManager();
-
-        logger.info("DB_FIND_FROM_NAME END");
-        
-        return searchProductsList;
-    }
+    int count();
 }

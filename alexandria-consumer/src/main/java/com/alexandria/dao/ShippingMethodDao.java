@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.ShippingMethodEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(ShippingMethodDao.class);
+public interface ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
 
-    ShippingMethodDao() {
-        super(ShippingMethodEntity.class);
-    }
+    void create(ShippingMethodEntity entity);
+
+    void update(ShippingMethodEntity entity);
+
+    void remove_(ShippingMethodEntity entity);
+
+    ShippingMethodEntity find(Object id);
+
+    List<ShippingMethodEntity> findAll();
+
+    List<ShippingMethodEntity> findRange(int[] range);
+
+    int count();
 }

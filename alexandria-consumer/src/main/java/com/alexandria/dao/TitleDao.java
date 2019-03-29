@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.TitleEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class TitleDao extends AbstractDao<TitleEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(TitleDao.class);
+public interface TitleDao extends AbstractDao<TitleEntity> {
 
-    TitleDao() {
-        super(TitleEntity.class);
-    }
+    void create(TitleEntity entity);
+
+    void update(TitleEntity entity);
+
+    void remove_(TitleEntity entity);
+
+    TitleEntity find(Object id);
+
+    List<TitleEntity> findAll();
+
+    List<TitleEntity> findRange(int[] range);
+
+    int count();
 }

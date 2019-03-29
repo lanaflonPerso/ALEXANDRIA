@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.PublisherEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class PublisherDao extends AbstractDao<PublisherEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(PublisherDao.class);
+public interface PublisherDao extends AbstractDao<PublisherEntity> {
 
-    PublisherDao() {
-        super(PublisherEntity.class);
-    }
+    void create(PublisherEntity entity);
+
+    void update(PublisherEntity entity);
+
+    void remove_(PublisherEntity entity);
+
+    PublisherEntity find(Object id);
+
+    List<PublisherEntity> findAll();
+
+    List<PublisherEntity> findRange(int[] range);
+
+    int count();
 }

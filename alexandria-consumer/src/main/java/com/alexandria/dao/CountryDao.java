@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.CountryEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class CountryDao extends AbstractDao<CountryEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(CountryDao.class);
+public interface CountryDao extends AbstractDao<CountryEntity> {
 
-    CountryDao() {
-        super(CountryEntity.class);
-    }
+    void create(CountryEntity entity);
+
+    void update(CountryEntity entity);
+
+    void remove_(CountryEntity entity);
+
+    CountryEntity find(Object id);
+
+    List<CountryEntity> findAll();
+
+    List<CountryEntity> findRange(int[] range);
+
+    int count();
 }

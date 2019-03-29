@@ -1,14 +1,22 @@
 package com.alexandria.dao;
 
 import com.alexandria.entities.BookEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class BookDao extends AbstractDao<BookEntity> {
+import java.util.List;
 
-    private static final Logger logger = LogManager.getLogger(BookDao.class);
+public interface BookDao extends AbstractDao<BookEntity> {
 
-    BookDao() {
-        super(BookEntity.class);
-    }
+    void create(BookEntity entity);
+
+    void update(BookEntity entity);
+
+    void remove_(BookEntity entity);
+
+    BookEntity find(Object id);
+
+    List<BookEntity> findAll();
+
+    List<BookEntity> findRange(int[] range);
+
+    int count();
 }
