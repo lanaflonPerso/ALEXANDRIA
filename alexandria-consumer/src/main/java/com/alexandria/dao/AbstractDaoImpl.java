@@ -43,7 +43,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public void remove_(T entity) {
+	public void remove(T entity) {
 		logger.info(entityClass + " DB_REMOVE_ BEGIN");
 
 		EntityManager em = beginTransaction();

@@ -120,7 +120,7 @@ public class ClientsView extends JPanel {
 		// remove items from database
 		for(int selectedRow : selectedRows)
 //			clientDao.remove(clients.get(selectedRow).getIdClient());
-            clientDao.remove_(clients.get(selectedRow));
+            clientDao.remove(clients.get(selectedRow));
 
 
         // remove items from memory

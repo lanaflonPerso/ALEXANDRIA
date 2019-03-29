@@ -10,7 +10,7 @@ public interface CountryDao extends AbstractDao<CountryEntity> {
 
     void update(CountryEntity entity);
 
-    void remove_(CountryEntity entity);
+    void remove(CountryEntity entity);
 
     CountryEntity find(Object id);
 

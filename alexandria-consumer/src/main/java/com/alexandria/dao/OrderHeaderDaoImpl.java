@@ -32,7 +32,7 @@ public class OrderHeaderDaoImpl extends AbstractDaoImpl<OrderHeaderEntity> imple
     }
 
     @Override
-    public void remove_(OrderHeaderEntity orderHeader) {
+    public void remove(OrderHeaderEntity orderHeader) {
 
         logger.info("DB_REMOVE_OVERRIDE BEGIN");
 

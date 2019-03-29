@@ -15,7 +15,6 @@ import org.jdesktop.beansbinding.ELProperty;
 import org.jdesktop.observablecollections.ObservableCollections;
 import org.jdesktop.swingbinding.SwingBindings;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -23,9 +22,6 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.alexandria.persistence.PersistenceUtils.beginTransaction;
-import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 /**
  * This view shows a list of orders in a JTable and provides
@@ -134,7 +130,7 @@ public class OrdersView extends JPanel {
 
 		// remove items from database
 		for(int selectedRow : selectedRows)
-			orderHeaderDao.remove_(orders.get(selectedRow));
+			orderHeaderDao.remove(orders.get(selectedRow));
 
         // remove items from memory
 		for (int i = selectedRows.length - 1; i >= 0; i--)

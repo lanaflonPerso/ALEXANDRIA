@@ -10,7 +10,7 @@ public interface AuthorDao extends AbstractDao<AuthorEntity> {
 
     void update(AuthorEntity entity);
 
-    void remove_(AuthorEntity entity);
+    void remove(AuthorEntity entity);
 
     AuthorEntity find(Object id);
 

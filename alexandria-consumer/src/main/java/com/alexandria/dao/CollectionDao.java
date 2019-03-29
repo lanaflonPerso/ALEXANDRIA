@@ -10,7 +10,7 @@ public interface CollectionDao extends AbstractDao<CollectionEntity> {
 
     void update(CollectionEntity entity);
 
-    void remove_(CollectionEntity entity);
+    void remove(CollectionEntity entity);
 
     CollectionEntity find(Object id);
 

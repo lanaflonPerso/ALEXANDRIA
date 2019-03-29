@@ -10,7 +10,7 @@ public interface OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
     void update(OrderHeaderEntity entity);
 
-    void remove_(OrderHeaderEntity entity);
+    void remove(OrderHeaderEntity entity);
 
     OrderHeaderEntity find(Object id);
 

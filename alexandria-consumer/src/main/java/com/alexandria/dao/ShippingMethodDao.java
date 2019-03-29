@@ -10,7 +10,7 @@ public interface ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
 
     void update(ShippingMethodEntity entity);
 
-    void remove_(ShippingMethodEntity entity);
+    void remove(ShippingMethodEntity entity);
 
     ShippingMethodEntity find(Object id);
 

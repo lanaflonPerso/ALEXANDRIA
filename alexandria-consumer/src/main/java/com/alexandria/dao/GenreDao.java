@@ -10,7 +10,7 @@ public interface GenreDao extends AbstractDao<GenreEntity> {
 
     void update(GenreEntity entity);
 
-    void remove_(GenreEntity entity);
+    void remove(GenreEntity entity);
 
     GenreEntity find(Object id);
 

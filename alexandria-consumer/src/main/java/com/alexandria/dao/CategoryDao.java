@@ -10,7 +10,7 @@ public interface CategoryDao extends AbstractDao<CategoryEntity> {
 
     void update(CategoryEntity entity);
 
-    void remove_(CategoryEntity entity);
+    void remove(CategoryEntity entity);
 
     CategoryEntity find(Object id);
 

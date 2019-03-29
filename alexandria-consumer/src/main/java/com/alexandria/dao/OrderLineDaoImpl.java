@@ -14,7 +14,7 @@ public class OrderLineDaoImpl extends AbstractDaoImpl<OrderLineEntity> implement
     }
 
     @Override
-    public void remove_(OrderLineEntity orderLine) {
+    public void remove(OrderLineEntity orderLine) {
 
         logger.info( " DB_REMOVE_OVERRIDE BEGIN");
 

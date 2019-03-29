@@ -8,7 +8,7 @@ public interface AbstractDao<T> {
 
 	void update(T entity);
 
-	void remove_(T entity);
+	void remove(T entity);
 	
 	T find(Object id);
 

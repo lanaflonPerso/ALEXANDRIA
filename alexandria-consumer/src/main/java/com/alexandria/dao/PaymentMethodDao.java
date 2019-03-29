@@ -10,7 +10,7 @@ public interface PaymentMethodDao extends AbstractDao<PaymentMethodEntity> {
 
     void update(PaymentMethodEntity entity);
 
-    void remove_(PaymentMethodEntity entity);
+    void remove(PaymentMethodEntity entity);
 
     PaymentMethodEntity find(Object id);
 

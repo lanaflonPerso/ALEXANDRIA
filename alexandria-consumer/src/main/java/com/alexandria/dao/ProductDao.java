@@ -10,7 +10,7 @@ public interface ProductDao extends AbstractDao<ProductEntity> {
 
     void update(ProductEntity entity);
 
-    void remove_(ProductEntity entity);
+    void remove(ProductEntity entity);
 
     ProductEntity find(Object id);
 

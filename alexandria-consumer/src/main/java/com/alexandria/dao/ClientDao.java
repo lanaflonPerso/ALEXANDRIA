@@ -10,7 +10,7 @@ public interface ClientDao extends AbstractDao<ClientEntity> {
 
     void update(ClientEntity entity);
 
-    void remove_(ClientEntity entity);
+    void remove(ClientEntity entity);
 
     ClientEntity find(Object id);
 

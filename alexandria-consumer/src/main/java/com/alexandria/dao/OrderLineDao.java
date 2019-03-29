@@ -10,7 +10,7 @@ public interface OrderLineDao extends AbstractDao<OrderLineEntity> {
 
     void update(OrderLineEntity entity);
 
-    void remove_(OrderLineEntity entity);
+    void remove(OrderLineEntity entity);
 
     OrderLineEntity find(Object id);
 

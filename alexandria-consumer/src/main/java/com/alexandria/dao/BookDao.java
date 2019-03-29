@@ -10,7 +10,7 @@ public interface BookDao extends AbstractDao<BookEntity> {
 
     void update(BookEntity entity);
 
-    void remove_(BookEntity entity);
+    void remove(BookEntity entity);
 
     BookEntity find(Object id);
 

@@ -10,7 +10,7 @@ public interface TitleDao extends AbstractDao<TitleEntity> {
 
     void update(TitleEntity entity);
 
-    void remove_(TitleEntity entity);
+    void remove(TitleEntity entity);
 
     TitleEntity find(Object id);
 
