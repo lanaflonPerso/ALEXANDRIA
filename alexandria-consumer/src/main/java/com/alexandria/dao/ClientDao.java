@@ -14,7 +14,7 @@ public class ClientDao extends AbstractDao<ClientEntity> {
 
     private static final Logger logger = LogManager.getLogger(ClientDao.class);
 
-    public ClientDao() {
+    ClientDao() {
         super(ClientEntity.class);
     }
 

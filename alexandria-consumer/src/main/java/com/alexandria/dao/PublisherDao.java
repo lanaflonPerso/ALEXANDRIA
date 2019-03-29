@@ -4,11 +4,11 @@ import com.alexandria.entities.PublisherEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PublisherDao extends AbstractDao<PublisherEntity> {
+class PublisherDao extends AbstractDao<PublisherEntity> {
 
     private static final Logger logger = LogManager.getLogger(PublisherDao.class);
 
-    public PublisherDao() {
+    PublisherDao() {
         super(PublisherEntity.class);
     }
 }

@@ -10,7 +10,7 @@ public class OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
     private static final Logger logger = LogManager.getLogger(OrderHeaderDao.class);
 
-    public OrderHeaderDao() {
+    OrderHeaderDao() {
         super(OrderHeaderEntity.class);
     }
 

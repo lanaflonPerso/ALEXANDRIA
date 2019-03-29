@@ -9,7 +9,7 @@ public class OrderLineDao extends AbstractDao<OrderLineEntity> {
 
     private static final Logger logger = LogManager.getLogger(OrderLineDao.class);
 
-    public OrderLineDao() {
+    OrderLineDao() {
         super(OrderLineEntity.class);
     }
 

@@ -4,11 +4,11 @@ import com.alexandria.entities.CollectionEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class CollectionDao extends AbstractDao<CollectionEntity> {
+class CollectionDao extends AbstractDao<CollectionEntity> {
 
     private static final Logger logger = LogManager.getLogger(CollectionDao.class);
 
-    public CollectionDao() {
+    CollectionDao() {
         super(CollectionEntity.class);
     }
 }

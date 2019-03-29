@@ -14,7 +14,7 @@ public class ProductDao extends AbstractDao<ProductEntity> {
 
     private static final Logger logger = LogManager.getLogger(ProductDao.class);
 
-    public ProductDao() {
+    ProductDao() {
         super(ProductEntity.class);
     }
 
