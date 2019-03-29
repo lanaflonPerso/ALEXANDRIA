@@ -4,7 +4,7 @@ import com.alexandria.entities.TitleEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-class TitleDao extends AbstractDao<TitleEntity> {
+public class TitleDao extends AbstractDao<TitleEntity> {
 
     private static final Logger logger = LogManager.getLogger(TitleDao.class);
 

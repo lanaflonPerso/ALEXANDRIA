@@ -4,7 +4,7 @@ import com.alexandria.entities.CollectionEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-class CollectionDao extends AbstractDao<CollectionEntity> {
+public class CollectionDao extends AbstractDao<CollectionEntity> {
 
     private static final Logger logger = LogManager.getLogger(CollectionDao.class);
 
