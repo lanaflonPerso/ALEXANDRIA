@@ -81,9 +81,8 @@
                             <directory>src/main/webapp/WEB-INF/jsp</directory>
                             <targetPath>WEB-INF/jsp</targetPath>
                             <includes>
-                                <include>_include/header.jspf</include>
-                                <include>_include/footer.jspf</include>
-                                <include>about.jsp</include>
+                                <include>_include/*.jspf</include>
+                                <include>*.jsp</include>
                             </includes>
                         </resource>
                     </webResources>
