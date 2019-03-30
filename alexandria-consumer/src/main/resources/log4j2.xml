@@ -13,21 +13,14 @@
         <Console name="Console-Appender-Hibernate" target="SYSTEM_OUT">
             <PatternLayout>
                 <pattern>
-                    %highlight{[%-5level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue} - %msg%n
-                </pattern>>
-            </PatternLayout>
-        </Console>
-        <Console name="Console-Appender-Tomcat" target="SYSTEM_OUT">
-            <PatternLayout>
-                <pattern>
-                    %highlight{[%-5level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue} - %msg%n
+                    %highlight{[%-5level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue} - HIBERNATE - %msg%n
                 </pattern>>
             </PatternLayout>
         </Console>
         <Console name="Console-Appender-Spring" target="SYSTEM_OUT">
             <PatternLayout>
                 <pattern>
-                    %highlight{[%-5level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue} - %msg%n
+                    %highlight{[%-5level]}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue} - SPRING - %msg%n
                 </pattern>>
             </PatternLayout>
         </Console>
@@ -56,15 +49,7 @@
             <AppenderRef ref="Console-Appender-Hibernate"/>
         </Logger>
 
-        <!-- Log Tomcat catalina -->
-        <Logger name="org.apache.catalina" level="info" additivity="false">
-            <AppenderRef ref="Console-Appender-Tomcat"/>
-        </Logger>
-
-        <!-- Log Tomcat coyote -->
-        <Logger name="org.apache.coyote" level="info" additivity="false">
-            <AppenderRef ref="Console-Appender-Tomcat"/>
-        </Logger>
+        <!-- Log Tomcat is under server responsibility  -->
 
         <!-- Log everything in Spring -->
         <Logger name="org.springframework" level="info" additivity="false">
