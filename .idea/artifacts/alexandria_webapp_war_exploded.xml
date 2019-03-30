@@ -48,13 +48,13 @@
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.1.0.Alpha4" />
           <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-spec:1.2.5" />
           <element id="library" level="project" name="Maven: org.apache.taglibs:taglibs-standard-impl:1.2.5" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.1.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.1.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.1.5.RELEASE" />
         </element>
       </element>
