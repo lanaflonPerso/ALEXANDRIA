@@ -29,17 +29,27 @@
 
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" name="firstName" id="validationCustom01" placeholder="First name" value="" required>
-                <div class="valid-feedback">
-                    Looks good!
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependFirstName"><i class="fas fa-id-card"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="firstName" id="validationCustom01" aria-describedby="inputGroupPrependFirstName" placeholder="First name" value="" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-4 mb-3">
                 <label for="validationCustom02">Last name</label>
-                <input type="text" class="form-control" name="lastName" id="validationCustom02" placeholder="Last name" value="" required>
-                <div class="valid-feedback">
-                    Looks good!
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependLastName"><i class="fas fa-id-card"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="lastName" id="validationCustom02" aria-describedby="inputGroupPrependLastName" placeholder="Last name" value="" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
             </div>
 
