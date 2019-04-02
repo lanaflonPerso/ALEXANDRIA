@@ -14,8 +14,9 @@
       <include-prelude>/WEB-INF/jsp/_include/taglibs.jspf</include-prelude>
       <include-prelude>/WEB-INF/jsp/_include/prelude.jspf</include-prelude>
       <include-prelude>/WEB-INF/jsp/_include/css.jspf</include-prelude>
+      <include-prelude>/WEB-INF/jsp/_include/js.jspf</include-prelude>
       <include-prelude>/WEB-INF/jsp/_include/header.jspf</include-prelude>
-      <include-coda>/WEB-INF/jsp/_include/js.jspf</include-coda>
+      <!--<include-coda>/WEB-INF/jsp/_include/js.jspf</include-coda>-->
       <include-coda>/WEB-INF/jsp/_include/footer.jspf</include-coda>
       <include-coda>/WEB-INF/jsp/_include/coda.jspf</include-coda>
       <trim-directive-whitespaces>true</trim-directive-whitespaces>
