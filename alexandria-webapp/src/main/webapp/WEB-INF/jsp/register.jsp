@@ -170,7 +170,7 @@
 
         <div class="form-row">
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
                 <label for="validationCustomCity">City</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
