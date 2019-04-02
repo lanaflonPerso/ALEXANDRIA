@@ -1,7 +1,11 @@
 package com.alexandria.managers;
 
 import com.alexandria.dao.ClientDao;
+import com.alexandria.dao.CountryDao;
+import com.alexandria.dao.TitleDao;
 import com.alexandria.entities.ClientEntity;
+import com.alexandria.entities.CountryEntity;
+import com.alexandria.entities.TitleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 
@@ -11,6 +15,12 @@ public class ClientManagerImpl implements ClientManager {
 
     @Autowired
     public ClientDao clientDao;
+
+    @Autowired
+    public TitleDao titleDao;
+
+    @Autowired
+    public CountryDao countryDao;
 
     @Override
     public void register(ClientEntity client) {
@@ -25,4 +35,10 @@ public class ClientManagerImpl implements ClientManager {
 
         return clients.size() > 0 ? clients.get(0) : null;
     }
+
+    @Override
+    public List<TitleEntity> getTitlesList() { return titleDao.findAll(); }
+
+    @Override
+    public List<CountryEntity> getCountriesList() { return countryDao.findAll(); }
 }

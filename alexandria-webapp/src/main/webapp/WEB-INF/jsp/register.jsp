@@ -8,68 +8,140 @@
         <h3 class="text-center text-info">Register</h3>
 
         <div class="form-row">
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomGender">Gender</label>
+                <select class="custom-select form-control" name="gender" id="validationCustomGender" required>
+                    <option selected>Select one</option>
+                    <c:forEach var="item" items="${titles}">
+                        <option value="${item.idTitle}">${item.description}</option>
+                    </c:forEach>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                <input type="text" class="form-control" name="firstName" id="validationCustom01" placeholder="First name" value="" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
+
             <div class="col-md-4 mb-3">
                 <label for="validationCustom02">Last name</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                <input type="text" class="form-control" name="lastName" id="validationCustom02" placeholder="Last name" value="" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
+
             <div class="col-md-4 mb-3">
-                <label for="validationCustomUsername">Username</label>
+                <label for="validationCustomEmail">Email</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <span class="input-group-text" id="inputGroupPrependEmail">@</span>
                     </div>
-                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                    <input type="email" class="form-control" name="email" id="validationCustomEmail" placeholder="Email" aria-describedby="inputGroupPrependEmail" required>
                     <div class="invalid-feedback">
-                        Please choose a username.
+                        Please choose an email.
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomConfirmEmail">Confirm Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependConfirmEmail">@</span>
+                    </div>
+                    <input type="email" class="form-control" name="confirmEmail" id="validationCustomConfirmEmail" placeholder="Confirm Email" aria-describedby="inputGroupPrependConfirmEmail" required>
+                    <div class="invalid-feedback">
+                        Please choose an email.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomPhone">Phone</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependPhone"><i class="fas fa-phone  "></i></span>
+                    </div>
+                    <input type="tel" class="form-control" name="phone" id="validationCustomPhone" placeholder="Phone" aria-describedby="inputGroupPrependPhone" value=" ">
+                    <div class="invalid-feedback">
+                        Please choose a phone number.
+                    </div>
+                </div>
+            </div>
+
         </div>
+
         <div class="form-row">
+
             <div class="col-md-6 mb-3">
-                <label for="validationCustom03">City</label>
-                <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+                <label for="validationCustomLine1">Line 1</label>
+                <input type="text" class="form-control" name="line1" id="validationCustomLine1" placeholder="Line 1" required>
+                <div class="invalid-feedback">
+                    Please provide a valid line 1.
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="validationCustomLine2">Line 2</label>
+                <input type="text" class="form-control" name="line2" id="validationCustomLine2" placeholder="Line 2" value=" ">
+                <div class="invalid-feedback">
+                    Please provide a valid line 2.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-md-6 mb-3">
+                <label for="validationCustomCity">City</label>
+                <input type="text" class="form-control" name="city" id="validationCustomCity" placeholder="City" required>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
+
             <div class="col-md-3 mb-3">
-                <label for="validationCustom04">State</label>
-                <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+                <label for="validationCustomState">State</label>
+                <input type="text" class="form-control" name="state" id="validationCustomState" placeholder="State" value=" ">
                 <div class="invalid-feedback">
                     Please provide a valid state.
                 </div>
             </div>
+
             <div class="col-md-3 mb-3">
-                <label for="validationCustom05">Zip</label>
-                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                <label for="validationCustomPostalCode">Postal code</label>
+                <input type="text" class="form-control" name="postalCode" id="validationCustomPostalCode" placeholder="Postal code" required>
                 <div class="invalid-feedback">
-                    Please provide a valid zip.
+                    Please provide a valid postal code.
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
+
+            <div class="col-md-3 mb-3">
+                <label for="validationCustomCountry">Country</label>
+                <select class="custom-select form-control" name="country" id="validationCustomCountry" required>
+                    <option selected>Select one</option>
+                    <c:forEach var="item" items="${countries}">
+                        <option value="${item.idCountry}">${item.description}</option>
+                    </c:forEach>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
                 </div>
             </div>
+
         </div>
+
         <button class="btn btn-primary" type="submit">Submit form</button>
+
     </form>
 
     </div>
