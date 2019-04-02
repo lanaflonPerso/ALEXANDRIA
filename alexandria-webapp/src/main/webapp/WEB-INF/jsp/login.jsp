@@ -33,8 +33,9 @@
                             <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                         </div>
 
+                        <c:url value="/register" var="URL_REGISTER"/>
                         <div id="register-link" class="text-right">
-                            <a href="#" class="text-info">Register here</a>
+                            <a href="${URL_REGISTER}" class="text-info">Register here</a>
                         </div>
 
                     </form>
