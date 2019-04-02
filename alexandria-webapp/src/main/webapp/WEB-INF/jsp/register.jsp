@@ -11,14 +11,19 @@
 
             <div class="col-md-4 mb-3">
                 <label for="validationCustomGender">Gender</label>
-                <select class="custom-select form-control" name="gender" id="validationCustomGender" required>
-                    <option selected disabled>Select one</option>
-                    <c:forEach var="item" items="${titles}" varStatus="status">
-                        <option value="${status.index}">${item.description}</option>
-                    </c:forEach>
-                </select>
-                <div class="valid-feedback">
-                    Looks good!
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependGender"><i class="fas fa-transgender-alt"></i></span>
+                    </div>
+                    <select class="custom-select form-control" name="gender" id="validationCustomGender" aria-describedby="inputGroupPrependGender" required>
+                        <option selected disabled>Select one</option>
+                        <c:forEach var="item" items="${titles}" varStatus="status">
+                            <option value="${status.index}">${item.description}</option>
+                        </c:forEach>
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
             </div>
 
@@ -42,7 +47,7 @@
                 <label for="validationCustomEmail">Email</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependEmail">@</span>
+                        <span class="input-group-text" id="inputGroupPrependEmail"><i class="fas fa-at"></i></span>
                     </div>
                     <input type="email" class="form-control" name="email" id="validationCustomEmail" placeholder="Email" aria-describedby="inputGroupPrependEmail" required>
                     <div class="invalid-feedback">
@@ -55,7 +60,7 @@
                 <label for="validationCustomConfirmEmail">Confirm Email</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependConfirmEmail">@</span>
+                        <span class="input-group-text" id="inputGroupPrependConfirmEmail"><i class="fas fa-at"></i></span>
                     </div>
                     <input type="email" class="form-control" name="confirmEmail" id="validationCustomConfirmEmail" placeholder="Confirm Email" aria-describedby="inputGroupPrependConfirmEmail" required>
                     <div class="invalid-feedback">
