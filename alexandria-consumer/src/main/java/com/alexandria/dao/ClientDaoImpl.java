@@ -35,4 +35,23 @@ public class ClientDaoImpl extends AbstractDaoImpl<ClientEntity> implements Clie
 
         return searchClientsList;
     }
+
+    @Override
+    public List<ClientEntity> findFromEmailPassword(String email, String password) {
+
+        logger.info("DB_FIND_FROM_EMAIL_PASSWORD BEGIN");
+
+        EntityManager em = getEntityManager();
+
+        TypedQuery<ClientEntity> query = em.createNamedQuery("ClientEntity.findFromEmailPassword", ClientEntity.class);
+        query.setParameter("email", email);
+        query.setParameter("password", password);
+        List<ClientEntity> searchClientsList = query.getResultList();
+
+        closeEntityManager();
+
+        logger.info("DB_FIND_FROM_EMAIL_PASSWORD END");
+
+        return searchClientsList;
+    }
 }

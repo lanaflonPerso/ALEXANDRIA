@@ -20,5 +20,7 @@ public interface ClientDao extends AbstractDao<ClientEntity> {
 
     List<ClientEntity> findFromFirstNameLastName(String name);
 
+    List<ClientEntity> findFromEmailPassword(String email, String password);
+
     int count();
 }
