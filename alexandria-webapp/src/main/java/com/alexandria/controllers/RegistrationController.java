@@ -49,7 +49,7 @@ public class RegistrationController {
 
     clientManager.register(map(client, request));
 
-    return new ModelAndView("welcome", "firstName", client.getFirstName());
+    return new ModelAndView("welcome", "client", client);
   }
 
   private ClientEntity map(ClientEntity client, HttpServletRequest request) {
