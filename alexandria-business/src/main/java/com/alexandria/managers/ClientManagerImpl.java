@@ -2,9 +2,11 @@ package com.alexandria.managers;
 
 import com.alexandria.dao.ClientDao;
 import com.alexandria.dao.CountryDao;
+import com.alexandria.dao.PaymentMethodDao;
 import com.alexandria.dao.TitleDao;
 import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.CountryEntity;
+import com.alexandria.entities.PaymentMethodEntity;
 import com.alexandria.entities.TitleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -21,6 +23,9 @@ public class ClientManagerImpl implements ClientManager {
 
     @Autowired
     public CountryDao countryDao;
+
+    @Autowired
+    public PaymentMethodDao paymentMethodDao;
 
     @Override
     public void register(ClientEntity client) {
@@ -41,4 +46,7 @@ public class ClientManagerImpl implements ClientManager {
 
     @Override
     public List<CountryEntity> getCountriesList() { return countryDao.findAll(); }
+
+    @Override
+    public List<PaymentMethodEntity> getPaymentMethodsList() { return paymentMethodDao.findAll(); }
 }

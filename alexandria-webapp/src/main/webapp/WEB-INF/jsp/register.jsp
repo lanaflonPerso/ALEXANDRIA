@@ -1,6 +1,6 @@
 
 <div id="register">
-    <h3 class="text-center text-white pt-5">Register form</h3>
+
     <div class="container">
 
     <form class="needs-validation" action="registerProcess" method="post" novalidate>
@@ -12,9 +12,9 @@
             <div class="col-md-4 mb-3">
                 <label for="validationCustomGender">Gender</label>
                 <select class="custom-select form-control" name="gender" id="validationCustomGender" required>
-                    <option selected>Select one</option>
-                    <c:forEach var="item" items="${titles}">
-                        <option value="${item.idTitle}">${item.description}</option>
+                    <option selected disabled>Select one</option>
+                    <c:forEach var="item" items="${titles}" varStatus="status">
+                        <option value="${status.index}">${item.description}</option>
                     </c:forEach>
                 </select>
                 <div class="valid-feedback">
@@ -77,6 +77,50 @@
                 </div>
             </div>
 
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomPassword">Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependPassword"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input type="password" class="form-control" name="password" id="validationCustomPassword" placeholder="Password" aria-describedby="inputGroupPrependPassword" required>
+                    <div class="invalid-feedback">
+                        Please choose a valid password.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomConfirmPassword">Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependConfirmPassword"><i class="fas fa-key"></i></span>
+                    </div>
+                    <input type="password" class="form-control" name="confirmPassword" id="validationCustomConfirmPassword" placeholder="Confirm Password" aria-describedby="inputGroupPrependConfirmPassword" required>
+                    <div class="invalid-feedback">
+                        Please choose a valid password.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="validationCustomPaymentMethod">Payment method</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependPaymentMethod"><i class="fas fa-money-check-alt"></i></span>
+                    </div>
+                    <select class="custom-select form-control" name="paymentMethod" id="validationCustomPaymentMethod" aria-describedby="inputGroupPrependPaymentMethod" required>
+                        <option selected disabled>Select one</option>
+                        <c:forEach var="item" items="${paymentMethods}" varStatus="status">
+                            <option value="${status.index}">${item.description}</option>
+                        </c:forEach>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please choose a valid payment method.
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="form-row">
@@ -128,9 +172,9 @@
             <div class="col-md-3 mb-3">
                 <label for="validationCustomCountry">Country</label>
                 <select class="custom-select form-control" name="country" id="validationCustomCountry" required>
-                    <option selected>Select one</option>
-                    <c:forEach var="item" items="${countries}">
-                        <option value="${item.idCountry}">${item.description}</option>
+                    <option selected disabled>Select one</option>
+                    <c:forEach var="item" items="${countries}" varStatus="status">
+                        <option value="${status.index}">${item.description}</option>
                     </c:forEach>
                 </select>
                 <div class="valid-feedback">

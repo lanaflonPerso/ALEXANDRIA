@@ -1,9 +1,6 @@
 package com.alexandria.controllers;
 
-import com.alexandria.entities.AddressEntity;
-import com.alexandria.entities.ClientEntity;
-import com.alexandria.entities.CountryEntity;
-import com.alexandria.entities.TitleEntity;
+import com.alexandria.entities.*;
 import com.alexandria.managers.ClientManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class RegistrationController {
@@ -21,14 +19,25 @@ public class RegistrationController {
   @Autowired
   ClientManager clientManager;
 
+  // TODO : tmp
+  List<TitleEntity> titles; // TODO : pourquoi clientManager.getXxxList(); plante ici ?
+  List<CountryEntity> countries;
+  List<PaymentMethodEntity> paymentMethods;
+  //
+
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
     ModelAndView mav = new ModelAndView("register");
     mav.addObject("client", new ClientEntity());
 
     // TODO : tmp
-    request.setAttribute("titles", clientManager.getTitlesList());
-    request.setAttribute("countries", clientManager.getCountriesList());
+    titles = clientManager.getTitlesList();
+    countries = clientManager.getCountriesList();
+    paymentMethods = clientManager.getPaymentMethodsList();
+
+    request.setAttribute("titles", titles);
+    request.setAttribute("countries", countries);
+    request.setAttribute("paymentMethods", paymentMethods);
     //
 
     return mav;
@@ -38,15 +47,14 @@ public class RegistrationController {
   public ModelAndView addClient(HttpServletRequest request, HttpServletResponse response,
                               @ModelAttribute("client") ClientEntity client) {
 
-
     clientManager.register(map(client, request));
 
-    return new ModelAndView("welcome", "firstname", client.getFirstName());
+    return new ModelAndView("welcome", "firstName", client.getFirstName());
   }
 
   private ClientEntity map(ClientEntity client, HttpServletRequest request) {
 
-    client.setTitleByTitleId(new TitleEntity(Integer.parseInt((String) request.getAttribute("gender")), request.getParameter("gender")));
+    client.setTitleByTitleId( titles.get(Integer.parseInt(request.getParameter("gender"))) );
 
     client.setFirstName(request.getParameter("firstName"));
     client.setLastName(request.getParameter("lastName"));
@@ -60,13 +68,15 @@ public class RegistrationController {
             request.getParameter("city"),
             request.getParameter("state"),
             request.getParameter("postalCode"),
-            new CountryEntity(Integer.parseInt((String)request.getAttribute("country")), request.getParameter("country"))
+            countries.get(Integer.parseInt(request.getParameter("country")))
     );
 
     AddressEntity deliveryAddress = invoiceAddress;
 
     client.setAddressByInvoiceAddressId(invoiceAddress);
     client.setAddressByDeliveryAddressId(deliveryAddress);
+
+    client.setPaymentMethodByPaymentMethodId( paymentMethods.get(Integer.parseInt(request.getParameter("paymentMethod"))) );
 
     return client;
   }
