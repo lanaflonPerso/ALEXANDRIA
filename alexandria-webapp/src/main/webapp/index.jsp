@@ -1,3 +1,3 @@
-<c:redirect url="/home" />
+<c:redirect url="/login" />
 
 <h2>Hello World!</h2>
