@@ -1,7 +1,6 @@
-<h1>Welcome to ${application.name}</h1>
 
 <div id="login">
-    <h3 class="text-center text-white pt-5">Login form</h3>
+    <h3 class="text-center pt-5">Welcome to ${application.name}</h3>
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
@@ -12,20 +11,30 @@
                         <p style="font-style: italic; color: red;">${message}</p>
 
                         <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="" required>
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrependEmail"><i class="fas fa-at"></i></span>
+                                </div>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="" aria-describedby="inputGroupPrependEmail" required>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control pwd" name="password" id="password" aria-describedby="passwordHelpId"
-                                   <%--pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{4,8}$" --%>
-                                   placeholder=""
-                                   title="Doit contenir entre 4 et 8 caractères contenant impérativement au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère."
-                                   required>
-                            <input type="button" class="btnShow" value="show"/>
-                            <small id="passwordHelpId" class="form-text text-muted">Doit contenir entre 4 et 8 caractères contenant impérativement
-                                au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère.</small>
+                            <label for="password">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrependPassword"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control pwd" name="password" id="password" aria-describedby="passwordHelpId"
+                                       <%--pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{4,8}$" --%>
+                                       placeholder=""
+                                       title="Doit contenir entre 4 et 8 caractères contenant impérativement au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère."
+                                       required>
+                                <input type="button" class="btnShow" value="show"/>
+                                <small id="passwordHelpId" class="form-text text-muted">Doit contenir entre 4 et 8 caractères contenant impérativement
+                                    au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère.</small>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -34,8 +43,8 @@
                         </div>
 
                         <c:url value="/register" var="URL_REGISTER"/>
-                        <div id="register-link" class="text-right">
-                            <a href="${URL_REGISTER}" class="text-info">Register here</a>
+                        <div class="form-group">
+                            <p class="text-center">Don't have account? <a href="${URL_REGISTER}" id="signup">Register here</a></p>
                         </div>
 
                     </form>
