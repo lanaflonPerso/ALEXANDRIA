@@ -142,17 +142,27 @@
 
             <div class="col-md-6 mb-3">
                 <label for="validationCustomLine1">Line 1</label>
-                <input type="text" class="form-control" name="line1" id="validationCustomLine1" placeholder="Line 1" required>
-                <div class="invalid-feedback">
-                    Please provide a valid line 1.
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependLine1"><i class="fas fa-road"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="line1" id="validationCustomLine1" aria-describedby="inputGroupPrependLine1" placeholder="Line 1" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid line 1.
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <label for="validationCustomLine2">Line 2</label>
-                <input type="text" class="form-control" name="line2" id="validationCustomLine2" placeholder="Line 2" value=" ">
-                <div class="invalid-feedback">
-                    Please provide a valid line 2.
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependLine2"><i class="fas fa-road"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="line2" id="validationCustomLine2" aria-describedby="inputGroupPrependLine2" placeholder="Line 2" value=" ">
+                    <div class="invalid-feedback">
+                        Please provide a valid line 2.
+                    </div>
                 </div>
             </div>
 
