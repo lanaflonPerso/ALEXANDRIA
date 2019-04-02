@@ -106,7 +106,7 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="validationCustomConfirmPassword">Password</label>
+                <label for="validationCustomConfirmPassword">Confirm Password</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupPrependConfirmPassword"><i class="fas fa-key"></i></span>
@@ -172,38 +172,58 @@
 
             <div class="col-md-6 mb-3">
                 <label for="validationCustomCity">City</label>
-                <input type="text" class="form-control" name="city" id="validationCustomCity" placeholder="City" required>
-                <div class="invalid-feedback">
-                    Please provide a valid city.
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependCity"><i class="fas fa-map-marked-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="city" id="validationCustomCity" aria-describedby="inputGroupPrependCity" placeholder="City" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
                 <label for="validationCustomState">State</label>
-                <input type="text" class="form-control" name="state" id="validationCustomState" placeholder="State" value=" ">
-                <div class="invalid-feedback">
-                    Please provide a valid state.
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependState"><i class="fas fa-map-marked-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="state" id="validationCustomState" aria-describedby="inputGroupPrependState" placeholder="State" value=" ">
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
                 <label for="validationCustomPostalCode">Postal code</label>
-                <input type="text" class="form-control" name="postalCode" id="validationCustomPostalCode" placeholder="Postal code" required>
-                <div class="invalid-feedback">
-                    Please provide a valid postal code.
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependPostalCode"><i class="fas fa-map-marked-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="postalCode" id="validationCustomPostalCode" aria-describedby="inputGroupPrependPostalCode" placeholder="Postal code" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid postal code.
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
                 <label for="validationCustomCountry">Country</label>
-                <select class="custom-select form-control" name="country" id="validationCustomCountry" required>
-                    <option selected disabled>Select one</option>
-                    <c:forEach var="item" items="${countries}" varStatus="status">
-                        <option value="${status.index}">${item.description}</option>
-                    </c:forEach>
-                </select>
-                <div class="valid-feedback">
-                    Looks good!
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrependCountry"><i class="fas fa-globe"></i></span>
+                    </div>
+                    <select class="custom-select form-control" name="country" id="validationCustomCountry" aria-describedby="inputGroupPrependCountry" required>
+                        <option selected disabled>Select one</option>
+                        <c:forEach var="item" items="${countries}" varStatus="status">
+                            <option value="${status.index}">${item.description}</option>
+                        </c:forEach>
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
             </div>
 
