@@ -4,6 +4,8 @@ import com.alexandria.dao.OrderHeaderDao;
 import com.alexandria.dao.OrderLineDao;
 import com.alexandria.dao.ProductDao;
 import com.alexandria.entities.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderHeaderManagerImpl implements OrderHeaderManager {
+
+    private static final Logger logger = LogManager.getLogger(OrderHeaderManagerImpl.class);
 
     // TODO : Here we write in database at each change of the model
     //  -> it would be easier to write in database periodically via a dedicated thread
@@ -144,6 +148,11 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
 
         OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
 
+        if(orderLine == null) {
+            logger.warn("orderLine is null");
+            return;
+        }
+
         // Calculate actual quantity to minor the stock (before/after update)
         Integer before = orderLine.getQuantity();
         orderLine.setQuantity(quantity);
@@ -176,6 +185,11 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     public void removeLineItem(ProductEntity product) {
 
         OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
+
+        if(orderLine == null) {
+            logger.warn("orderLine is null");
+            return;
+        }
 
         // Remove order line in database
         orderLineDao.remove(orderLine);
