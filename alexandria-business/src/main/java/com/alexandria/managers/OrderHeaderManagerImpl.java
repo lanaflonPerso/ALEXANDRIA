@@ -190,7 +190,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             logger.warn("orderLine is null");
             return;
         }
-        
+
         // Update the stock in the model
         product.setStock(product.getStock() + orderLine.getQuantity());
 
