@@ -36,7 +36,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
         // Look for an active oder
         order = getCurrentClientOrder(client);
 
-        // If no order active create a new one
+        // If no active order create a new one
         if( order == null ) {
             order = new OrderHeaderEntity();
             order.setClientByClientId(client);
