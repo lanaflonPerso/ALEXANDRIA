@@ -201,7 +201,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
         orderLineDao.remove(orderLine);
 
         // Remove order line in model
-        order.getOrderLinesByIdOrderHeader().remove(orderLine);
+        order.getOrderLinesByIdOrderHeader().remove(orderLine); // TODO : overhead due to the '.equals(picture)' -> use index instead
     }
 
     @Override
