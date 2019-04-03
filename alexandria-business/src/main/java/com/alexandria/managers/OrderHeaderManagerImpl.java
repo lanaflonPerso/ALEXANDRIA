@@ -118,7 +118,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             orderLineDao.create(orderLine);
 
         } else {
-            // If order line exist just increase quantity by 1
+            // If order line exists just increase quantity by 1
             orderLine.setQuantity(orderLine.getQuantity()+1);
 
             // Update in database
