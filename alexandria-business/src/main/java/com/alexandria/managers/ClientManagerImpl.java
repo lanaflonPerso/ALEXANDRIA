@@ -29,6 +29,9 @@ public class ClientManagerImpl implements ClientManager {
 
     @Override
     public void register(ClientEntity client) {
+
+        // TODO : Check that the client email doesn't already exist in database before record the client.
+
         clientDao.create(client);
     }
 
