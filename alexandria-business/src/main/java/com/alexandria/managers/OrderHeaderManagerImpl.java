@@ -102,7 +102,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     public void addLineItem(ProductEntity product) {
 
         // Look for an existing order line
-        OrderLineEntity orderLine = getOrderLineInOrderFromProduct(product);
+        OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
 
         // If no order line create a new one
         if( orderLine == null ) {
@@ -238,18 +238,6 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     public BigDecimal getTotalCostInVat() {
         // TODO
         return new BigDecimal(BigInteger.ZERO, 4);
-    }
-
-    @Nullable
-    private OrderLineEntity getOrderLineInOrderFromProduct(ProductEntity product)
-    {
-        List<OrderLineEntity> orderlines = order.getOrderLinesByIdOrderHeader();
-
-        for(OrderLineEntity orderLine : orderlines) {
-            if( orderLine.getProductId() == product.getIdProduct() ) return orderLine;
-        }
-
-        return null;
     }
 
     @Nullable
