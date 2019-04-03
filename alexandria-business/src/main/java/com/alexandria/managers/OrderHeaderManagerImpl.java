@@ -37,7 +37,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     @Override
     public void initialize(ClientEntity client) {
 
-        // Look for an active oder
+        // Look for an active order
         order = getCurrentClientOrder(client);
 
         // If no active order create a new one
