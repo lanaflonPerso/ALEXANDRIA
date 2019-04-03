@@ -117,16 +117,23 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             // Create in database
             orderLineDao.create(orderLine);
 
+            // Update the stock in the model
+            product.setStock(product.getStock()-orderLine.getQuantity());
+
         } else {
-            // If order line exists just increase quantity by 1
-            orderLine.setQuantity(orderLine.getQuantity()+1);
+
+            // Calculate actual quantity to minor the stock (before/after update)
+            Integer before = orderLine.getQuantity();
+            orderLine.setQuantity(before+1); // If order line exists just increase quantity by 1
+            Integer after = orderLine.getQuantity();
+            Integer delta = after - before;
+
+            // Update the stock in the model
+            product.setStock(product.getStock()-delta);
 
             // Update in database
             orderLineDao.update(orderLine);
         }
-
-        // Update the stock in the model
-        product.setStock(product.getStock()-orderLine.getQuantity());
 
         // Update the stock in database
         productDao.update(product);
@@ -137,7 +144,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
 
         OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
 
-        // Calculate actual quantity (before/after update)
+        // Calculate actual quantity to minor the stock (before/after update)
         Integer before = orderLine.getQuantity();
         orderLine.setQuantity(quantity);
         Integer after = orderLine.getQuantity();
