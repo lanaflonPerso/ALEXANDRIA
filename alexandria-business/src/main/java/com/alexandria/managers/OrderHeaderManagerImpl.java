@@ -190,15 +190,18 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             logger.warn("orderLine is null");
             return;
         }
-
-        // Remove order line in database
-        orderLineDao.remove(orderLine);
-
+        
         // Update the stock in the model
         product.setStock(product.getStock() + orderLine.getQuantity());
 
         // Update the stock in database
         productDao.update(product);
+
+        // Remove order line in database
+        orderLineDao.remove(orderLine);
+
+        // Remove order line in model
+        order.getOrderLinesByIdOrderHeader().remove(orderLine);
     }
 
     @Override
