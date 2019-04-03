@@ -1,5 +1,6 @@
 package com.alexandria.dao;
 
+import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.OrderHeaderEntity;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
     List<OrderHeaderEntity> findAll();
 
     List<OrderHeaderEntity> findRange(int[] range);
+
+    List<OrderHeaderEntity> findFromClient(ClientEntity client);
 
     int count();
 }

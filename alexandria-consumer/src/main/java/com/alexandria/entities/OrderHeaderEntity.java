@@ -12,6 +12,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "order_header", schema = "dbo", catalog = "DB_ALEXANDRIA")
+@NamedQueries({
+        @NamedQuery(
+                name = "OrderHeaderEntity.findFromClient",
+                query = "from OrderHeaderEntity as o where o.clientByClientId = :client"
+        )
+})
 public class OrderHeaderEntity extends AbstractModelObject {
     private Integer idOrderHeader;
     private Date datePlaced;

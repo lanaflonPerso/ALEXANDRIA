@@ -1,8 +1,14 @@
 package com.alexandria.dao;
 
+import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.OrderHeaderEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import java.util.List;
 
 import static com.alexandria.persistence.PersistenceUtils.*;
 
@@ -29,6 +35,24 @@ public class OrderHeaderDaoImpl extends AbstractDaoImpl<OrderHeaderEntity> imple
         logger.info("DB_FIND END " + "id: " + id);
 
         return order;
+    }
+
+    @Override
+    public List<OrderHeaderEntity> findFromClient(ClientEntity client) {
+
+        logger.info("DB_FIND_FROM_CLIENT BEGIN");
+
+        EntityManager em = getEntityManager();
+
+        TypedQuery<OrderHeaderEntity> query = em.createNamedQuery("OrderHeaderEntity.findFromClient", OrderHeaderEntity.class);
+        query.setParameter("client", client);
+        List<OrderHeaderEntity> searchOrdersList = query.getResultList();
+
+        closeEntityManager();
+
+        logger.info("DB_FIND_FROM_CLIENT END");
+
+        return searchOrdersList;
     }
 
     @Override

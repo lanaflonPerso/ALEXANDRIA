@@ -11,13 +11,15 @@ import java.util.List;
 
 public interface OrderHeaderManager {
 
+    void initialize(ClientEntity client);
+
+    void setDatePlaced(Date date); // TODO : should be set automatically since the payment is done
+
     void setDateShipped(Date date);
 
     void setDateDelivered(Date date);
 
     void setComment(String comment);
-
-    void setClient(ClientEntity client);
 
     void setShippingMethod(ShippingMethodEntity shippingMethod);
 
