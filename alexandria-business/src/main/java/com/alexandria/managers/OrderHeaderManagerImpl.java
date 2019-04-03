@@ -2,6 +2,7 @@ package com.alexandria.managers;
 
 import com.alexandria.dao.OrderHeaderDao;
 import com.alexandria.dao.OrderLineDao;
+import com.alexandria.dao.ProductDao;
 import com.alexandria.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -14,11 +15,18 @@ import java.util.List;
 
 public class OrderHeaderManagerImpl implements OrderHeaderManager {
 
+    // TODO : Here we write in database at each change of the model
+    //  -> it would be easier to write in database periodically via a dedicated thread
+    // TODO : Use Spring TX (transactions) for atomically write order line and product stock.
+
     @Autowired
     public OrderHeaderDao orderHeaderDao;
 
     @Autowired
     public OrderLineDao orderLineDao;
+
+    @Autowired
+    public ProductDao productDao;
 
     private OrderHeaderEntity order;
 
@@ -112,23 +120,64 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
         } else {
             // If order line exist just increase quantity by 1
             orderLine.setQuantity(orderLine.getQuantity()+1);
+
+            // Update in database
+            orderLineDao.update(orderLine);
         }
+
+        // Update the stock in the model
+        product.setStock(product.getStock()-orderLine.getQuantity());
+
+        // Update the stock in database
+        productDao.update(product);
     }
 
     @Override
     public void updateLineItem(ProductEntity product, int quantity) {
 
-        int iProduct = order.getOrderLinesByIdOrderHeader().indexOf(product);
+        OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
 
-        order.getOrderLinesByIdOrderHeader().get(iProduct).setQuantity(quantity);
+        // Calculate actual quantity (before/after update)
+        Integer before = orderLine.getQuantity();
+        orderLine.setQuantity(quantity);
+        Integer after = orderLine.getQuantity();
+        Integer delta = after - before;
+
+        // Update order line in database
+        orderLineDao.update(orderLine);
+
+        // Update the stock in the model
+        product.setStock(product.getStock() - delta);
+
+        // Update the stock in database
+        productDao.update(product);
+    }
+
+    @Nullable
+    private OrderLineEntity findOrderLineInOrderFromProduct(ProductEntity product) {
+
+        List<OrderLineEntity> orderLines = order.getOrderLinesByIdOrderHeader();
+
+        for(OrderLineEntity orderLine : orderLines) {
+            if( orderLine.getProductId() == product.getIdProduct() ) return orderLine;
+        }
+
+        return null;
     }
 
     @Override
     public void removeLineItem(ProductEntity product) {
 
-        int iProduct = order.getOrderLinesByIdOrderHeader().indexOf(product);
+        OrderLineEntity orderLine = findOrderLineInOrderFromProduct(product);
 
-        order.getOrderLinesByIdOrderHeader().remove(iProduct);
+        // Remove order line in database
+        orderLineDao.remove(orderLine);
+
+        // Update the stock in the model
+        product.setStock(product.getStock() + orderLine.getQuantity());
+
+        // Update the stock in database
+        productDao.update(product);
     }
 
     @Override

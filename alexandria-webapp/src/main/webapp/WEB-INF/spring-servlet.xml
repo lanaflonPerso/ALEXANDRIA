@@ -18,6 +18,7 @@
     <bean id="paymentMethodDao" class="com.alexandria.dao.PaymentMethodDaoImpl" />
     <bean id="orderHeaderDao" class="com.alexandria.dao.OrderHeaderDaoImpl" />
     <bean id="orderLineDao" class="com.alexandria.dao.OrderLineDaoImpl" />
+    <bean id="productDao" class="com.alexandria.dao.ProductDaoImpl" />
 
     <!-- Provide support for component scanning -->
     <context:component-scan base-package="com.alexandria.controllers" />
