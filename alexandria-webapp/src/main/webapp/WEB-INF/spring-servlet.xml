@@ -19,6 +19,7 @@
     <bean id="orderHeaderDao" class="com.alexandria.dao.OrderHeaderDaoImpl" />
     <bean id="orderLineDao" class="com.alexandria.dao.OrderLineDaoImpl" />
     <bean id="productDao" class="com.alexandria.dao.ProductDaoImpl" />
+    <bean id="orderHeaderManager" class="com.alexandria.managers.OrderHeaderManagerImpl" />
 
     <!-- Provide support for component scanning -->
     <context:component-scan base-package="com.alexandria.controllers" />
