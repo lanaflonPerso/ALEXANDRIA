@@ -46,7 +46,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             order.setClientByClientId(client);
             order.setOrderLinesByIdOrderHeader(new ArrayList<>());
 
-            // FIXME : Set dummy data for shipping method as this field is not null in database
+            // FIXME : Set dummy data for shipping method as this field doesn't accept null in database
             ShippingMethodEntity shippingMethod = new ShippingMethodEntity();
             shippingMethod.setIdShippingMethod(1);
             shippingMethod.setDescription("DHL");
