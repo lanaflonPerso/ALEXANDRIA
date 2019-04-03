@@ -48,7 +48,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             shippingMethod.setDescription("DHL");
             shippingMethod.setCharges(new BigDecimal(18.4065));
 
-            order.setShippingMethodByShippingMethodId(new ShippingMethodEntity());
+            order.setShippingMethodByShippingMethodId(shippingMethod);
 
             // Create in database
             orderHeaderDao.create(order);
