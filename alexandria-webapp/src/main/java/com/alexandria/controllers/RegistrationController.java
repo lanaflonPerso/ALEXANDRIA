@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -19,26 +20,26 @@ public class RegistrationController {
   @Autowired
   ClientManager clientManager;
 
-  // TODO : tmp
-  List<TitleEntity> titles; // TODO : pourquoi clientManager.getXxxList(); plante ici ?
+  // Combobox
+  List<TitleEntity> titles;
   List<CountryEntity> countries;
   List<PaymentMethodEntity> paymentMethods;
-  //
+
+  @PostConstruct
+  public void init() {
+    titles = clientManager.getTitlesList();
+    countries = clientManager.getCountriesList();
+    paymentMethods = clientManager.getPaymentMethodsList();
+  }
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
     ModelAndView mav = new ModelAndView("register");
     mav.addObject("client", new ClientEntity());
 
-    // TODO : tmp
-    titles = clientManager.getTitlesList();
-    countries = clientManager.getCountriesList();
-    paymentMethods = clientManager.getPaymentMethodsList();
-
     request.setAttribute("titles", titles);
     request.setAttribute("countries", countries);
     request.setAttribute("paymentMethods", paymentMethods);
-    //
 
     return mav;
   }
