@@ -12,11 +12,19 @@
 					<div class="card-body">
 						<h4 class="card-title">Register</h4>
 						<form method="POST" class="my-login-validation" novalidate="">
+
 							<div class="form-group">
-								<label for="name">Name</label>
-								<input id="name" type="text" class="form-control" name="name" required autofocus>
+								<label for="firstName">First Name</label>
+								<input id="firstName" type="text" class="form-control" name="firstName" required autofocus>
 								<div class="invalid-feedback">
-									What's your name?
+									What's your first name?
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="lastName">Last Name</label>
+								<input id="lastName" type="text" class="form-control" name="lastName" required autofocus>
+								<div class="invalid-feedback">
+									What's your last name?
 								</div>
 							</div>
 
