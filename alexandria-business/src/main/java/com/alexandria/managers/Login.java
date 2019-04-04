@@ -4,6 +4,7 @@ public class Login {
 
   private String email;
   private String password;
+  private boolean remember;
 
   public String getEmail() { return email; }
 
@@ -17,4 +18,7 @@ public class Login {
     this.password = password;
   }
 
+  public boolean isRemember() { return remember; }
+
+  public void setRemember(boolean remember) { this.remember = remember; }
 }

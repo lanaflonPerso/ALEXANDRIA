@@ -33,8 +33,8 @@ public class LoginController {
         ModelAndView mav = null;
 
         // TODO : temp
-        login.setEmail(request.getParameter("email"));
-        login.setPassword(request.getParameter("password"));
+//        login.setEmail(request.getParameter("email"));
+//        login.setPassword(request.getParameter("password"));
         //
 
         ClientEntity client = clientManager.validateClient(login);
@@ -44,7 +44,7 @@ public class LoginController {
             mav.addObject("client", client);
         } else {
             mav = new ModelAndView("login");
-            mav.addObject("message", "Username or Password is wrong!!");
+            mav.addObject("message", "Email or Password is wrong!!");
         }
 
         return mav;
