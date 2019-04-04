@@ -11,7 +11,7 @@
 				<div class="card fat">
 					<div class="card-body">
 						<h4 class="card-title">Register</h4>
-						<form method="POST" class="my-login-validation" action="registerProcess" novalidate="">
+						<form:form method="POST" class="my-login-validation" action="registerProcess" modelAttribute="client" novalidate="">
 
 							<div class="form-group">
 								<label for="gender">Gender</label>
@@ -21,6 +21,10 @@
 										<option value="${status.index}">${item.description}</option>
 									</c:forEach>
 								</select>
+								<%--<form:select path="titleByTitleId" class="custom-select form-control" id="gender" name="gender" required="R" autofocus="A">--%>
+									<%--<form:option value="-" label="--Please Select" />--%>
+									<%--<form:options items="${titles}" itemValue="idTitle" itemLabel="description" />--%>
+								<%--</form:select>--%>
 								<div class="invalid-feedback">
 									What's your gender?
 								</div>
@@ -66,7 +70,7 @@
 							<div class="mt-4 text-center">
 								Already have an account? <a href="<c:url value="/login"/>">Login</a>
 							</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 
