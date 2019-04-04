@@ -11,18 +11,32 @@
 				<div class="card fat">
 					<div class="card-body">
 						<h4 class="card-title">Register</h4>
-						<form method="POST" class="my-login-validation" novalidate="">
+						<form method="POST" class="my-login-validation" action="registerProcess" novalidate="">
+
+							<div class="form-group">
+								<label for="gender">Gender</label>
+								<select class="custom-select form-control" id="gender" name="gender" required autofocus>
+									<option selected disabled>Select one</option>
+									<c:forEach var="item" items="${titles}" varStatus="status">
+										<option value="${status.index}">${item.description}</option>
+									</c:forEach>
+								</select>
+								<div class="invalid-feedback">
+									What's your gender?
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label for="firstName">First Name</label>
-								<input id="firstName" type="text" class="form-control" name="firstName" required autofocus>
+								<input id="firstName" type="text" class="form-control" name="firstName" required>
 								<div class="invalid-feedback">
 									What's your first name?
 								</div>
 							</div>
+
 							<div class="form-group">
 								<label for="lastName">Last Name</label>
-								<input id="lastName" type="text" class="form-control" name="lastName" required autofocus>
+								<input id="lastName" type="text" class="form-control" name="lastName" required>
 								<div class="invalid-feedback">
 									What's your last name?
 								</div>
@@ -41,16 +55,6 @@
 								<input id="password" type="password" class="form-control" name="password" required data-eye>
 								<div class="invalid-feedback">
 									Password is required
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="custom-checkbox custom-control">
-									<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
-									<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
-									<div class="invalid-feedback">
-										You must agree with our Terms and Conditions
-									</div>
 								</div>
 							</div>
 
