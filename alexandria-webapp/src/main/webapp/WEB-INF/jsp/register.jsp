@@ -61,9 +61,11 @@
 
 							<div class="form-group">
 								<form:label path="password">Password</form:label>
-								<form:password path="password" class="form-control" required="required" data-eye="data-eye"/>
+								<form:password path="password" class="form-control"
+											   pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
+											   required="required" data-eye="data-eye"/>
                                 <small class="form-text text-muted">
-                                    Passwords must contain at least eight characters, including at least 1 letter and 1 number.
+                                    Passwords must contain at least eight characters, including at least 1 upper letter 1 lower letter and 1 number.
                                 </small>
 								<div class="invalid-feedback">
 									Password is required
