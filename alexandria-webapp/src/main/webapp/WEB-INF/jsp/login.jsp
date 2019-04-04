@@ -7,6 +7,7 @@
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
+					<h3 class="text-center pt-5">Welcome to ${application.name}</h3>
 					<div class="brand">
 						<img src="<c:url value="/static/images/logo.jpg"/>" alt="logo">
 					</div>
