@@ -1,11 +1,11 @@
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/my-login.css"/>">
 
-<section class="h-100 my-login-page">
+<section class="h-80 my-login-page">
 
-	<div class="container h-100">
+	<div class="container h-80">
 
-		<div class="row justify-content-md-center h-100">
+		<div class="row justify-content-md-center h-80">
 
 			<div class="card-wrapper">
 
@@ -94,5 +94,6 @@
 	</div>
 
 </section>
+<br>
 
 <script src="<c:url value="/static/js/my-login.js"/>"></script>

@@ -3,6 +3,7 @@
     request.setAttribute("year", sdf.format(new java.util.Date()));
 %>
 
+<br>
 <footer class="footer fixed-bottom bg-primary">
     <div class="container text-center text-white">
         <p>
