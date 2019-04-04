@@ -59,4 +59,16 @@ public class LoginController {
 
         return mav;
     }
+
+    @RequestMapping(value = "/signout", method = RequestMethod.GET)
+    public ModelAndView signout(HttpServletRequest request, HttpServletResponse response) {
+
+        // Clear the session
+        request.getSession().invalidate();
+
+        ModelAndView mav = new ModelAndView("login");
+        mav.addObject("login", new Login());
+
+        return mav;
+    }
 }
