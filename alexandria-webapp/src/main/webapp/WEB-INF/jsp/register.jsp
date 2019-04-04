@@ -2,16 +2,24 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/my-login.css"/>">
 
 <section class="h-100 my-login-page">
+
 	<div class="container h-100">
+
 		<div class="row justify-content-md-center h-100">
+
 			<div class="card-wrapper">
+
 				<div class="brand">
 					<img src="<c:url value="/static/images/logo.jpg"/>" alt="logo">
 				</div>
+
 				<div class="card fat">
+
 					<div class="card-body">
+
 						<h4 class="card-title">Register</h4>
-						<form:form method="POST" class="my-login-validation" action="registerProcess" modelAttribute="client" novalidate="">
+
+						<form:form method="POST" class="my-login-validation" action="registerProcess" modelAttribute="client" novalidate="novalidate">
 
 							<div class="form-group">
 								<label for="gender">Gender</label>
