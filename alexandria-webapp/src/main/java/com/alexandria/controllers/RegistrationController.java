@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -28,8 +29,6 @@ public class RegistrationController {
   @PostConstruct
   public void init() {
     titles = clientManager.getTitlesList();
-    countries = clientManager.getCountriesList();
-    paymentMethods = clientManager.getPaymentMethodsList();
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -40,46 +39,39 @@ public class RegistrationController {
     mav.addObject("client", new ClientEntity());
 
     mav.addObject("titles", titles);
-    mav.addObject("countries", countries);
-    mav.addObject("paymentMethods", paymentMethods);
 
     return mav;
   }
 
   @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
   public ModelAndView addClient(HttpServletRequest request, HttpServletResponse response,
-                              @ModelAttribute("client") ClientEntity client) {
+                                @ModelAttribute("client") ClientEntity client,
+                                @RequestParam("gender") Integer iTitle) {
 
-    clientManager.register(map(client, request));
+    // TODO : use Spring form with databinding
+    client.setTitleByTitleId( titles.get(iTitle) );
+
+    clientManager.register(addDummies(client)); // FIXME : Add dummies data as some fields are not null in database
 
     return new ModelAndView("welcome", "client", client);
   }
 
-  private ClientEntity map(ClientEntity client, HttpServletRequest request) {
+  private ClientEntity addDummies(ClientEntity client) {
 
-    client.setTitleByTitleId( titles.get(Integer.parseInt(request.getParameter("gender"))) );
+    countries = clientManager.getCountriesList();
+    paymentMethods = clientManager.getPaymentMethodsList();
 
-    client.setFirstName(request.getParameter("firstName"));
-    client.setLastName(request.getParameter("lastName"));
-    client.setEmail(request.getParameter("email"));
-    client.setPhone(request.getParameter("phone"));
-    client.setPassword(request.getParameter("password"));
+    client.setPhone("phone");
 
     AddressEntity invoiceAddress = new AddressEntity(
-            request.getParameter("line1"),
-            request.getParameter("line2"),
-            request.getParameter("city"),
-            request.getParameter("state"),
-            request.getParameter("postalCode"),
-            countries.get(Integer.parseInt(request.getParameter("country")))
-    );
+        "line1", "line2", "city", "state", "postalCode", countries.get(0));
 
     AddressEntity deliveryAddress = invoiceAddress;
 
     client.setAddressByInvoiceAddressId(invoiceAddress);
     client.setAddressByDeliveryAddressId(deliveryAddress);
 
-    client.setPaymentMethodByPaymentMethodId( paymentMethods.get(Integer.parseInt(request.getParameter("paymentMethod"))) );
+    client.setPaymentMethodByPaymentMethodId( paymentMethods.get(0));
 
     return client;
   }
