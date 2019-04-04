@@ -29,10 +29,6 @@
 										<option value="${status.index}">${item.description}</option>
 									</c:forEach>
 								</select>
-								<%--<form:select path="titleByTitleId" class="custom-select form-control" id="gender" name="gender" required="R" autofocus="A">--%>
-									<%--<form:option value="-" label="--Please Select" />--%>
-									<%--<form:options items="${titles}" itemValue="idTitle" itemLabel="description" />--%>
-								<%--</form:select>--%>
 								<div class="invalid-feedback">
 									What's your gender?
 								</div>
