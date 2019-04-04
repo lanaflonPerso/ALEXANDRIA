@@ -21,7 +21,9 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
+
         ModelAndView mav = new ModelAndView("login");
+
         mav.addObject("login", new Login());
 
         return mav;
@@ -31,11 +33,6 @@ public class LoginController {
     public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
                                      @ModelAttribute("login") Login login) {
         ModelAndView mav = null;
-
-        // TODO : temp
-//        login.setEmail(request.getParameter("email"));
-//        login.setPassword(request.getParameter("password"));
-        //
 
         ClientEntity client = clientManager.validateClient(login);
 
