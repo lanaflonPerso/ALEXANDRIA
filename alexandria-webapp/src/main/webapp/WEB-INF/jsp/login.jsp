@@ -32,7 +32,8 @@
                                        title="Doit contenir entre 4 et 8 caractères contenant impérativement au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère."
                                        required>
                                 <input type="button" class="btnShow" value="show"/>
-                                <small id="passwordHelpId" class="form-text text-muted">Doit contenir entre 4 et 8 caractères contenant impérativement
+                                <small id="passwordHelpId" class="form-text text-muted">Passwords must contain at least eight characters, including at least 1 letter and 1 number.
+                                    Doit contenir entre 4 et 8 caractères contenant impérativement
                                     au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère.</small>
                             </div>
                         </div>
