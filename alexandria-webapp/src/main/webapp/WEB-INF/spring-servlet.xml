@@ -24,6 +24,8 @@
     <!-- Provide support for component scanning -->
     <context:component-scan base-package="com.alexandria.controllers" />
 
+    <mvc:resources location = "/static/" mapping = "/static/**" />
+
     <!--Provide support for conversion, formatting and validation -->
     <mvc:annotation-driven/>
 

@@ -1,67 +1,65 @@
 
-<div id="login">
-    <h3 class="text-center pt-5">Welcome to ${application.name}</h3>
-    <div class="container">
-        <div id="login-row" class="row justify-content-center align-items-center">
-            <div id="login-column" class="col-md-6">
-                <div id="login-box" class="col-md-12">
-                    <form id="login-form" class="form" action="loginProcess" method="post">
-                        <h3 class="text-center text-info">Login</h3>
 
-                        <p style="font-style: italic; color: red;">${message}</p>
+<link rel="stylesheet" type="text/css" href="<c:url value="/static/css/my-login.css"/>">
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupPrependEmail"><i class="fas fa-at"></i></span>
-                                </div>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="" aria-describedby="inputGroupPrependEmail" required>
-                            </div>
-                        </div>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="img/logo.jpg" alt="logo">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Login</h4>
+							<form method="POST" class="my-login-validation" novalidate="">
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+									<div class="invalid-feedback">
+										Email is invalid
+									</div>
+								</div>
 
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupPrependPassword"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" class="form-control pwd" name="password" id="password" aria-describedby="passwordHelpId"
-                                       <%--pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{4,8}$" --%>
-                                       placeholder=""
-                                       title="Doit contenir entre 4 et 8 caractères contenant impérativement au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère."
-                                       required>
-                                <input type="button" class="btnShow" value="show"/>
-                                <small id="passwordHelpId" class="form-text text-muted">Passwords must contain at least eight characters, including at least 1 letter and 1 number.
-                                    Doit contenir entre 4 et 8 caractères contenant impérativement
-                                    au moins un chiffre, une lettre majuscule, une lettre minuscule et un autre caractère.</small>
-                            </div>
-                        </div>
+								<div class="form-group">
+									<label for="password">Password
+										<a href="forgot.html" class="float-right">
+											Forgot Password?
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+								    <div class="invalid-feedback">
+								    	Password is required
+							    	</div>
+								</div>
 
-                        <div class="form-group">
-                            <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                        </div>
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+										<label for="remember" class="custom-control-label">Remeber Me</label>
+									</div>
+								</div>
 
-                        <c:url value="/register" var="URL_REGISTER"/>
-                        <div class="form-group">
-                            <p class="text-center">Don't have account? <a href="${URL_REGISTER}" id="signup">Register here</a></p>
-                        </div>
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Login
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Don't have an account? <a href="register.html">Create One</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; 2017 &mdash; Your Company 
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-<script>
-    $( ".btnShow" ).mousedown(function() {
-        $(".pwd").attr("type","text");
-    });
-    $( ".btnShow" ).on("mouseleave",function() {
-        $(".pwd").attr("type","password");
-    });
-</script>
-
+	<script src="<c:url value="/static/js/my-login.js"/>"></script>
+</body>

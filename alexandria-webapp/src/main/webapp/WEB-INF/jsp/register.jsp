@@ -1,258 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/my-login.css">
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="img/logo.jpg" alt="bootstrap 4 login page">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form method="POST" class="my-login-validation" novalidate="">
+								<div class="form-group">
+									<label for="name">Name</label>
+									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<div class="invalid-feedback">
+										What's your name?
+									</div>
+								</div>
 
-<div id="register">
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" name="email" required>
+									<div class="invalid-feedback">
+										Your email is invalid
+									</div>
+								</div>
 
-    <div class="container">
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<div class="invalid-feedback">
+										Password is required
+									</div>
+								</div>
 
-    <form class="needs-validation" action="registerProcess" method="post" novalidate>
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
+										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
+										<div class="invalid-feedback">
+											You must agree with our Terms and Conditions
+										</div>
+									</div>
+								</div>
 
-        <h3 class="text-center text-info">Register</h3>
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										Register
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Already have an account? <a href="index.html">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; 2017 &mdash; Your Company 
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-        <div class="form-row">
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomGender">Gender</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependGender"><i class="fas fa-transgender-alt"></i></span>
-                    </div>
-                    <select class="custom-select form-control" name="gender" id="validationCustomGender" aria-describedby="inputGroupPrependGender" required>
-                        <option selected disabled>Select one</option>
-                        <c:forEach var="item" items="${titles}" varStatus="status">
-                            <option value="${status.index}">${item.description}</option>
-                        </c:forEach>
-                    </select>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustom01">First name</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependFirstName"><i class="fas fa-id-card"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="firstName" id="validationCustom01" aria-describedby="inputGroupPrependFirstName" placeholder="First name" value="" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustom02">Last name</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependLastName"><i class="fas fa-id-card"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="lastName" id="validationCustom02" aria-describedby="inputGroupPrependLastName" placeholder="Last name" value="" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomEmail">Email</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependEmail"><i class="fas fa-at"></i></span>
-                    </div>
-                    <input type="email" class="form-control" name="email" id="validationCustomEmail" placeholder="Email" aria-describedby="inputGroupPrependEmail" required>
-                    <div class="invalid-feedback">
-                        Please choose an email.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomConfirmEmail">Confirm Email</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependConfirmEmail"><i class="fas fa-at"></i></span>
-                    </div>
-                    <input type="email" class="form-control" name="confirmEmail" id="validationCustomConfirmEmail" placeholder="Confirm Email" aria-describedby="inputGroupPrependConfirmEmail" required>
-                    <div class="invalid-feedback">
-                        Please choose an email.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomPhone">Phone</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependPhone"><i class="fas fa-phone  "></i></span>
-                    </div>
-                    <input type="tel" class="form-control" name="phone" id="validationCustomPhone" placeholder="Phone" aria-describedby="inputGroupPrependPhone" value=" ">
-                    <div class="invalid-feedback">
-                        Please choose a phone number.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomPassword">Password</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependPassword"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" name="password" id="validationCustomPassword" placeholder="Password" aria-describedby="inputGroupPrependPassword" required>
-                    <div class="invalid-feedback">
-                        Please choose a valid password.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomConfirmPassword">Confirm Password</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependConfirmPassword"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" name="confirmPassword" id="validationCustomConfirmPassword" placeholder="Confirm Password" aria-describedby="inputGroupPrependConfirmPassword" required>
-                    <div class="invalid-feedback">
-                        Please choose a valid password.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <label for="validationCustomPaymentMethod">Payment method</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependPaymentMethod"><i class="fas fa-money-check-alt"></i></span>
-                    </div>
-                    <select class="custom-select form-control" name="paymentMethod" id="validationCustomPaymentMethod" aria-describedby="inputGroupPrependPaymentMethod" required>
-                        <option selected disabled>Select one</option>
-                        <c:forEach var="item" items="${paymentMethods}" varStatus="status">
-                            <option value="${status.index}">${item.description}</option>
-                        </c:forEach>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please choose a valid payment method.
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="col-md-6 mb-3">
-                <label for="validationCustomLine1">Line 1</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependLine1"><i class="fas fa-road"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="line1" id="validationCustomLine1" aria-describedby="inputGroupPrependLine1" placeholder="Line 1" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid line 1.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label for="validationCustomLine2">Line 2</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependLine2"><i class="fas fa-road"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="line2" id="validationCustomLine2" aria-describedby="inputGroupPrependLine2" placeholder="Line 2" value=" ">
-                    <div class="invalid-feedback">
-                        Please provide a valid line 2.
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="col-md-3 mb-3">
-                <label for="validationCustomCity">City</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependCity"><i class="fas fa-map-marked-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="city" id="validationCustomCity" aria-describedby="inputGroupPrependCity" placeholder="City" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <label for="validationCustomState">State</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependState"><i class="fas fa-map-marked-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="state" id="validationCustomState" aria-describedby="inputGroupPrependState" placeholder="State" value=" ">
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <label for="validationCustomPostalCode">Postal code</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependPostalCode"><i class="fas fa-map-marked-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control" name="postalCode" id="validationCustomPostalCode" aria-describedby="inputGroupPrependPostalCode" placeholder="Postal code" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid postal code.
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <label for="validationCustomCountry">Country</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrependCountry"><i class="fas fa-globe"></i></span>
-                    </div>
-                    <select class="custom-select form-control" name="country" id="validationCustomCountry" aria-describedby="inputGroupPrependCountry" required>
-                        <option selected disabled>Select one</option>
-                        <c:forEach var="item" items="${countries}" varStatus="status">
-                            <option value="${status.index}">${item.description}</option>
-                        </c:forEach>
-                    </select>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <button class="btn btn-primary" type="submit">Submit</button>
-
-    </form>
-
-    </div>
-</div>
-
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/my-login.js"></script>
+</body>
+</html>
