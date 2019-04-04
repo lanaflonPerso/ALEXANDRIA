@@ -44,11 +44,13 @@ public class LoginController {
         ClientEntity client = clientManager.validateClient(login);
 
         if (client != null) {
-           request.getSession().setAttribute( "userSession", client);
+            // Set user session
+            request.getSession().setAttribute( "userSession", client);
 
             mav = new ModelAndView("welcome");
             mav.addObject("client", client);
         } else {
+            // Reset user session
             request.getSession().setAttribute( "userSession", null);
 
             mav = new ModelAndView("login");
