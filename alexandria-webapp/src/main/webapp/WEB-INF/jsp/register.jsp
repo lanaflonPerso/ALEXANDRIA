@@ -21,6 +21,7 @@
 
 						<form:form method="POST" class="my-login-validation" action="registerProcess" modelAttribute="client" novalidate="novalidate">
 
+							<%--TODO : use Spring form--%>
 							<div class="form-group">
 								<label for="gender">Gender</label>
 								<select class="custom-select form-control" id="gender" name="gender" required autofocus>
@@ -35,53 +36,58 @@
 							</div>
 
 							<div class="form-group">
-								<label for="firstName">First Name</label>
-								<input id="firstName" type="text" class="form-control" name="firstName" required>
+								<form:label path="firstName">First Name</form:label>
+								<form:input path="firstName" class="form-control" required="required"/>
 								<div class="invalid-feedback">
 									What's your first name?
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="lastName">Last Name</label>
-								<input id="lastName" type="text" class="form-control" name="lastName" required>
+								<form:label path="lastName">Last Name</form:label>
+								<form:input path="lastName" class="form-control" required="required"/>
 								<div class="invalid-feedback">
 									What's your last name?
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="email">E-Mail Address</label>
-								<input id="email" type="email" class="form-control" name="email" required>
+								<form:label path="email">E-Mail Address</form:label>
+								<form:input path="email" type="email" class="form-control" required="required"/>
 								<div class="invalid-feedback">
 									Your email is invalid
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="password">Password</label>
-								<input id="password" type="password" class="form-control" name="password" required data-eye>
+								<form:label path="password">Password</form:label>
+								<form:password path="password" class="form-control" required="required" data-eye="data-eye"/>
 								<div class="invalid-feedback">
 									Password is required
 								</div>
 							</div>
 
 							<div class="form-group m-0">
-								<button type="submit" class="btn btn-primary btn-block">
-									Register
-								</button>
+								<form:button type="submit" class="btn btn-primary btn-block">Register</form:button>
 							</div>
+
 							<div class="mt-4 text-center">
 								Already have an account? <a href="<c:url value="/login"/>">Login</a>
 							</div>
+
 						</form:form>
+
 					</div>
+
 				</div>
 
+
 			</div>
+
 		</div>
+
 	</div>
+
 </section>
 
 <script src="<c:url value="/static/js/my-login.js"/>"></script>
-
