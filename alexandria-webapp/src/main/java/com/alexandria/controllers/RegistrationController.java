@@ -34,12 +34,14 @@ public class RegistrationController {
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
+
     ModelAndView mav = new ModelAndView("register");
+
     mav.addObject("client", new ClientEntity());
 
-    request.setAttribute("titles", titles);
-    request.setAttribute("countries", countries);
-    request.setAttribute("paymentMethods", paymentMethods);
+    mav.addObject("titles", titles);
+    mav.addObject("countries", countries);
+    mav.addObject("paymentMethods", paymentMethods);
 
     return mav;
   }
