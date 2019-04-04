@@ -23,11 +23,11 @@
 
 						<p style="font-style: italic; color: red;">${message}</p>
 
-						<form:form id="loginForm" class="my-login-validation" modelAttribute="login" action="loginProcess" method="post" novalidate="">
+						<form:form id="loginForm" class="my-login-validation" modelAttribute="login" action="loginProcess" method="post" novalidate="novalidate">
 
 							<div class="form-group">
 								<form:label path="email">E-Mail Address</form:label>
-								<form:input path="email" type="email" class="form-control" name="email" id="email" required="R" autofocus="A"/>
+								<form:input path="email" type="email" class="form-control" name="email" id="email" required="required" autofocus="autofocus"/>
 								<div class="invalid-feedback">
 									Email is invalid
 								</div>
@@ -35,7 +35,7 @@
 
 							<div class="form-group">
 								<form:label path="password">Password</form:label>
-								<form:password path="password" class="form-control" name="password" id="password" required="R" data-eye="D"/>
+								<form:password path="password" class="form-control" name="password" id="password" required="required" data-eye="data-eye"/>
 								<div class="invalid-feedback">
 									Password is required
 								</div>
