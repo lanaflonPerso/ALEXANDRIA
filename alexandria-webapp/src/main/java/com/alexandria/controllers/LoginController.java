@@ -22,7 +22,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
 
-        // Bypass login if session recorded
+        // Bypass login if user session recorded
         ClientEntity client = (ClientEntity)request.getSession().getAttribute( "userSession");
         if(client != null) {
             ModelAndView mav = new ModelAndView("welcome");
