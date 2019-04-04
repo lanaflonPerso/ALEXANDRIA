@@ -59,6 +59,6 @@
 		</div>
 	</section>
 
-
 	<script src="<c:url value="/static/js/my-login.js"/>"></script>
+
 </body>
