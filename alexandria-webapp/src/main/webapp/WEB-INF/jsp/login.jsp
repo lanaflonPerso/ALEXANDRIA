@@ -27,7 +27,7 @@
 
 							<div class="form-group">
 								<form:label path="email">E-Mail Address</form:label>
-								<form:input path="email" type="email" class="form-control" name="email" id="email" required="required" autofocus="autofocus"/>
+								<form:input path="email" type="email" class="form-control" required="required" autofocus="autofocus"/>
 								<div class="invalid-feedback">
 									Email is invalid
 								</div>
@@ -35,7 +35,7 @@
 
 							<div class="form-group">
 								<form:label path="password">Password</form:label>
-								<form:password path="password" class="form-control" name="password" id="password" required="required" data-eye="data-eye"/>
+								<form:password path="password" class="form-control" required="required" data-eye="data-eye"/>
 								<div class="invalid-feedback">
 									Password is required
 								</div>
@@ -43,7 +43,7 @@
 
 							<div class="form-group">
 								<div class="custom-checkbox custom-control">
-									<form:checkbox path="remember" class="custom-control-input" name="remember" id="remember"/>
+									<form:checkbox path="remember" class="custom-control-input"/>
 									<form:label path="remember" class="custom-control-label">Remember Me</form:label>
 								</div>
 							</div>
