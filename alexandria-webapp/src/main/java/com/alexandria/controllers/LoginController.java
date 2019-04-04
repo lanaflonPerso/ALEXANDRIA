@@ -22,8 +22,15 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
 
-        ModelAndView mav = new ModelAndView("login");
+        // Bypass login if session recorded
+        ClientEntity client = (ClientEntity)request.getSession().getAttribute( "userSession");
+        if(client != null) {
+            ModelAndView mav = new ModelAndView("welcome");
+            mav.addObject("client", client);
+            return mav;
+        }
 
+        ModelAndView mav = new ModelAndView("login");
         mav.addObject("login", new Login());
 
         return mav;
@@ -37,9 +44,13 @@ public class LoginController {
         ClientEntity client = clientManager.validateClient(login);
 
         if (client != null) {
+           request.getSession().setAttribute( "userSession", client);
+
             mav = new ModelAndView("welcome");
             mav.addObject("client", client);
         } else {
+            request.getSession().setAttribute( "userSession", null);
+
             mav = new ModelAndView("login");
             mav.addObject("message", "Email or Password is wrong!!");
         }
