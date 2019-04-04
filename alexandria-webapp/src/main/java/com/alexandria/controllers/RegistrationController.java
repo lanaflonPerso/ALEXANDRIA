@@ -23,8 +23,6 @@ public class RegistrationController {
 
   // Combobox
   List<TitleEntity> titles;
-  List<CountryEntity> countries;
-  List<PaymentMethodEntity> paymentMethods;
 
   @PostConstruct
   public void init() {
@@ -48,31 +46,48 @@ public class RegistrationController {
                                 @ModelAttribute("client") ClientEntity client,
                                 @RequestParam("gender") Integer iTitle) {
 
-    // TODO : use Spring form with databinding
-    client.setTitleByTitleId( titles.get(iTitle) );
+        ModelAndView mav = null;
 
-    clientManager.register(addDummies(client)); // FIXME : Add dummies data as some fields are not null in database
+        boolean isEmailAlreadyRegistered = clientManager.isEmailAlreadyRegistered(client.getEmail());
 
-    return new ModelAndView("welcome", "client", client);
-  }
+        if(!isEmailAlreadyRegistered) {
 
-  private ClientEntity addDummies(ClientEntity client) {
+            // TODO : use Spring form select with databinding instead @RequestParam
+            client.setTitleByTitleId( titles.get(iTitle) );
 
-    countries = clientManager.getCountriesList();
-    paymentMethods = clientManager.getPaymentMethodsList();
+            // FIXME : Cf. addDummies method's comments
+            clientManager.register(addDummies(client));
 
-    client.setPhone("phone");
+            mav = new ModelAndView("welcome", "client", client);
 
-    AddressEntity invoiceAddress = new AddressEntity(
-        "line1", "line2", "city", "state", "postalCode", countries.get(0));
+        } else {
 
-    AddressEntity deliveryAddress = invoiceAddress;
+            mav = new ModelAndView("register");
+            mav.addObject("message", "Email already registered !!");
+            mav.addObject("titles", titles);
+        }
 
-    client.setAddressByInvoiceAddressId(invoiceAddress);
-    client.setAddressByDeliveryAddressId(deliveryAddress);
+        return mav;
+    }
 
-    client.setPaymentMethodByPaymentMethodId( paymentMethods.get(0));
+    // FIXME : Add dummies data as some fields doesn't accept null in database
+    private ClientEntity addDummies(ClientEntity client) {
 
-    return client;
-  }
+        List<CountryEntity> countries = clientManager.getCountriesList();
+        List<PaymentMethodEntity> paymentMethods = clientManager.getPaymentMethodsList();
+
+        client.setPhone("phone");
+
+        AddressEntity invoiceAddress = new AddressEntity(
+            "line1", "line2", "city", "state", "postalCode", countries.get(0));
+
+        AddressEntity deliveryAddress = invoiceAddress;
+
+        client.setAddressByInvoiceAddressId(invoiceAddress);
+        client.setAddressByDeliveryAddressId(deliveryAddress);
+
+        client.setPaymentMethodByPaymentMethodId( paymentMethods.get(0));
+
+        return client;
+    }
 }

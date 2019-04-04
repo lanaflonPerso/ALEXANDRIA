@@ -28,6 +28,14 @@ public class ClientManagerImpl implements ClientManager {
     public PaymentMethodDao paymentMethodDao;
 
     @Override
+    public boolean isEmailAlreadyRegistered(String email) {
+
+        List<ClientEntity> clients = clientDao.findFromEmail(email);
+
+        return clients.size() > 0 ? true : false;
+    }
+
+    @Override
     public void register(ClientEntity client) {
 
         // TODO : Check that the client email doesn't already exist in database before record the client.

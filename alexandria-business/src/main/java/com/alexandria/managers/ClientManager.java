@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface ClientManager {
 
+    boolean isEmailAlreadyRegistered(String email);
+
     void register(ClientEntity client);
 
     ClientEntity validateClient(Login login);

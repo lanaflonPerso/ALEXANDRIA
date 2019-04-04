@@ -24,6 +24,12 @@ import java.util.Set;
                         "and " +
                         "upper(c.password) = :password " +
                         ")"
+        ),
+        @NamedQuery(
+                name = "ClientEntity.findFromEmail",
+                query = "from ClientEntity as c where (" +
+                        "upper(c.email) like upper(concat('%', :email, '%')) " +
+                        ")"
         )
 })
 public class ClientEntity extends AbstractModelObject {

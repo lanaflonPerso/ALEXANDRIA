@@ -19,6 +19,8 @@
 
 						<h4 class="card-title">Register</h4>
 
+						<p style="font-style: italic; color: red;">${message}</p>
+
 						<form:form method="POST" class="my-login-validation" action="registerProcess" modelAttribute="client" novalidate="novalidate">
 
 							<%--TODO : use Spring form--%>
