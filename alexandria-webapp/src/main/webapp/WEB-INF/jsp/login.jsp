@@ -52,9 +52,7 @@
 							</form>
 						</div>
 					</div>
-					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
-					</div>
+
 				</div>
 			</div>
 		</div>
