@@ -29,6 +29,8 @@ public interface OrderHeaderManager {
 
     void removeLineItem(ProductEntity product);
 
+    void clearOrderLines();
+
     List<OrderLineEntity> getOrderLines();
 
     int getNbOrderLines();

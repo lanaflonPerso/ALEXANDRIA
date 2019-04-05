@@ -199,6 +199,11 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     }
 
     @Override
+    public void clearOrderLines() {
+        // TODO : update stocks and co
+    }
+
+    @Override
     public List<OrderLineEntity> getOrderLines() {
         return order.getOrderLinesByIdOrderHeader();
     }
