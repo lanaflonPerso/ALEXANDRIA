@@ -59,5 +59,15 @@ public class ClientManagerImpl implements ClientManager {
     public List<CountryEntity> getCountriesList() { return countryDao.findAll(); }
 
     @Override
+    public List<CountryEntity> getCountriesListRange(int iMin, int nb) {
+        return countryDao.findRange(iMin, nb);
+    }
+
+    @Override
     public List<PaymentMethodEntity> getPaymentMethodsList() { return paymentMethodDao.findAll(); }
+
+    @Override
+    public List<PaymentMethodEntity> getPaymentMethodsListRange(int iMin, int nb) {
+        return paymentMethodDao.findRange(iMin, nb);
+    }
 }

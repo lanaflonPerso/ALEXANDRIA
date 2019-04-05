@@ -19,5 +19,9 @@ public interface ClientManager {
 
     List<CountryEntity> getCountriesList();
 
+    List<CountryEntity> getCountriesListRange(int iMin, int nb);
+
     List<PaymentMethodEntity> getPaymentMethodsList();
+
+    List<PaymentMethodEntity> getPaymentMethodsListRange(int iMin, int nb);
 }
