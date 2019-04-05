@@ -3,6 +3,7 @@ package com.alexandria.managers;
 import com.alexandria.dao.OrderHeaderDao;
 import com.alexandria.dao.OrderLineDao;
 import com.alexandria.dao.ProductDao;
+import com.alexandria.dao.ShippingMethodDao;
 import com.alexandria.entities.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,6 +33,9 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
     @Autowired
     public ProductDao productDao;
 
+    @Autowired
+    public ShippingMethodDao shippingMethodDao;
+
     private OrderHeaderEntity order;
 
     @Override
@@ -47,11 +51,7 @@ public class OrderHeaderManagerImpl implements OrderHeaderManager {
             order.setOrderLinesByIdOrderHeader(new ArrayList<>());
 
             // FIXME : Set dummy data for shipping method as this field doesn't accept null in database
-            ShippingMethodEntity shippingMethod = new ShippingMethodEntity();
-            shippingMethod.setIdShippingMethod(1);
-            shippingMethod.setDescription("DHL");
-            shippingMethod.setCharges(new BigDecimal(18.4065));
-
+            ShippingMethodEntity shippingMethod = shippingMethodDao.findRange(0, 1).get(0);
             order.setShippingMethodByShippingMethodId(shippingMethod);
 
             // Create in database
