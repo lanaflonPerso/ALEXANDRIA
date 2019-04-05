@@ -17,7 +17,7 @@ public interface OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
     List<OrderHeaderEntity> findAll();
 
-    List<OrderHeaderEntity> findRange(int[] range);
+    List<OrderHeaderEntity> findRange(int iMin, int nb);
 
     List<OrderHeaderEntity> findFromClient(ClientEntity client);
 

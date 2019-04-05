@@ -16,7 +16,7 @@ public interface BookDao extends AbstractDao<BookEntity> {
 
     List<BookEntity> findAll();
 
-    List<BookEntity> findRange(int[] range);
+    List<BookEntity> findRange(int iMin, int nb);
 
     int count();
 }

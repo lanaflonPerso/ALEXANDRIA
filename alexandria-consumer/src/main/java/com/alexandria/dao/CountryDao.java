@@ -16,7 +16,7 @@ public interface CountryDao extends AbstractDao<CountryEntity> {
 
     List<CountryEntity> findAll();
 
-    List<CountryEntity> findRange(int[] range);
+    List<CountryEntity> findRange(int iMin, int nb);
 
     int count();
 }

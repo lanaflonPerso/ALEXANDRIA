@@ -16,7 +16,7 @@ public interface ShippingMethodDao extends AbstractDao<ShippingMethodEntity> {
 
     List<ShippingMethodEntity> findAll();
 
-    List<ShippingMethodEntity> findRange(int[] range);
+    List<ShippingMethodEntity> findRange(int iMin, int nb);
 
     int count();
 }

@@ -16,7 +16,7 @@ public interface ClientDao extends AbstractDao<ClientEntity> {
 
     List<ClientEntity> findAll();
 
-    List<ClientEntity> findRange(int[] range);
+    List<ClientEntity> findRange(int iMin, int nb);
 
     List<ClientEntity> findFromFirstNameLastName(String name);
 

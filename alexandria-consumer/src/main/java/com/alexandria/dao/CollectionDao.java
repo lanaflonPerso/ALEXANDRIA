@@ -16,7 +16,7 @@ public interface CollectionDao extends AbstractDao<CollectionEntity> {
 
     List<CollectionEntity> findAll();
 
-    List<CollectionEntity> findRange(int[] range);
+    List<CollectionEntity> findRange(int iMin, int nb);
 
     int count();
 }

@@ -16,7 +16,7 @@ public interface ProductDao extends AbstractDao<ProductEntity> {
 
     List<ProductEntity> findAll();
 
-    List<ProductEntity> findRange(int[] range);
+    List<ProductEntity> findRange(int iMin, int nb);
 
     List<ProductEntity> findFromName(String name);
 

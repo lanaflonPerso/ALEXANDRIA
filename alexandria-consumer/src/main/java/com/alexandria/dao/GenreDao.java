@@ -16,7 +16,7 @@ public interface GenreDao extends AbstractDao<GenreEntity> {
 
     List<GenreEntity> findAll();
 
-    List<GenreEntity> findRange(int[] range);
+    List<GenreEntity> findRange(int iMin, int nb);
 
     int count();
 }

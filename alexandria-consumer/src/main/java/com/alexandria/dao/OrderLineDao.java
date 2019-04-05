@@ -16,7 +16,7 @@ public interface OrderLineDao extends AbstractDao<OrderLineEntity> {
 
     List<OrderLineEntity> findAll();
 
-    List<OrderLineEntity> findRange(int[] range);
+    List<OrderLineEntity> findRange(int iMin, int nb);
 
     int count();
 }

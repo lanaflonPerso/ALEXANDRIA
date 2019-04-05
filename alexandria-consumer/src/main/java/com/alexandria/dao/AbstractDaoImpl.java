@@ -94,21 +94,24 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
 	}
 
 	@Override
-	public List<T> findRange(int[] range) {
-		logger.info(entityClass + " DB_FIND_RANGE BEGIN");
+	public List<T> findRange(int iMin, int nb) {
+
+		if(iMin < 0 || nb < 0) logger.error("iMin or nb < 0");
+
+		logger.info(entityClass + " DB_FIND_RANGE BEGIN" + " iMin: " + iMin + " nb: " + nb);
 
 		EntityManager em = getEntityManager();
 
 		CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
 		cq.select(cq.from(entityClass));
 		TypedQuery<Object> q = em.createQuery(cq);
-		q.setMaxResults(range[1] - range[0]);
-		q.setFirstResult(range[0]);
+		q.setMaxResults(nb);
+		q.setFirstResult(iMin);
 		List<T> list = (List<T>) q.getResultList();
 
 		closeEntityManager();
 
-		logger.info(entityClass + " DB_FIND_RANGE END");
+		logger.info(entityClass + " DB_FIND_RANGE END" + " iMin: " + iMin + " nb: " + nb);
 
 		return list;
 	}

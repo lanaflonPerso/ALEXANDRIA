@@ -16,7 +16,7 @@ public interface AuthorDao extends AbstractDao<AuthorEntity> {
 
     List<AuthorEntity> findAll();
 
-    List<AuthorEntity> findRange(int[] range);
+    List<AuthorEntity> findRange(int iMin, int nb);
 
     int count();
 }

@@ -14,7 +14,7 @@ public interface AbstractDao<T> {
 
 	List<T> findAll();
 
-	List<T> findRange(int[] range);
+	List<T> findRange(int iMin, int nb);
 
 	int count();
 }

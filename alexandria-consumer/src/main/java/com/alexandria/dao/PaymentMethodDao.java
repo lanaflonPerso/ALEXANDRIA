@@ -16,7 +16,7 @@ public interface PaymentMethodDao extends AbstractDao<PaymentMethodEntity> {
 
     List<PaymentMethodEntity> findAll();
 
-    List<PaymentMethodEntity> findRange(int[] range);
+    List<PaymentMethodEntity> findRange(int iMin, int nb);
 
     int count();
 }

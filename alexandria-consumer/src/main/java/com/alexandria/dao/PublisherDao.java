@@ -16,7 +16,7 @@ public interface PublisherDao extends AbstractDao<PublisherEntity> {
 
     List<PublisherEntity> findAll();
 
-    List<PublisherEntity> findRange(int[] range);
+    List<PublisherEntity> findRange(int iMin, int nb);
 
     int count();
 }

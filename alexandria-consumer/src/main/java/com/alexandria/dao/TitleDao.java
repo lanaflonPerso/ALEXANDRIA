@@ -16,7 +16,7 @@ public interface TitleDao extends AbstractDao<TitleEntity> {
 
     List<TitleEntity> findAll();
 
-    List<TitleEntity> findRange(int[] range);
+    List<TitleEntity> findRange(int iMin, int nb);
 
     int count();
 }
