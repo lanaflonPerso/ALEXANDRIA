@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <bean id="productManager" class="com.alexandria.managers.ProductManagerImpl" />
     <bean id="orderHeaderManager" class="com.alexandria.managers.OrderHeaderManagerImpl" />
     <bean id="clientManager" class="com.alexandria.managers.ClientManagerImpl" />
     <bean id="clientDao" class="com.alexandria.dao.ClientDaoImpl" />
@@ -21,6 +22,7 @@
     <bean id="orderLineDao" class="com.alexandria.dao.OrderLineDaoImpl" />
     <bean id="productDao" class="com.alexandria.dao.ProductDaoImpl" />
     <bean id="shippingMethodDao" class="com.alexandria.dao.ShippingMethodDaoImpl" />
+    <bean id="categoryDao" class="com.alexandria.dao.CategoryDaoImpl" />
 
     <!-- Provide support for component scanning -->
     <context:component-scan base-package="com.alexandria.controllers" />
