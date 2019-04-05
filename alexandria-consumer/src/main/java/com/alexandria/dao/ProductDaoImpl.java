@@ -1,5 +1,6 @@
 package com.alexandria.dao;
 
+import com.alexandria.entities.CategoryEntity;
 import com.alexandria.entities.ProductEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,23 @@ public class ProductDaoImpl extends AbstractDaoImpl<ProductEntity> implements Pr
 
         logger.info("DB_FIND_FROM_NAME END");
         
+        return searchProductsList;
+    }
+
+    @Override
+    public List<ProductEntity> findAllFromCategoryId(List<CategoryEntity> categories) {
+        logger.info("DB_FIND_FROM_CATEGORY_ID BEGIN");
+
+        EntityManager em = getEntityManager();
+
+        TypedQuery<ProductEntity> query = em.createNamedQuery("ProductEntity.findAllFromCategoryId", ProductEntity.class);
+        query.setParameter("categories", categories);
+        List<ProductEntity> searchProductsList = query.getResultList();
+
+        closeEntityManager();
+
+        logger.info("DB_FIND_FROM_CATEGORY_ID END");
+
         return searchProductsList;
     }
 }

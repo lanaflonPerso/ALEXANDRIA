@@ -1,5 +1,6 @@
 package com.alexandria.dao;
 
+import com.alexandria.entities.CategoryEntity;
 import com.alexandria.entities.ProductEntity;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface ProductDao extends AbstractDao<ProductEntity> {
     List<ProductEntity> findRange(int iMin, int nb);
 
     List<ProductEntity> findFromName(String name);
+
+    List<ProductEntity> findAllFromCategoryId(List<CategoryEntity> categories);
 
     int count();
 }

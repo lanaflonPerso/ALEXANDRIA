@@ -8,6 +8,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "category", schema = "dbo", catalog = "DB_ALEXANDRIA")
+@NamedQueries({
+        @NamedQuery(
+                name = "CategoryEntity.findFromParent",
+                query = "from CategoryEntity as c where c.categoryByParent.idCategory = :parent"
+        )
+})
 public class CategoryEntity extends AbstractModelObject {
     private Integer idCategory;
     private String description;

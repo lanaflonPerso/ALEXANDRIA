@@ -19,4 +19,6 @@ public interface CategoryDao extends AbstractDao<CategoryEntity> {
     List<CategoryEntity> findRange(int iMin, int nb);
 
     int count();
+
+    List<CategoryEntity> findFromParent(int parent);
 }

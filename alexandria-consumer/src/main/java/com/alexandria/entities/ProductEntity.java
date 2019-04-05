@@ -20,6 +20,10 @@ import java.util.*;
         @NamedQuery(
                 name = "ProductEntity.findFromName",
                 query = "from ProductEntity as p where upper(p.name) like upper(concat('%', :name, '%'))"
+        ),
+        @NamedQuery(
+                name = "ProductEntity.findAllFromCategoryId",
+                query = "select p.productByProductId from ProductCategoryEntity as p where p.categoryByCategoryId in ( :categories )"
         )
 })
 public class ProductEntity extends AbstractModelObject {
@@ -128,6 +132,26 @@ public class ProductEntity extends AbstractModelObject {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+//    pour le web (affichage de l'image)
+/*    public String base64Image;
+
+    @Transient
+    public String getBase64Image() {
+        base64Image = Base64.getEncoder().encodeToString(this.picture);
+        return base64Image;
+    }*/
+@Transient
+String base64Image;
+    @Transient
+    public String getBase64Image() {
+        base64Image = Base64.getEncoder().encodeToString(this.picture);
+        return base64Image;
+    }
+    @Transient
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 
     @Override
