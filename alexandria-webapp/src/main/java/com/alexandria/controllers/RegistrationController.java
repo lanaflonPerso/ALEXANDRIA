@@ -76,20 +76,20 @@ public class RegistrationController {
     // FIXME : Add dummies data as some fields doesn't accept null in database
     private ClientEntity addDummies(ClientEntity client) {
 
-        List<CountryEntity> countries = clientManager.getCountriesList();
-        List<PaymentMethodEntity> paymentMethods = clientManager.getPaymentMethodsList();
+        CountryEntity dummyCountry = clientManager.getCountriesListRange(0, 1).get(0);
+        PaymentMethodEntity dummyPaymentMethod = clientManager.getPaymentMethodsListRange(0, 1).get(0);
 
         client.setPhone("phone");
 
         AddressEntity invoiceAddress = new AddressEntity(
-            "line1", "line2", "city", "state", "postalCode", countries.get(0));
+            "line1", "line2", "city", "state", "postalCode", dummyCountry);
 
         AddressEntity deliveryAddress = invoiceAddress;
 
         client.setAddressByInvoiceAddressId(invoiceAddress);
         client.setAddressByDeliveryAddressId(deliveryAddress);
 
-        client.setPaymentMethodByPaymentMethodId( paymentMethods.get(0));
+        client.setPaymentMethodByPaymentMethodId( dummyPaymentMethod );
 
         return client;
     }
