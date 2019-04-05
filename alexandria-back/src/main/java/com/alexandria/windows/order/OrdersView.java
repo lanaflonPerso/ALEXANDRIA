@@ -50,7 +50,7 @@ public class OrdersView extends JPanel {
 	}
 
 	// Init
-	private void doOrdersList() {
+	public void doOrdersList() {
 
 		List<OrderHeaderEntity> ordersList = orderHeaderDao.findAll();
 

@@ -14,9 +14,9 @@ import java.awt.event.WindowEvent;
 
 public class MainWindow extends JFrame {
 
-    Component clientsView;
+    ClientsView clientsView;
     Component productsView;
-    Component ordersView;
+    OrdersView ordersView;
     Component eventsView;
 
     public MainWindow() {
@@ -29,7 +29,8 @@ public class MainWindow extends JFrame {
         if(clientsView == null)
             clientsView = new ClientsView();
 
-        // TODO : refresh clientsList from database in case database is updated outside this thread
+        // refresh clientsList from database in case database is updated outside this thread
+        clientsView.doClientsList();
 
         refreshAll(clientsView);
     }
@@ -48,7 +49,8 @@ public class MainWindow extends JFrame {
         if(ordersView == null)
             ordersView = new OrdersView();
 
-        // TODO : refresh ordersList from database in case database is updated outside this thread
+        // refresh ordersList from database in case database is updated outside this thread
+        ordersView.doOrdersList();
 
         refreshAll(ordersView);
     }
