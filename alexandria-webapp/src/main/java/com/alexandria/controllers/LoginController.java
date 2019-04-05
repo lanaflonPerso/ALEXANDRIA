@@ -3,6 +3,8 @@ package com.alexandria.controllers;
 import com.alexandria.entities.ClientEntity;
 import com.alexandria.managers.ClientManager;
 import com.alexandria.managers.Login;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class LoginController {
+
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
 
     @Autowired
     ClientManager clientManager;
