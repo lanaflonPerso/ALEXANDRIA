@@ -58,6 +58,9 @@ public class RegistrationController {
             // FIXME : Cf. addDummies method's comments
             clientManager.register(addDummies(client));
 
+            // Set user session
+            request.getSession().setAttribute( "userSession", client);
+
             mav = new ModelAndView("welcome", "client", client);
 
         } else {
