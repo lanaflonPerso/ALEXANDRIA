@@ -36,8 +36,7 @@ public class LoginController {
         // Bypass login if user session recorded
         if(client != null) {
 
-            mav = new ModelAndView("welcome");
-            mav.addObject("client", client);
+            mav = new ModelAndView("redirect:/products");
 
         } else {
 
@@ -56,15 +55,17 @@ public class LoginController {
         ClientEntity client = clientManager.validateClient(login);
 
         if (client != null) {
+
             // Set user session
             request.getSession().setAttribute( "userSession", client);
 
             // Set user cart session
             request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
-            mav = new ModelAndView("welcome");
-            mav.addObject("client", client);
+            mav = new ModelAndView("redirect:/products");
+
         } else {
+
             // Reset user session
             request.getSession().setAttribute( "userSession", null);
 

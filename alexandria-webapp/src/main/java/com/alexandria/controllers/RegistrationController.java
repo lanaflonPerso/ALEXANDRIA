@@ -66,7 +66,7 @@ public class RegistrationController {
             // Set user cart session
             request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
-            mav = new ModelAndView("welcome", "client", client);
+            mav = new ModelAndView("redirect:/products");
 
         } else {
 
