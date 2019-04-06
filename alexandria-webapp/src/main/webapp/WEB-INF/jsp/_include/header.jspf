@@ -1,7 +1,6 @@
 <%-- Définitions des constantes symboliques des URLs
     La directive JSTL url avec "/" génère une url absolue (le prefixe ${pageContext.request.contextPath} est implicite) et gère les cookies/sessions.
     De plus la directive param transforme les caractères spéciaux en codes Html (évite injections de code) --%>
-<c:url value="/login" var="URL_HOME"/>
 <c:url value="/about" var="URL_ABOUT"/>
 <c:url value="/signout" var="URL_SIGNOUT"/>
 <c:url value="/products" var="URL_PRODUCTS"/>
@@ -15,9 +14,6 @@
                 aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="${URL_HOME}">Home<span class="sr-only">(current)</span></a>
-                </li>
 
                 <c:if test="${!empty sessionScope.userCartSession}">
                     <li class="nav-item active">
