@@ -105,7 +105,7 @@ public class OrdersView extends JPanel {
 	}
 
 	private void editOrder() {
-		int selectedRow = getSelectedRows(ordersTable)[0];
+		int selectedRow = getSelectedRows(ordersTable)[0]; // instead of getSelectedRow()
 		if (selectedRow < 0)
 			return;
 

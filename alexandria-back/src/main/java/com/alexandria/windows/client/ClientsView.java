@@ -94,7 +94,7 @@ public class ClientsView extends JPanel {
 	}
 
 	private void editClient() {
-		int selectedRow = getSelectedRows(clientsTable)[0];
+		int selectedRow = getSelectedRows(clientsTable)[0]; // instead of getSelectedRow()
 		if (selectedRow < 0)
 			return;
 
