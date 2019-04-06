@@ -1,6 +1,8 @@
 package com.alexandria.controllers;
 
 import com.alexandria.entities.*;
+import com.alexandria.managers.Cart;
+import com.alexandria.managers.CartImpl;
 import com.alexandria.managers.ClientManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,6 +62,9 @@ public class RegistrationController {
 
             // Set user session
             request.getSession().setAttribute( "userSession", client);
+
+            // Set user cart session
+            request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
             mav = new ModelAndView("welcome", "client", client);
 

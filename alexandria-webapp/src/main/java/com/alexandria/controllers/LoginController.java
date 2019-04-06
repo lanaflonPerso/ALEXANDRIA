@@ -62,6 +62,9 @@ public class LoginController {
             // Reset user session
             request.getSession().setAttribute( "userSession", null);
 
+            // Reset user cart session
+            request.getSession().setAttribute( "userCartSession", null);
+
             mav = new ModelAndView("login");
             mav.addObject("message", "Email or Password is wrong!!");
         }
