@@ -47,8 +47,8 @@ public class ProductsController {
         //   -> Utiliser "userCartSession" dans products.jsp pour le databinding
         //      -> ATTENTION au null si le "userCartSession" n'a pas été initialisé lors du login/register
         //          -> pas d'accès à products.jsp tant que l'utilisateur n'est pas loggé (cf. header.jspf )
-        //      -> On pourrait se passer ici de la récupération du "userCartSession" en le passant directement au ModelAndView lors de la redirection de "login/register" vers "products"
         //   -> Récupérer "userCartSession" dans la méthode POST du ProductsController via l'argument "@ModelAttribute("userCartSession") Cart userCartSession"
+        //   -> Si "userCartSession" n'est pas utilisé pour le databinding faire le "...getSession()..." dans la méthode POST.
         // TODO ----------------------------------------------------
 
         return mav;
