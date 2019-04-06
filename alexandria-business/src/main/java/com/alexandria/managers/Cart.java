@@ -1,6 +1,5 @@
 package com.alexandria.managers;
 
-import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.OrderLineEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.entities.ShippingMethodEntity;
@@ -9,9 +8,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
-public interface OrderHeaderManager {
-
-    void initialize(ClientEntity client);
+public interface Cart {
 
     void setDatePlaced(Date date); // TODO : should be set automatically since the payment is done
 

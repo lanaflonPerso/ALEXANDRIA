@@ -1,13 +1,9 @@
 package com.alexandria.managers;
 
-import com.alexandria.dao.OrderHeaderDao;
-import com.alexandria.dao.OrderLineDao;
-import com.alexandria.dao.ProductDao;
-import com.alexandria.dao.ShippingMethodDao;
+import com.alexandria.dao.*;
 import com.alexandria.entities.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 
 import java.math.BigDecimal;
@@ -16,30 +12,30 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderHeaderManagerImpl implements OrderHeaderManager {
+public class CartImpl implements Cart {
 
-    private static final Logger logger = LogManager.getLogger(OrderHeaderManagerImpl.class);
+    private static final Logger logger = LogManager.getLogger(CartImpl.class);
 
     // TODO : Here we write in database at each change of the model
     //  -> it would be easier to write in database periodically via a dedicated thread
     // TODO : Use Spring TX (transactions) for atomically write order line and product stock.
 
-    @Autowired
-    public OrderHeaderDao orderHeaderDao;
-
-    @Autowired
-    public OrderLineDao orderLineDao;
-
-    @Autowired
-    public ProductDao productDao;
-
-    @Autowired
-    public ShippingMethodDao shippingMethodDao;
+    private OrderHeaderDao orderHeaderDao;
+    private OrderLineDao orderLineDao;
+    private ProductDao productDao;
+    private ShippingMethodDao shippingMethodDao;
 
     private OrderHeaderEntity order;
 
-    @Override
-    public void initialize(ClientEntity client) {
+    public CartImpl(ClientEntity client) {
+
+        // Init DAOs
+        // Rk : Cannot use @Autowired as this object is instantiated after startup
+        DAOFactory daoFactory = new DAOFactory();
+        orderHeaderDao = daoFactory.getOrderHeaderDao();
+        orderLineDao = daoFactory.getOrderLineDao();
+        productDao = daoFactory.getProductDao();
+        shippingMethodDao = daoFactory.getShippingMethodDao();
 
         // Look for an active order
         order = getCurrentClientOrder(client);

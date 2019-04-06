@@ -12,7 +12,6 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean id="productManager" class="com.alexandria.managers.ProductManagerImpl" />
-    <bean id="orderHeaderManager" class="com.alexandria.managers.OrderHeaderManagerImpl" />
     <bean id="clientManager" class="com.alexandria.managers.ClientManagerImpl" />
     <bean id="clientDao" class="com.alexandria.dao.ClientDaoImpl" />
     <bean id="titleDao" class="com.alexandria.dao.TitleDaoImpl" />
