@@ -18,6 +18,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -93,7 +94,7 @@ public class ClientsView extends JPanel {
 	}
 
 	private void editClient() {
-		int selectedRow = clientsTable.getSelectedRow();
+		int selectedRow = getSelectedRows(clientsTable)[0];
 		if (selectedRow < 0)
 			return;
 
@@ -113,7 +114,7 @@ public class ClientsView extends JPanel {
 	}
 
 	private void deleteClient() {
-		int[] selectedRows = clientsTable.getSelectedRows();
+		int[] selectedRows = getSelectedRows(clientsTable);
 		if (selectedRows.length == 0)
 			return;
 
@@ -133,6 +134,22 @@ public class ClientsView extends JPanel {
 			clientsTable.setRowSelectionInterval(newSel, newSel);
 			clientsTable.scrollRectToVisible(clientsTable.getCellRect(newSel, 0, true));
 		}
+	}
+
+	private int[] getSelectedRows(JTable table) {
+		/* les index retournés par les méthodes pour récupérer la sélection (getSelectedRows() par exemple) retournent l'index visuel.
+		Dans le cas d'une JTable non triable, cet index correspond également à l'index du modèle, mais ce n'est plus le cas avec un tableau trié.
+		On peut néanmoins très facilement résoudre ce problème en utilisant la méthode convertRowIndexToModel de la classe RowSorter. */
+		int[] selection = table.getSelectedRows();
+		int[] modelIndexes = new int[selection.length];
+
+		for (int i = 0; i < selection.length; i++) {
+			modelIndexes[i] = table.getRowSorter().convertRowIndexToModel(selection[i]);
+		}
+
+		Arrays.sort(modelIndexes);
+
+		return modelIndexes;
 	}
 
 	/// ACTION LISTENER HANDLER Methods ///END
