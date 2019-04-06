@@ -54,7 +54,7 @@
                     <c:forEach var="k" items="${categoryList}">
                         <c:set var="parent" value="${c.idCategory}"/>
                         <c:if test="${parent == k.categoryByParent.idCategory}">
-                            <li><a href="productsByCat${k.idCategory}">--->${k.idCategory}--${k.description}</a></li>
+                            <li><a href="<c:url value="/productsByCat${k.idCategory}"/>">--->${k.idCategory}--${k.description}</a></li>
                         </c:if>
                     </c:forEach>
                 </c:if>
