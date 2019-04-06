@@ -252,7 +252,7 @@ public class CartImpl implements Cart {
         // FIXME : Since there is no status for order we consider that an order is still active
         //  until the payment is done (date placed set)
         // FIXME : as the "date placed" cannot be null and set by default to 1970 (see constructor comments)
-        //  we are looking for this default date (70 = 1970 - 1900) (see getYear in util/Date.java)
+        //  we are looking for this default date (70 = 1970 - 1900) (see deprecated getYear method in util/Date.java)
         for(OrderHeaderEntity order : orders) {
             if(order.getDatePlaced() == null || order.getDatePlaced().getYear() == 70) return order;
         }
