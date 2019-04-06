@@ -62,6 +62,12 @@ public class CartImpl implements Cart {
     }
 
     @Override
+    public ClientEntity getClient() {
+        return order.getClientByClientId();
+    }
+
+
+    @Override
     public void setDatePlaced(Date date) { // TODO : should be set automatically since the payment is done
         order.setDatePlaced(date);
 

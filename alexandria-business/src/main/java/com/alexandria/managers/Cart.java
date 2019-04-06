@@ -1,5 +1,6 @@
 package com.alexandria.managers;
 
+import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.OrderLineEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.entities.ShippingMethodEntity;
@@ -9,6 +10,8 @@ import java.sql.Date;
 import java.util.List;
 
 public interface Cart {
+
+    ClientEntity getClient();
 
     void setDatePlaced(Date date); // TODO : should be set automatically since the payment is done
 
