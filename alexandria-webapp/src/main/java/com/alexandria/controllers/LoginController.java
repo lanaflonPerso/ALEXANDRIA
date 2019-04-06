@@ -44,7 +44,7 @@ public class LoginController {
             mav = new ModelAndView("login");
             mav.addObject("login", new Login());
         }
-        
+
         return mav;
     }
 
