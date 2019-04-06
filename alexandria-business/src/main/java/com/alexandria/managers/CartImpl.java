@@ -47,8 +47,14 @@ public class CartImpl implements Cart {
             order.setOrderLinesByIdOrderHeader(new ArrayList<>());
 
             // FIXME : Set dummy data for shipping method as this field doesn't accept null in database
+            //  + there is no test for null is alexandria-back (databinding in JTable)
             ShippingMethodEntity shippingMethod = shippingMethodDao.findRange(0, 1).get(0);
             order.setShippingMethodByShippingMethodId(shippingMethod);
+
+            // FIXME : Set dummy data for date placed as this field doesn't accept null in database
+            //  + there is no test for null is alexandria-back (databinding in JTable)
+            //  Date(0) : milliseconds since January 1, 1970, 00:00:00 GMT
+            order.setDatePlaced(new Date(0));
 
             // Create in database
             orderHeaderDao.create(order);
@@ -245,8 +251,10 @@ public class CartImpl implements Cart {
 
         // FIXME : Since there is no status for order we consider that an order is still active
         //  until the payment is done (date placed set)
+        // FIXME : as the "date placed" cannot be null and set by default to 1970 (see constructor comments)
+        //  we are looking for this default date (70 = 1970 - 1900) (see getYear in util/Date.java)
         for(OrderHeaderEntity order : orders) {
-            if(order.getDatePlaced() == null) return order;
+            if(order.getDatePlaced() == null || order.getDatePlaced().getYear() == 70) return order;
         }
 
         return null;

@@ -1,6 +1,8 @@
 package com.alexandria.controllers;
 
 import com.alexandria.entities.ClientEntity;
+import com.alexandria.managers.Cart;
+import com.alexandria.managers.CartImpl;
 import com.alexandria.managers.ClientManager;
 import com.alexandria.managers.Login;
 import org.apache.logging.log4j.LogManager;
@@ -50,6 +52,9 @@ public class LoginController {
         if (client != null) {
             // Set user session
             request.getSession().setAttribute( "userSession", client);
+
+            // Set user cart session
+            request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
             mav = new ModelAndView("welcome");
             mav.addObject("client", client);
