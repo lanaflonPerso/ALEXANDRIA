@@ -24,7 +24,7 @@
                         <a class="nav-link" href="${URL_PRODUCTS}">Products<span class="sr-only">(current)</span></a>
                     </li>
                 </c:if>
-    
+
                 <li class="nav-item">
                     <a class="nav-link" href="${URL_ABOUT}">About</a>
                 </li>
