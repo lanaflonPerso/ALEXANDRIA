@@ -48,6 +48,10 @@ public class OrderHeaderDaoImpl extends AbstractDaoImpl<OrderHeaderEntity> imple
         query.setParameter("client", client);
         List<OrderHeaderEntity> searchOrdersList = query.getResultList();
 
+        // Retrieve the order lines as the association is @OneToMany(fetch = FetchType.LAZY) (default) via the trigger ".size()"
+        for(OrderHeaderEntity order : searchOrdersList)
+            order.getOrderLinesByIdOrderHeader().size();
+
         closeEntityManager();
 
         logger.info("DB_FIND_FROM_CLIENT END");
