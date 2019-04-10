@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-8 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">My cart ${userCartSession.client.lastName} &nbsp; ${userCartSession.client.firstName} session : ${userCartSession.} </span>
+                <span class="text-muted">My cart ${userCartSession.client.lastName} &nbsp; ${userCartSession.client.firstName}</span>
             </h4>
 
             <c:forEach var="i" items="${userCartSession.orderLines}">
