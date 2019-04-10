@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static jdk.nashorn.internal.objects.NativeString.trim;
-
 @Controller
 @Scope("session")
 public class ProductsController {
