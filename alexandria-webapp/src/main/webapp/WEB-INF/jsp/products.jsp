@@ -138,7 +138,7 @@
                     </tr>
                     <tr>
                         <td>Author : ${i.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${i.bookByIdProduct.authorByAuthorId.lastName}</td>
-                        <td>Publisher : ${i.bookByIdProduct.publisherByPublisherId}</td>
+                        <td>Publisher : ${i.bookByIdProduct.publisherByPublisherId.name}</td>
                     </tr>
                     <tr>
                         <td colspan="4">
