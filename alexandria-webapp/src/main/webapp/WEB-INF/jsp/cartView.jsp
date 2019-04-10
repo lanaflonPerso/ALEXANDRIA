@@ -1,4 +1,4 @@
-
+<link type="text/css" rel="stylesheet" href="../../static/css/cart.css"/>
 
 <div id="wrapper" class="container">
     <div class="row">
