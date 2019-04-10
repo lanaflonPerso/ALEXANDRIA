@@ -4,7 +4,7 @@
 <c:url value="/about" var="URL_ABOUT"/>
 <c:url value="/signout" var="URL_SIGNOUT"/>
 <c:url value="/products" var="URL_PRODUCTS"/>
-<c:url value="/cartoon" var="URL_CART"/>
+<c:url value="/cartView" var="URL_CART"/>
 
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">

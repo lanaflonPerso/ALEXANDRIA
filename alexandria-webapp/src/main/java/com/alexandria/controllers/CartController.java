@@ -19,10 +19,10 @@ public class CartController {
 
     private static final Logger logger = LogManager.getLogger(ProductsController.class);
 
-    @RequestMapping(value = "/cartoon")
+    @RequestMapping(value = "/cartView")
     public ModelAndView showOrderLines(HttpServletRequest request, HttpServletResponse response) {
 
-        ModelAndView mav = new ModelAndView("cartoon");
+        ModelAndView mav = new ModelAndView("cartView");
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
         List<OrderLineEntity> orderLines = userCartSession.getOrderLines();
