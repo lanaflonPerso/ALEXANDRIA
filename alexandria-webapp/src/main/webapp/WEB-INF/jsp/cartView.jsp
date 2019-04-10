@@ -30,7 +30,7 @@
                         Stock : ${i.productByProductId.stock}
 
                         <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="" name="quantity" />
+                        <input id="quantity" type="number" value="${i.quantity}" name="quantity" />
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
 
