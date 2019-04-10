@@ -136,7 +136,7 @@ public class CartImpl implements Cart {
             productDao.update(product);
 
         } else {
-            updateLineItem(orderLine, product, 1); // If order line exists just increase quantity by 1
+            updateLineItem(orderLine, product, (1 + orderLine.getQuantity())); // If order line exists just increase quantity by 1
         }
     }
 
