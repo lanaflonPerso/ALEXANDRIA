@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,41 +36,39 @@ public class ProductsController {
     public void init() {
         categoryList = productManager.getCategoriesList();
         categoryParent = productManager.getCategoryParents();
-        Cart userCartSession;
-
     }
 
     //    déplacer
     private List<CategoryEntity> categoryTree(int categoryId) {
         CategoryEntity category = productManager.findCategoryFromId(categoryId);
-        List<CategoryEntity> cateTree = new ArrayList<>(); //category nulle dans le cas d'une sous catégorie
-        try {
-            cateTree.addAll(productManager.findCategoriesFromParent(category));
-            System.out.println("boucle ");
-        } finally {
+        List<CategoryEntity> cateTree = new ArrayList<>();
+
+        List<CategoryEntity> categories = productManager.findCategoriesFromParent(category);
+
+        if (categories != null) {
+            cateTree.addAll(categories);
+        }
             cateTree.add(category);
+
             return cateTree;
         }
-    }
+
 
     @RequestMapping(value = "/products{catId}")
 
     public ModelAndView productList(@RequestParam(required = false) Integer page, @PathVariable(value = "catId") Integer id, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("products");
 
-        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-
         mav.addObject("categoryList", categoryList);
         mav.addObject("categoryParent", categoryParent);
 
         List<ProductEntity> products = null;
-        if (id == null) id = 1;
-        List<CategoryEntity> categories = categoryTree(id);
 
-        if (id != 1) {
-            products = productManager.findProductsFromCategoriesId(categories);
-        } else {
+        if (id == null || id == 1) {
             products = productManager.getProductsList();
+        } else {
+            List<CategoryEntity> categories = categoryTree(id);
+            products = productManager.findProductsFromCategoriesId(categories);
         }
 
         PagedListHolder<ProductEntity> pagedListHolder = new PagedListHolder<>(products);
