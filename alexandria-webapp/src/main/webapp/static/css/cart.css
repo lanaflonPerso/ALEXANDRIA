@@ -37,11 +37,11 @@
 }
 
 /*hover/active styles*/
-.breadcrumb a.active, .breadcrumb a:hover{
+.breadcrumb a.active{
     background: #0074cb;
     background: linear-gradient(#0074cb, #00166c);
 }
-.breadcrumb a.active:after, .breadcrumb a:hover:after {
+.breadcrumb a.active:after{
     background: #0074cb;
     background: linear-gradient(135deg, #0074cb, #00166c);
 }
@@ -96,19 +96,7 @@
     font-weight: bold;
 }
 
-/*
-.flat a, .flat a:after {
-    background: white;
-    color: black;
-    transition: all 0.5s;
+#quantity{
+    width: 50px;
+    height: 30px;
 }
-
-.flat a:before {
-    background: white;
-    box-shadow: 0 0 0 1px #ccc;
-}
-
-.flat a:hover, .flat a.active,
-.flat a:hover:after, .flat a.active:after{
-    background: #9EEB62;
-}*/
