@@ -119,42 +119,42 @@
 
 
     <%-- liste de produits--%>
-    <div class="container col-sm-8">
+    <div class="container col-sm-9">
         <div class="row">
-
+            <ul class="list-group mb-3">
             <c:forEach var="i" items="${productsList}">
-                <table class="table-condensed table-bordered">
-                    <tr>
-                        <td><img src="data:image/jpg;base64,${i.base64Image}" width="150" height="150"/></td>
-                        <td> Description : ${i.bookByIdProduct.authorByAuthorId.bio} </td>  <%--c'est la bio de l'auteur mais ça fait le job en desc d'article--%>
-                    </tr>
-                    <tr>
-                        <td>${i.idProduct} - ${i.name}</td>
-                        <td>Book title : ${i.bookByIdProduct.title}</td>
-                    </tr>
-                    <tr>
-                        <td>isbn : ${i.bookByIdProduct.isbn}</td>
-                        <td>Prix : <fmt:formatNumber value="${i.priceExVat}" type="currency"/></td>
-                    </tr>
-                    <tr>
-                        <td>Author : ${i.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${i.bookByIdProduct.authorByAuthorId.lastName}</td>
-                        <td>Publisher : ${i.bookByIdProduct.publisherByPublisherId.name}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
-                            <a href="<c:url value="/addProduct?code=${i.idProduct}"/>">Add to cart</a>
-                        </td>
-                        <br><br>
-                    </tr>
-                </table>
-            </c:forEach>
 
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <p>
+                        <header>${i.idProduct} - ${i.name}</header>
+                            <br/>
+                        <img src="data:image/jpg;base64,${i.base64Image}" width="150" height="150"/>
+                        </p>
+                    <br/>
+                        <article>Description : ${i.bookByIdProduct.authorByAuthorId.bio}</article>  <%--c'est la bio de l'auteur mais ça fait le job en desc d'article--%>
+                    <br/>
+                        <p><h6>Book title : ${i.bookByIdProduct.title}</h6>
+                        <em>isbn : ${i.bookByIdProduct.isbn}</em>
+                        </p>
+                    <br/>
+                        <p> Author : ${i.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${i.bookByIdProduct.authorByAuthorId.lastName}
+                            Publisher : ${i.bookByIdProduct.publisherByPublisherId.name}
+                            Price : <fmt:formatNumber value="${i.priceExVat}" type="currency"/>
+                        </p>
+                    <br/>
+                    </li>
+                    <li>
+                        <a href="<c:url value="/addProduct?code=${i.idProduct}"/>"><button class="btn btn-secondary">Add to cart</button></a>
+                    </li>
+
+            </c:forEach>
+            </ul>
         </div>
     </div>
-
+        <br/>
     <%--pagination--%>
-    <div class="col-sm-2">
-
+    <div class="row">
+    <div class="col-offset-5 col-sm-2">
         <c:url value="/products${category}" var="prev">
             <c:param name="page" value="${page-1}"/>
         </c:url>
@@ -168,4 +168,5 @@
             <a href="<c:out value="${next}"/>">Next Page</a>
         </c:if>
     </div>
+</div>
 </div>
