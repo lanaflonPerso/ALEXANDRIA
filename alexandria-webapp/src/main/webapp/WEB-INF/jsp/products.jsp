@@ -1,75 +1,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/static/css/products.css"/>">
 <link href="https://fonts.googleapis.com/css?family=Jaldi:400,700" rel="stylesheet" type="text/css">
 
-<%--<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <table>
-                <tr>
-                    <td><img class="d-block w-20"
-                             src="http://1.bp.blogspot.com/-oD8c6FAA7Gg/ULmcVbdPjfI/AAAAAAAAAGk/kEvziwGST7M/s320/Nyan+Cat+Wallet.jpg"
-                             alt="First slide"></td>
-                    <td>
-                        Titre <br>
-                        Prénom auteur nom auteur <br>
-                        Bio auteur
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-        <c:forEach var="a" items="${productsList}">
-            <div class="carousel-item">
-                <table>
-                    <tr>
-                        <td>
-                            <img class="d-block w-20" src="data:image/jpg;base64,${a.base64Image}"/>
-                        </td>
-                        <td>
-                                ${a.bookByIdProduct.title} <br>
-                                ${a.bookByIdProduct.authorByAuthorId.firstName}
-                            &nbsp; ${a.bookByIdProduct.authorByAuthorId.lastName} <br>
-                                ${a.bookByIdProduct.authorByAuthorId.bio}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </c:forEach>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-<div class="row">--%>
-
-
 <div class="row">
     <%--catégories--%>
-    <%--<div id="jquery-accordion-menu" class="jquery-accordion-menu col-sm-4">
-        <div class="jquery-accordion-menu-header">HEADER</div>
-        <ul>
-            <c:forEach var="c" items="${categoryList}">
-                <c:set var="parent" value="${c.categoryByParent.idCategory}"/>
-                <c:if test="${parent == 1}">
-                    <li><a href="<c:url value="/productsByCat${c.idCategory}"/>">${c.idCategory}--${c.description}</a></li>
-                    <c:forEach var="k" items="${categoryList}">
-                        <c:set var="parent" value="${c.idCategory}"/>
-                        <c:if test="${parent == k.categoryByParent.idCategory}">
-                            <li><a href="<c:url value="/productsByCat${k.idCategory}"/>">--->${k.idCategory}--${k.description}</a></li>
-                        </c:if>
-                    </c:forEach>
-                </c:if>
-            </c:forEach>
-        </ul>
-        <div class="jquery-accordion-menu-footer">FOOTER</div>
-    </div>--%>
-
-    <%--new category --%>
     <div class="vnav col-sm-2">
         <ul class="cd-accordion-menu">
             <li class="has-children">

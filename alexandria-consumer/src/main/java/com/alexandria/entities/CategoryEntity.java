@@ -78,7 +78,7 @@ public class CategoryEntity extends AbstractModelObject {
         return Objects.hash(idCategory, description);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent", referencedColumnName = "id_category", nullable = false)
     public CategoryEntity getCategoryByParent() {
         return categoryByParent;
