@@ -1,21 +1,30 @@
 package com.alexandria.controllers;
 
 import com.alexandria.entities.CategoryEntity;
+import com.alexandria.entities.ProductEntity;
 import com.alexandria.managers.Cart;
 import com.alexandria.managers.ProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import static jdk.nashorn.internal.objects.NativeString.trim;
 
 @Controller
+@Scope("session")
 public class ProductsController {
 
     private static final Logger logger = LogManager.getLogger(ProductsController.class);
@@ -24,57 +33,83 @@ public class ProductsController {
     ProductManager productManager;
 
     List<CategoryEntity> categoryList;
+    Set<CategoryEntity> categoryParent;
 
-
-/*    public void init(){
+    @PostConstruct
+    public void init() {
         categoryList = productManager.getCategoriesList();
-    }*/
+        categoryParent = productManager.getCategoryParents();
+        Cart userCartSession;
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public ModelAndView showProducts(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("products");
-        categoryList = productManager.getCategoriesList();
-
-        mav.addObject("productsList", productManager.getProductsList());
-        mav.addObject("categoryList", categoryList);
-// filtrer les produits par catégorie : https://openclassrooms.com/forum/sujet/jquery-filtrer-les-produits-par-categorie
-
-        // TODO ----------------------------------------------------
-        // Get user cart session
-        Cart userCartSession = (Cart)request.getSession().getAttribute( "userCartSession");
-        mav.addObject("userCartSession", userCartSession);
-        //  TODO:
-        //   -> Utiliser "userCartSession" dans products.jsp pour le databinding
-        //      -> ATTENTION au null si le "userCartSession" n'a pas été initialisé lors du login/register
-        //          -> pas d'accès à products.jsp tant que l'utilisateur n'est pas loggé (cf. header.jspf )
-        //   -> Récupérer "userCartSession" dans la méthode POST du ProductsController via l'argument "@ModelAttribute("userCartSession") Cart userCartSession"
-        //   -> Si "userCartSession" n'est pas utilisé pour le databinding faire le "...getSession()..." dans la méthode POST.
-        // TODO ----------------------------------------------------
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/productsByCat{catId}")
-    public @ResponseBody ModelAndView getAttr(@PathVariable(value="catId") String id) {
-        ModelAndView mav = new ModelAndView("products");
-        categoryList = productManager.getCategoriesList();
-
-        mav.addObject("categoryList", categoryList);
-        mav.addObject("productsList", productManager.findProductsFromCategoriesId(categoryTree(Integer.parseInt(id))));
-        return mav;
     }
 
     //    déplacer
     private List<CategoryEntity> categoryTree(int categoryId) {
         CategoryEntity category = productManager.findCategoryFromId(categoryId);
-        List<CategoryEntity> cateTree = new ArrayList<>();
-        cateTree.add(category);
-        System.out.println("VUUUUUUUUUUUUUUUUUUUUUUUUUUCHE : " + category);
+        List<CategoryEntity> cateTree = new ArrayList<>(); //category nulle dans le cas d'une sous catégorie
         try {
             cateTree.addAll(productManager.findCategoriesFromParent(category));
+            System.out.println("boucle ");
         } finally {
+            cateTree.add(category);
             return cateTree;
         }
-        }
     }
+
+    @RequestMapping(value = "/products{catId}")
+
+    public ModelAndView productList(@RequestParam(required = false) Integer page, @PathVariable(value = "catId") Integer id, HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mav = new ModelAndView("products");
+
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+        mav.addObject("categoryList", categoryList);
+        mav.addObject("categoryParent", categoryParent);
+
+        List<ProductEntity> products = null;
+        List<CategoryEntity> categories = categoryTree(id);
+        if (id == null) id = 1;
+
+        if (id != 1) {
+            products = productManager.findProductsFromCategoriesId(categories);
+        } else {
+            products = productManager.getProductsList();
+        }
+
+        PagedListHolder<ProductEntity> pagedListHolder = new PagedListHolder<>(products);
+        pagedListHolder.setPageSize(12);
+        mav.addObject("maxPages", pagedListHolder.getPageCount());
+
+        if (page == null || page < 1 || page > pagedListHolder.getPageCount()) page = 1;
+
+        mav.addObject("page", page);
+        if (page > pagedListHolder.getPageCount()) {
+            pagedListHolder.setPage(0);
+            mav.addObject("productsList", pagedListHolder.getPageList());
+        } else if (page <= pagedListHolder.getPageCount()) {
+            pagedListHolder.setPage(page - 1);
+            mav.addObject("productsList", pagedListHolder.getPageList());
+        }
+
+        mav.addObject("category", id);
+        return mav;
+    }
+
+    @RequestMapping({"/addProduct"})
+    public ModelAndView listProductHandler(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
+        ModelAndView mav = new ModelAndView("products");
+
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+         ProductEntity product=null;
+        if (code  > 0) {
+        product = productManager.findProductFromId(code);
+        }
+        if (product != null) {
+
+            userCartSession.addLineItem(product);
+        }
+        return mav;
+    }
+}
 

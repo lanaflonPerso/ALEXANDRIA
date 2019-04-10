@@ -4,6 +4,7 @@
 <c:url value="/about" var="URL_ABOUT"/>
 <c:url value="/signout" var="URL_SIGNOUT"/>
 <c:url value="/products" var="URL_PRODUCTS"/>
+<c:url value="/cartoon" var="URL_CART"/>
 
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -18,6 +19,9 @@
                 <c:if test="${!empty sessionScope.userCartSession}">
                     <li class="nav-item active">
                         <a class="nav-link" href="${URL_PRODUCTS}">Products<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="${URL_CART}">Cart<span class="sr-only">(current)</span></a>
                     </li>
                 </c:if>
 

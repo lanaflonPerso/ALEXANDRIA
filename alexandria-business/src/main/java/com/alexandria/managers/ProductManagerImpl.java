@@ -47,4 +47,8 @@ public class ProductManagerImpl implements ProductManager {
     public List<CategoryEntity> findCategoriesFromParent(CategoryEntity category) {
         return categoryDao.findFromParent(category.getIdCategory());
     }
+    @Override
+    public Set<CategoryEntity> getCategoryParents() {
+        return categoryDao.findAllParents();
+    }
 }

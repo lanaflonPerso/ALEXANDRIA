@@ -12,6 +12,10 @@ import java.util.Set;
         @NamedQuery(
                 name = "CategoryEntity.findFromParent",
                 query = "from CategoryEntity as c where c.categoryByParent.idCategory = :parent"
+        ),
+        @NamedQuery(
+                name = "CategoryEntity.findAllParents",
+                query = "select c.categoryByParent from CategoryEntity as c where c.categoryByParent is not null"
         )
 })
 public class CategoryEntity extends AbstractModelObject {

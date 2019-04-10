@@ -3,6 +3,7 @@ package com.alexandria.dao;
 import com.alexandria.entities.CategoryEntity;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CategoryDao extends AbstractDao<CategoryEntity> {
 
@@ -21,4 +22,6 @@ public interface CategoryDao extends AbstractDao<CategoryEntity> {
     int count();
 
     List<CategoryEntity> findFromParent(int parent);
+
+    Set<CategoryEntity> findAllParents();
 }

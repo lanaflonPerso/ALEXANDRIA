@@ -6,7 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.alexandria.persistence.PersistenceUtils.*;
 
@@ -34,5 +36,22 @@ public class CategoryDaoImpl extends AbstractDaoImpl<CategoryEntity> implements 
         logger.info("DB_FIND_FROM_PARENT_ID END");
 
         return searchCategoriesList;
+    }
+
+    @Override
+    public Set<CategoryEntity> findAllParents() {
+        logger.info("DB_FIND_ALL_PARENTS BEGIN");
+
+        EntityManager em = getEntityManager();
+
+        TypedQuery<CategoryEntity> query = em.createNamedQuery("CategoryEntity.findAllParents", CategoryEntity.class);
+
+        Set<CategoryEntity> parentCategories = new HashSet<>(query.getResultList());
+
+        closeEntityManager();
+
+        logger.info("DB_FIND_ALL_PARENTS END");
+
+        return parentCategories;
     }
 }

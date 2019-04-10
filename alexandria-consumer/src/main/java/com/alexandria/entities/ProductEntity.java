@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -26,7 +27,7 @@ import java.util.*;
                 query = "select p.productByProductId from ProductCategoryEntity as p where p.categoryByCategoryId in ( :categories )"
         )
 })
-public class ProductEntity extends AbstractModelObject {
+public class ProductEntity extends AbstractModelObject implements Serializable {
     private Integer idProduct;
     private String name;
     private Integer stock;

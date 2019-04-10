@@ -15,4 +15,5 @@ public interface ProductManager {
     List<ProductEntity> findProductsFromCategoriesId(List<CategoryEntity> categories);
 
     List<CategoryEntity> findCategoriesFromParent(CategoryEntity category);
+    Set<CategoryEntity> getCategoryParents();
 }

@@ -1,0 +1,31 @@
+.cd-accordion-menu input[type=checkbox] {
+    /* hide native checkbox */
+    position: absolute;
+    opacity: 0;
+}
+
+.cd-accordion-menu label, .cd-accordion-menu a {
+    position: relative;
+    margin: 0px;
+    padding-left: 1px;
+    width: 100%;
+    font-size: .9rem;
+}
+
+.cd-accordion-menu ul {
+    /* by default hide all sub menus */
+    display: none;
+}
+
+.cd-accordion-menu input[type=checkbox]:checked + label + ul {
+    display: block;
+}
+
+.vnav {
+    width: 20%;
+    margin: 0px;
+}
+
+ul {
+    list-style: none;
+}

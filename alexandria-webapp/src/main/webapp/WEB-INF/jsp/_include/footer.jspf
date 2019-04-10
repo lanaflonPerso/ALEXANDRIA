@@ -4,7 +4,8 @@
 %>
 
 <br>
-<footer class="footer fixed-bottom bg-primary">
+<%--<footer class="footer fixed-bottom bg-primary">--%>
+<footer class="footer bg-primary">
     <div class="container text-center text-white">
         <p>
             ${year} - ${application.name} - version ${project.version}
