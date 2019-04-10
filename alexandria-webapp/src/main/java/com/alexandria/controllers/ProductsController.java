@@ -65,8 +65,8 @@ public class ProductsController {
         mav.addObject("categoryParent", categoryParent);
 
         List<ProductEntity> products = null;
-        List<CategoryEntity> categories = categoryTree(id);
         if (id == null) id = 1;
+        List<CategoryEntity> categories = categoryTree(id);
 
         if (id != 1) {
             products = productManager.findProductsFromCategoriesId(categories);
