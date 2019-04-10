@@ -92,11 +92,12 @@ public class ProductsController {
 
     @RequestMapping({"/addProduct"})
     public ModelAndView listProductHandler(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
-        ModelAndView mav = new ModelAndView("products");
+
+        ModelAndView mav = new ModelAndView("redirect:/products");
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
-         ProductEntity product=null;
+        ProductEntity product=null;
         if (code  > 0) {
         product = productManager.findProductFromId(code);
         }
