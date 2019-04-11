@@ -63,7 +63,7 @@
 
             </ul>
 
-            <form action="" method="post">
+            <form action="checkout" method="get">
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
         </div>
