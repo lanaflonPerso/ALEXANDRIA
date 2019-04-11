@@ -8,7 +8,7 @@
 
     <h4 class="mb-3">Billing address</h4>
 
-    <form class="needs-validation" action="checkoutProcess" novalidate>
+    <form class="needs-validation" method="POST" action="checkoutProcess" novalidate>
 
         <div class="form-row">
 

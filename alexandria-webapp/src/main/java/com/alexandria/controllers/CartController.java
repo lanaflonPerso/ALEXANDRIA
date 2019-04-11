@@ -94,8 +94,8 @@ public class CartController {
     @RequestMapping(value = "/checkoutProcess", method = RequestMethod.POST)
     public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response,
                                         @ModelAttribute("client") ClientEntity client,
-                                        @RequestParam("iPaymentMethod") Integer iPaymentMethod,
-                                        @RequestParam("iCountry") Integer iCountry) {
+                                        @RequestParam("paymentMethod") Integer iPaymentMethod,
+                                        @RequestParam("country") Integer iCountry) {
 
 
         // Set values from combobox
