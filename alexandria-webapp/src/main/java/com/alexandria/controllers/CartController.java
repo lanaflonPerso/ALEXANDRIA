@@ -5,6 +5,7 @@ import com.alexandria.entities.CountryEntity;
 import com.alexandria.entities.PaymentMethodEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.managers.Cart;
+import com.alexandria.managers.CartImpl;
 import com.alexandria.managers.ClientManager;
 import com.alexandria.managers.ProductManager;
 import org.apache.logging.log4j.LogManager;
@@ -106,6 +107,9 @@ public class CartController {
         /* Set order placed date that indicate the order is no more active */
         Date currentDate = new java.sql.Date(System.currentTimeMillis());
         userCartSession.setDatePlaced( currentDate );
+
+        // Set a new user cart session that replaces the previous one
+        request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
         ModelAndView mav = new ModelAndView("cartView");
 
