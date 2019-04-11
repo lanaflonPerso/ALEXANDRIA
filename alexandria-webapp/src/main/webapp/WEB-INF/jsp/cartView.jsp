@@ -30,7 +30,8 @@
                         Stock : ${i.productByProductId.stock}
 
                         <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="${i.quantity}" name="quantity" />
+                        <input id="quantity" type="number" value="${i.quantity}" name="quantity"
+                               onchange="updateOrderLine(${i.productByProductId.idProduct}, this.value)"/>
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
 
@@ -68,4 +69,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    function updateOrderLine(idProduct, quantity) {
+        document.location.href='<c:url value="/cartUpdateLineItem"/>?quantity=' + quantity + '&idProduct=' + idProduct;
+    }
+</script>
 
