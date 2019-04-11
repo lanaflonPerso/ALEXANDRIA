@@ -16,6 +16,7 @@
         <div class="col-md-8">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart: ${userCartSession.client.firstName} &nbsp; ${userCartSession.client.lastName}</span>
+                <p style="font-style: italic; color: green;">${message}</p>
             </h4>
 
             <ul class="list-group mb-3">
