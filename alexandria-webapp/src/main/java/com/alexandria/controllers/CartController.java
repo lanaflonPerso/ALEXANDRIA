@@ -70,7 +70,7 @@ public class CartController {
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
-        userCartSession.setDatePlaced(new java.sql.Date(System.currentTimeMillis()));
+        userCartSession.setDatePlaced( new java.sql.Date(System.currentTimeMillis()));
 
         ModelAndView mav = new ModelAndView("checkout");
 
