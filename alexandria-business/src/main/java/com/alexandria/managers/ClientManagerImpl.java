@@ -37,7 +37,7 @@ public class ClientManagerImpl implements ClientManager {
 
     @Override
     public void register(ClientEntity client) {
-        
+
         clientDao.create(client);
     }
 
