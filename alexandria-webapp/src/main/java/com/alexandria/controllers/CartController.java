@@ -78,5 +78,23 @@ public class CartController {
 
         return mav;
     }
+
+    @RequestMapping({"/remProduct"})
+    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
+
+        ModelAndView mav = new ModelAndView("redirect:/cartView");
+
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+        ProductEntity product=null;
+        if (code  > 0) {
+            product = productManager.findProductFromId(code);
+        }
+        if (product != null) {
+
+            userCartSession.removeLineItem(product);
+        }
+        return mav;
+    }
 }
 
