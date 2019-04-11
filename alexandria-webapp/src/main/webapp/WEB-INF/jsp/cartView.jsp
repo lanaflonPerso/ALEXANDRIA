@@ -22,7 +22,7 @@
 
                 <c:forEach var="i" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150"/></h6>
+                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150" alt="${i.productByProductId.name}"/></h6>
 
                         ${i.productByProductId.name}<br>
                         <fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/>
@@ -30,12 +30,12 @@
                         Stock : ${i.productByProductId.stock}
 
                         <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="${i.quantity}" name="quantity"
+                        <input id="quantity" type="number" value="${i.quantity}" name="quantity" min="1"
                                onchange="updateOrderLine(${i.productByProductId.idProduct}, this.value)"/>
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
 
-                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="<c:url value="/remProduct?code=${i.productId}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
                 </c:forEach>
             </ul>

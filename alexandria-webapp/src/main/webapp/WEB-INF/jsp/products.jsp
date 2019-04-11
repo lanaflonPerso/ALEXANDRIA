@@ -9,7 +9,7 @@
             <c:forEach var="j" items="${categoryList}">
                 <c:set var="parent" value="${j.categoryByParent.idCategory}"/>
                 <c:if test="${parent == null}">
-                    <input type="checkbox" name="${j.description}" id="${i.description}" checked>
+                    <input type="checkbox" name="${j.description}" id="${j.description}" checked>
                     <label for="${j.description}"><a href="<c:url value="/products"/>">All categories</a></label>
                 </c:if>
             </c:forEach>
@@ -48,7 +48,7 @@
         </ul>
             </li>
         </ul>
-    </div><!-- cd-accordion-menu -->
+    </div>
 
 
     <%-- liste de produits--%>
