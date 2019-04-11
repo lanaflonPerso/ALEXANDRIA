@@ -52,7 +52,7 @@
             <div class="col-md-3 mb-3">
                 <label for="country">Country</label>
                 <select class="custom-select form-control" name="country" id="country" required>
-                    <option selected disabled>Select one</option>
+                    <option disabled>Select one</option>
                     <c:forEach var="country" items="${countries}" varStatus="status">
                         <option value="${status.index}">${country.description}</option>
                     </c:forEach>
@@ -109,7 +109,7 @@
                         <span class="input-group-text"><i class="fas fa-money-check-alt"></i></span>
                     </div>
                     <select class="custom-select form-control" name="paymentMethod" id="paymentMethod" required>
-                        <option selected disabled>Select one</option>
+                        <option disabled>Select one</option>
                         <c:forEach var="paymentMethod" items="${paymentMethods}" varStatus="status">
                             <option value="${status.index}">${paymentMethod.description}</option>
                         </c:forEach>

@@ -1,5 +1,6 @@
 package com.alexandria.controllers;
 
+import com.alexandria.entities.ClientEntity;
 import com.alexandria.entities.CountryEntity;
 import com.alexandria.entities.PaymentMethodEntity;
 import com.alexandria.entities.ProductEntity;
@@ -11,7 +12,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,17 +83,27 @@ public class CartController {
 
         ModelAndView mav = new ModelAndView("checkout");
 
-        mav.addObject("userCartSession", userCartSession);
+        mav.addObject("client", userCartSession.getClient());
         mav.addObject("paymentMethods", paymentMethods);
         mav.addObject("countries", countries);
 
         return mav;
     }
 
-    @RequestMapping(value = "/checkoutProcess")
-    public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/checkoutProcess", method = RequestMethod.POST)
+    public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response,
+                                        @ModelAttribute("client") ClientEntity client,
+                                        @RequestParam("iPaymentMethod") Integer iPaymentMethod,
+                                        @RequestParam("iCountry") Integer iCountry) {
+
+
+        // Set value from combobox
+        client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
+        client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+        /* Set order placed date that indicate the order is no more active */
         Date currentDate = new java.sql.Date(System.currentTimeMillis());
         userCartSession.setDatePlaced( currentDate );
 
