@@ -33,7 +33,7 @@
                         <input id="quantity" type="number" value="${i.quantity}" name="quantity" min="1"
                                onchange="updateOrderLine(${i.productByProductId.idProduct}, this.value)"/>
                     <br>
-                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
+                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat * i.quantity}" type="currency"/></span>
 
                         <a href="<c:url value="/remProduct?code=${i.productId}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
@@ -52,7 +52,7 @@
                 <c:forEach var="i" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <small class="text-muted">${i.productByProductId.name}</small>
-                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
+                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat * i.quantity}" type="currency"/></span>
                     </li>
                 </c:forEach>
 
