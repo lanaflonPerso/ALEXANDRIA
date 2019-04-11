@@ -35,7 +35,7 @@
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
 
-                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="<c:url value="/remProduct?idProduct=${i.productByProductId.idProduct}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
                 </c:forEach>
             </ul>

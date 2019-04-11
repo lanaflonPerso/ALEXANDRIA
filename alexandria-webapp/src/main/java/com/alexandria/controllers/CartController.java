@@ -80,7 +80,7 @@ public class CartController {
     }
 
     @RequestMapping({"/remProduct"})
-    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer idProduct) {
+    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         if(idProduct > 0) {
             ProductEntity product = productManager.findProductFromId(idProduct);
