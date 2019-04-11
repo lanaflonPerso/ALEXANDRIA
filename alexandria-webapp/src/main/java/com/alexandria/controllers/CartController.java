@@ -52,5 +52,31 @@ public class CartController {
 
         return mav;
     }
+
+    @RequestMapping(value = "/checkout")
+    public ModelAndView checkout(HttpServletRequest request, HttpServletResponse response) {
+
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+        ModelAndView mav = new ModelAndView("checkout");
+
+        mav.addObject("userCartSession", userCartSession);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/checkoutProcess")
+    public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response) {
+
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+
+        userCartSession.setDatePlaced(new java.sql.Date(System.currentTimeMillis()));
+
+        ModelAndView mav = new ModelAndView("checkout");
+
+        mav.addObject("userCartSession", userCartSession);
+
+        return mav;
+    }
 }
 
