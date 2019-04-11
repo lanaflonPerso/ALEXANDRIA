@@ -97,7 +97,7 @@ public class CartController {
                                         @RequestParam("iCountry") Integer iCountry) {
 
 
-        // Set value from combobox
+        // Set values from combobox
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
         client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
 
