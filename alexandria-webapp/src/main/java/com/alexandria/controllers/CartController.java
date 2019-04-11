@@ -80,21 +80,22 @@ public class CartController {
     }
 
     @RequestMapping({"/remProduct"})
-    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
+    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer idProduct) {
 
-        ModelAndView mav = new ModelAndView("redirect:/cartView");
+        if(idProduct > 0) {
+            ProductEntity product = productManager.findProductFromId(idProduct);
 
-        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-
-        ProductEntity product=null;
-        if (code  > 0) {
-            product = productManager.findProductFromId(code);
+            if( product != null ) {
+                Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+                userCartSession.removeLineItem(product);
+            } else {
+                logger.warn("Product not found from id " + idProduct);
+            }
+        } else {
+            logger.warn("Try to remove a product with id <= 0 : " + idProduct);
         }
-        if (product != null) {
 
-            userCartSession.removeLineItem(product);
-        }
-        return mav;
+        return new ModelAndView("redirect:/cartView");
     }
 }
 
