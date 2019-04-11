@@ -1,7 +1,10 @@
 package com.alexandria.controllers;
 
+import com.alexandria.entities.CountryEntity;
+import com.alexandria.entities.PaymentMethodEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.managers.Cart;
+import com.alexandria.managers.ClientManager;
 import com.alexandria.managers.ProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.util.List;
 
 @Controller
 @Scope("session")
@@ -23,6 +29,20 @@ public class CartController {
 
     @Autowired
     ProductManager productManager;
+
+    @Autowired
+    ClientManager clientManager;
+
+    // Combobox
+    List<PaymentMethodEntity> paymentMethods;
+    List<CountryEntity> countries;
+
+    @PostConstruct
+    public void init() {
+
+        paymentMethods = clientManager.getPaymentMethodsList();
+        countries = clientManager.getCountriesList();
+    }
 
     @RequestMapping(value = "/cartView")
     public ModelAndView showOrderLines(HttpServletRequest request, HttpServletResponse response) {
@@ -61,6 +81,8 @@ public class CartController {
         ModelAndView mav = new ModelAndView("checkout");
 
         mav.addObject("userCartSession", userCartSession);
+        mav.addObject("paymentMethods", paymentMethods);
+        mav.addObject("countries", countries);
 
         return mav;
     }
@@ -69,12 +91,13 @@ public class CartController {
     public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response) {
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+        Date currentDate = new java.sql.Date(System.currentTimeMillis());
+        userCartSession.setDatePlaced( currentDate );
 
-        userCartSession.setDatePlaced( new java.sql.Date(System.currentTimeMillis()));
-
-        ModelAndView mav = new ModelAndView("checkout");
+        ModelAndView mav = new ModelAndView("cartView");
 
         mav.addObject("userCartSession", userCartSession);
+        mav.addObject("message", "Your order has been placed successfully on " + currentDate);
 
         return mav;
     }
