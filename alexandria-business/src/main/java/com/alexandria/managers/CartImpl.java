@@ -129,8 +129,9 @@ public class CartImpl implements Cart {
             // Create in database
             orderLineDao.create(orderLine);
 
-            // Update the stock in the model
+            // Update the stock in the model (in product and in orderline)
             product.setStock(product.getStock()-orderLine.getQuantity());
+            orderLine.getProductByProductId().setStock(product.getStock());
 
             // Update the stock in database
             productDao.update(product);
@@ -164,8 +165,9 @@ public class CartImpl implements Cart {
         // Update order line in database
         orderLineDao.update(orderLine);
 
-        // Update the stock in the model
+        // Update the stock in the model (in product and in orderline)
         product.setStock(product.getStock() - delta);
+        orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
         productDao.update(product);
@@ -193,8 +195,9 @@ public class CartImpl implements Cart {
             return;
         }
 
-        // Update the stock in the model
+        // Update the stock in the model (in product and in orderline)
         product.setStock(product.getStock() + orderLine.getQuantity());
+        orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
         productDao.update(product);
