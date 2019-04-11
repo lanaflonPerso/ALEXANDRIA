@@ -72,7 +72,7 @@
 
 <script>
     function updateOrderLine(idProduct, quantity) {
-        document.location.href='<c:url value="/cartUpdateLineItem"/>?quantity=' + quantity + '&idProduct=' + idProduct;
+        document.location.href='<c:url value="/cartUpdateLineItem"/>?idProduct=' + idProduct + '&quantity=' + quantity;
     }
 </script>
 
