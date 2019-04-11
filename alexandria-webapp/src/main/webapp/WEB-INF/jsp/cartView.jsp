@@ -52,7 +52,7 @@
                 <c:forEach var="i" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
                         <small class="text-muted">${i.productByProductId.name}</small>
-                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
+                        <span class="text-muted"><fmt:formatNumber value="${i.quantity * i.productByProductId.priceExVat}" type="currency"/></span>
                     </li>
                 </c:forEach>
 
