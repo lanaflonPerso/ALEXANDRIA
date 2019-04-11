@@ -30,7 +30,7 @@
                         Stock : ${i.productByProductId.stock}
 
                         <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="${i.quantity}" name="quantity"
+                        <input id="quantity" type="number" value="${i.quantity}" name="quantity" min="1" max="${i.productByProductId.stock + i.quantity}"
                                onchange="updateOrderLine(${i.productByProductId.idProduct}, this.value)"/>
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
