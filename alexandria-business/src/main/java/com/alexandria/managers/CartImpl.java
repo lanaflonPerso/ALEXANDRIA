@@ -211,7 +211,10 @@ public class CartImpl implements Cart {
 
     @Override
     public void clearOrderLines() {
-        // TODO : update stocks and co
+
+        for(OrderLineEntity orderLine : order.getOrderLinesByIdOrderHeader()) {
+            removeLineItem(orderLine.getProductByProductId());
+        }
     }
 
     @Override
