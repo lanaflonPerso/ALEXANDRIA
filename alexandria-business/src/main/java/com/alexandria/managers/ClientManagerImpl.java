@@ -51,6 +51,12 @@ public class ClientManagerImpl implements ClientManager {
     }
 
     @Override
+    public void updateClient(ClientEntity client) {
+
+        clientDao.update(client);
+    }
+
+    @Override
     public List<TitleEntity> getTitlesList() { return titleDao.findAll(); }
 
     @Override

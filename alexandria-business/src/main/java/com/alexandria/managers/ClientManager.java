@@ -15,6 +15,8 @@ public interface ClientManager {
 
     ClientEntity validateClient(Login login);
 
+    void updateClient(ClientEntity client);
+
     List<TitleEntity> getTitlesList();
 
     List<CountryEntity> getCountriesList();

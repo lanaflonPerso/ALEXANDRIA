@@ -8,12 +8,9 @@ import com.alexandria.managers.ProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +20,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Controller
-@Scope("session")
+@SessionAttributes("client")
 public class CartController {
 
     private static final Logger logger = LogManager.getLogger(ProductsController.class);
@@ -83,7 +80,9 @@ public class CartController {
 
         ModelAndView mav = new ModelAndView("checkout");
 
+        // Set in session via @SessionAttributes("client") to keep info when POST action is called
         mav.addObject("client", userCartSession.getClient());
+
         mav.addObject("titles", titles);
         mav.addObject("paymentMethods", paymentMethods);
         mav.addObject("countries", countries);
@@ -93,29 +92,35 @@ public class CartController {
 
     @RequestMapping(value = "/checkoutProcess", method = RequestMethod.POST)
     public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response,
-                                        @ModelAttribute("client") ClientEntity client,
+                                        @ModelAttribute("client") ClientEntity client, // From session (@SessionAttributes("client"))
                                         @RequestParam("gender") Integer iTitle,
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
-                                        @RequestParam("country") Integer iCountry) {
+                                        @RequestParam("country") Integer iCountry,
+                                        SessionStatus status) {
 
         // Set values from combobox
         client.setTitleByTitleId(titles.get(iTitle));
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
         client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
 
-        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+        // Update client in database
+        clientManager.updateClient(client);
 
         /* Set order placed date that indicate the order is no more active */
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
         Date currentDate = new java.sql.Date(System.currentTimeMillis());
         userCartSession.setDatePlaced( currentDate );
 
-        // Set a new user cart session that replaces the previous one
+        // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
         ModelAndView mav = new ModelAndView("cartView");
 
         mav.addObject("userCartSession", userCartSession);
         mav.addObject("message", "Your order has been placed successfully on " + currentDate);
+
+        //Mark Session Complete
+        status.setComplete();
 
         return mav;
     }
