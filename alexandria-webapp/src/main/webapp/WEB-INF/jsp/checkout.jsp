@@ -14,13 +14,13 @@
     </div>
 
     <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="<c:url value="/static/images/logo.png"/>" alt="" width="72" height="72">
+        <%--<img class="d-block mx-auto mb-4" src="<c:url value="/static/images/logo.png"/>" alt="" width="72" height="72">--%>
         <h2>Checkout form</h2>
     </div>
 
-    <h4 class="mb-3">Billing address</h4>
-
     <form:form method="POST" class="needs-validation" action="checkoutProcess" modelAttribute="client" novalidate="novalidate">
+
+        <h4 class="mb-3">Billing address</h4>
 
         <div class="form-row">
 
@@ -115,10 +115,74 @@
 
         </div>
 
+        <div id="deliveryAddress" style="display:none;">
+
+            <h4 class="mb-3">Delivery address</h4>
+
+            <div class="form-row">
+
+                <div class="col-md-6 mb-3">
+                    <form:label path="addressByDeliveryAddressId.addressLine1">Address</form:label>
+                    <form:input path="addressByDeliveryAddressId.addressLine1" class="form-control" placeholder="1234 Main St" required="required" autofocus="autofocus"/>
+                    <div class="invalid-feedback">
+                        Please enter your delivery address.
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <form:label path="addressByDeliveryAddressId.addressLine2">Address 2 <span class="text-muted">(Optional)</span></form:label>
+                    <form:input path="addressByDeliveryAddressId.addressLine2" class="form-control" placeholder="Apartment or suite" required="required"/>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-md-3 mb-3">
+                    <label for="country">Country</label>
+                    <select class="custom-select form-control" name="country" id="countryDelivery" required>
+                        <option disabled>Select one</option>
+                        <c:forEach var="country" items="${countries}" varStatus="status">
+                            <option value="${status.index}">${country.description}</option>
+                        </c:forEach>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <form:label path="addressByDeliveryAddressId.city">City</form:label>
+                    <form:input path="addressByDeliveryAddressId.city" class="form-control" required="required"/>
+                    <div class="invalid-feedback">
+                        City is required.
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <form:label path="addressByDeliveryAddressId.state">State</form:label>
+                    <form:input path="addressByDeliveryAddressId.state" class="form-control" required="required"/>
+                    <div class="invalid-feedback">
+                        State is required.
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <form:label path="addressByDeliveryAddressId.postalCode">Postal code</form:label>
+                    <form:input path="addressByDeliveryAddressId.postalCode" class="form-control" required="required"/>
+                    <div class="invalid-feedback">
+                        Postal code is required.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
         <hr class="mb-4">
 
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="same-address">
+            <input type="checkbox" class="custom-control-input" id="same-address" checked onclick="showData()">
             <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
         </div>
 
@@ -209,6 +273,15 @@
             });
         }, false);
     })();
+
+    function showData() {
+        if(document.getElementById("deliveryAddress").style.display === "block") {
+            document.getElementById("deliveryAddress").style.display="none";
+
+        } else {
+            document.getElementById("deliveryAddress").style.display = "block";
+        }
+    }
 </script>
 
 
