@@ -13,6 +13,21 @@
         <div class="form-row">
 
             <div class="col-md-4 mb-3">
+                <label for="gender">Gender</label>
+                <select class="custom-select form-control" id="gender" name="gender" required>
+                    <option disabled>Select one</option>
+                    <c:forEach var="title" items="${titles}" varStatus="status">
+                        <option value="${status.index}"
+                                <c:if test="${client.titleByTitleId.idTitle == title.idTitle}"> selected </c:if>
+                        >${title.description}</option>
+                    </c:forEach>
+                </select>
+                <div class="invalid-feedback">
+                    What's your gender?
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
                 <form:label path="firstName">First Name</form:label>
                 <form:input path="firstName" class="form-control" value="${userCartSession.client.firstName}" required="required"/>
                 <div class="invalid-feedback">
@@ -34,7 +49,7 @@
 
             <div class="col-md-6 mb-3">
                 <form:label path="addressByInvoiceAddressId.addressLine1">Address</form:label>
-                <form:input path="addressByInvoiceAddressId.addressLine1" class="form-control" placeholder="1234 Main St" required="required"/>
+                <form:input path="addressByInvoiceAddressId.addressLine1" class="form-control" placeholder="1234 Main St" required="required" autofocus="autofocus"/>
                 <div class="invalid-feedback">
                     Please enter your shipping address.
                 </div>

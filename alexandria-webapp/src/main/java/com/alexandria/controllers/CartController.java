@@ -1,9 +1,6 @@
 package com.alexandria.controllers;
 
-import com.alexandria.entities.ClientEntity;
-import com.alexandria.entities.CountryEntity;
-import com.alexandria.entities.PaymentMethodEntity;
-import com.alexandria.entities.ProductEntity;
+import com.alexandria.entities.*;
 import com.alexandria.managers.Cart;
 import com.alexandria.managers.CartImpl;
 import com.alexandria.managers.ClientManager;
@@ -38,12 +35,14 @@ public class CartController {
     ClientManager clientManager;
 
     // Combobox
+    List<TitleEntity> titles;
     List<PaymentMethodEntity> paymentMethods;
     List<CountryEntity> countries;
 
     @PostConstruct
     public void init() {
 
+        titles = clientManager.getTitlesList();
         paymentMethods = clientManager.getPaymentMethodsList();
         countries = clientManager.getCountriesList();
     }
@@ -85,6 +84,7 @@ public class CartController {
         ModelAndView mav = new ModelAndView("checkout");
 
         mav.addObject("client", userCartSession.getClient());
+        mav.addObject("titles", titles);
         mav.addObject("paymentMethods", paymentMethods);
         mav.addObject("countries", countries);
 
@@ -94,10 +94,12 @@ public class CartController {
     @RequestMapping(value = "/checkoutProcess", method = RequestMethod.POST)
     public ModelAndView checkoutProcess(HttpServletRequest request, HttpServletResponse response,
                                         @ModelAttribute("client") ClientEntity client,
+                                        @RequestParam("gender") Integer iTitle,
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
                                         @RequestParam("country") Integer iCountry) {
 
         // Set values from combobox
+        client.setTitleByTitleId(titles.get(iTitle));
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
         client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
 
