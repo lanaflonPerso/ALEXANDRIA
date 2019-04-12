@@ -97,6 +97,7 @@ public class CartController {
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
                                         @RequestParam("country") Integer iCountry) {
 
+logger.error("P: " + iPaymentMethod + " C: " + iCountry);
 
         // Set values from combobox
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
@@ -109,7 +110,7 @@ public class CartController {
         userCartSession.setDatePlaced( currentDate );
 
         // Set a new user cart session that replaces the previous one
-        request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
+//        request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
         ModelAndView mav = new ModelAndView("cartView");
 

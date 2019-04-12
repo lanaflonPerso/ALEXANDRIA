@@ -8,21 +8,21 @@
 
     <h4 class="mb-3">Billing address</h4>
 
-    <form class="needs-validation" method="POST" action="checkoutProcess" novalidate>
+    <form:form method="POST" class="needs-validation" action="checkoutProcess" modelAttribute="client" novalidate="novalidate">
 
         <div class="form-row">
 
             <div class="col-md-4 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="${userCartSession.client.firstName}" required>
+                <form:label path="firstName">First Name</form:label>
+                <form:input path="firstName" class="form-control" value="${userCartSession.client.firstName}" required="required"/>
                 <div class="invalid-feedback">
                     Valid first name is required.
                 </div>
             </div>
 
             <div class="col-md-4 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="${userCartSession.client.lastName}" required>
+                <form:label path="lastName">Last Name</form:label>
+                <form:input path="lastName" class="form-control" value="${userCartSession.client.lastName}" required="required"/>
                 <div class="invalid-feedback">
                     Valid last name is required.
                 </div>
@@ -33,16 +33,16 @@
         <div class="form-row">
 
             <div class="col-md-6 mb-3">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                <form:label path="addressByInvoiceAddressId.addressLine1">Address</form:label>
+                <form:input path="addressByInvoiceAddressId.addressLine1" class="form-control" placeholder="1234 Main St" required="required"/>
                 <div class="invalid-feedback">
                     Please enter your shipping address.
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
-                <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                <form:label path="addressByInvoiceAddressId.addressLine2">Address 2 <span class="text-muted">(Optional)</span></form:label>
+                <form:input path="addressByInvoiceAddressId.addressLine2" class="form-control" placeholder="Apartment or suite" required="required"/>
             </div>
 
         </div>
@@ -63,24 +63,24 @@
             </div>
 
             <div class="col-md-3 mb-3">
-                <label for="City">City</label>
-                <input type="text" class="form-control" id="city" placeholder="" required>
+                <form:label path="addressByInvoiceAddressId.city">City</form:label>
+                <form:input path="addressByInvoiceAddressId.city" class="form-control" required="required"/>
                 <div class="invalid-feedback">
                     City is required.
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
-                <label for="state">State</label>
-                <input type="text" class="form-control" id="state" placeholder="" required>
+                <form:label path="addressByInvoiceAddressId.state">State</form:label>
+                <form:input path="addressByInvoiceAddressId.state" class="form-control" required="required"/>
                 <div class="invalid-feedback">
                     State is required.
                 </div>
             </div>
 
             <div class="col-md-3 mb-3">
-                <label for="postalCode">Postal code</label>
-                <input type="text" class="form-control" id="postalCode" placeholder="" required>
+                <form:label path="addressByInvoiceAddressId.postalCode">Postal code</form:label>
+                <form:input path="addressByInvoiceAddressId.postalCode" class="form-control" required="required"/>
                 <div class="invalid-feedback">
                     Postal code is required.
                 </div>
@@ -158,7 +158,9 @@
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-    </form>
+
+    </form:form>
+
 </div>
 
 <script>
