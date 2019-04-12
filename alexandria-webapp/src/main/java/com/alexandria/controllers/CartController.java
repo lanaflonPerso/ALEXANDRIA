@@ -114,7 +114,7 @@ public class CartController {
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
-        ModelAndView mav = new ModelAndView("cartView");
+        ModelAndView mav = new ModelAndView("orderResume");
 
         mav.addObject("userCartSession", userCartSession);
         mav.addObject("message", "Your order has been placed successfully on " + currentDate);
