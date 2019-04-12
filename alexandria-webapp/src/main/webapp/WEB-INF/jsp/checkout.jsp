@@ -150,7 +150,7 @@
 
             <div class="col-md-3 mb-3">
                 <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" value="${userCartSession.client.lastName} ${userCartSession.client.firstName}" placeholder="" required>
+                <input type="text" class="form-control" id="cc-name" value="<c:out value="${userCartSession.client.lastName} ${userCartSession.client.firstName}"/>" placeholder="" required>
                 <small class="text-muted">Full name as displayed on card</small>
                 <div class="invalid-feedback">
                     Name on card is required

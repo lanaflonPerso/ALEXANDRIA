@@ -15,8 +15,7 @@
     <div class="row">
         <div class="col-md-8">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart: ${userCartSession.client.firstName} &nbsp; ${userCartSession.client.lastName}</span>
-                <p style="font-style: italic; color: green;">${message}</p>
+                <span class="text-muted">Your cart: <c:out value="${userCartSession.client.titleByTitleId.description} ${userCartSession.client.firstName} ${userCartSession.client.lastName}"/></span>
             </h4>
 
             <ul class="list-group mb-3">

@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -114,13 +114,16 @@ public class CartController {
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
+        //Mark Session Complete
+        status.setComplete();
+
+        // Set model & view
         ModelAndView mav = new ModelAndView("orderResume");
 
         mav.addObject("userCartSession", userCartSession);
-        mav.addObject("message", "Your order has been placed successfully on " + LocalDateTime.now());
 
-        //Mark Session Complete
-        status.setComplete();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        mav.addObject("message", "Your order has been placed successfully on " + LocalDateTime.now().format(myFormatObj));
 
         return mav;
     }
