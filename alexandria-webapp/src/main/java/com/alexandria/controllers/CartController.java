@@ -96,9 +96,7 @@ public class CartController {
                                         @ModelAttribute("client") ClientEntity client,
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
                                         @RequestParam("country") Integer iCountry) {
-
-logger.error("P: " + iPaymentMethod + " C: " + iCountry);
-
+        
         // Set values from combobox
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
         client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
