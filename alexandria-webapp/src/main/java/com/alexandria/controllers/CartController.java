@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -108,8 +109,7 @@ public class CartController {
 
         /* Set order placed date that indicate the order is no more active */
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-        Date currentDate = new java.sql.Date(System.currentTimeMillis());
-        userCartSession.setDatePlaced( currentDate );
+        userCartSession.setDatePlaced( new java.sql.Date(System.currentTimeMillis()) );
 
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
@@ -117,7 +117,7 @@ public class CartController {
         ModelAndView mav = new ModelAndView("orderResume");
 
         mav.addObject("userCartSession", userCartSession);
-        mav.addObject("message", "Your order has been placed successfully on " + currentDate);
+        mav.addObject("message", "Your order has been placed successfully on " + LocalDateTime.now());
 
         //Mark Session Complete
         status.setComplete();
