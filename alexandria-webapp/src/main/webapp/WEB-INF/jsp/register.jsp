@@ -10,7 +10,7 @@
 			<div class="card-wrapper">
 
 				<div class="brand">
-					<img src="<c:url value="/static/images/logo.jpg"/>" alt="logo">
+					<img src="<c:url value="/static/images/logo.png"/>" alt="logo">
 				</div>
 
 				<div class="card fat">

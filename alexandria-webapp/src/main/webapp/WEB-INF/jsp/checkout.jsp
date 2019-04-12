@@ -1,5 +1,17 @@
+<link type="text/css" rel="stylesheet" href="<c:url value="/static/css/cart.css"/>"/>
 
 <div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-5">
+            <div class="breadcrumb">
+                <a>Cart overview</a>
+                <a href="#" class="active">Delivery & Payment</a>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="<c:url value="/static/images/logo.png"/>" alt="" width="72" height="72">
