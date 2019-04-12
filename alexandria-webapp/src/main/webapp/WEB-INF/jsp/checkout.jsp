@@ -150,7 +150,7 @@
 
             <div class="col-md-3 mb-3">
                 <label for="cc-name">Name on card</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <input type="text" class="form-control" id="cc-name" value="${userCartSession.client.lastName} ${userCartSession.client.firstName}" placeholder="" required>
                 <small class="text-muted">Full name as displayed on card</small>
                 <div class="invalid-feedback">
                     Name on card is required
@@ -159,7 +159,7 @@
 
             <div class="col-md-3 mb-3">
                 <label for="cc-number">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <input type="text" class="form-control" id="cc-number" value="4978040303994666" placeholder="" required>
                 <div class="invalid-feedback">
                     Credit card number is required
                 </div>
@@ -167,7 +167,7 @@
 
             <div class="col-md-3 mb-3">
                 <label for="cc-expiration">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <input type="text" class="form-control" id="cc-expiration" value="25/12/2020" placeholder="" required>
                 <div class="invalid-feedback">
                     Expiration date required
                 </div>
@@ -175,7 +175,7 @@
 
             <div class="col-md-3 mb-3">
                 <label for="cc-cvv">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <input type="text" class="form-control" id="cc-cvv" value="666" placeholder="" required>
                 <div class="invalid-feedback">
                     Security code required
                 </div>
