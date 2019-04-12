@@ -108,7 +108,7 @@ public class CartController {
         userCartSession.setDatePlaced( currentDate );
 
         // Set a new user cart session that replaces the previous one
-//        request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
+        request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
         ModelAndView mav = new ModelAndView("cartView");
 
