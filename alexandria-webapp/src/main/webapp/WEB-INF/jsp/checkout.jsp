@@ -100,7 +100,7 @@
 
             <div class="col-md-3 mb-3">
                 <form:label path="addressByInvoiceAddressId.state">State</form:label>
-                <form:input path="addressByInvoiceAddressId.state" class="form-control" required="required"/>
+                <form:input path="addressByInvoiceAddressId.state" class="form-control" maxlength="45" required="required"/>
                 <div class="invalid-feedback">
                     State is required.
                 </div>
@@ -108,7 +108,7 @@
 
             <div class="col-md-3 mb-3">
                 <form:label path="addressByInvoiceAddressId.postalCode">Postal code</form:label>
-                <form:input path="addressByInvoiceAddressId.postalCode" class="form-control" required="required"/>
+                <form:input path="addressByInvoiceAddressId.postalCode" class="form-control" maxlength="10" required="required"/>
                 <div class="invalid-feedback">
                     Postal code is required.
                 </div>
@@ -162,7 +162,7 @@
 
                 <div class="col-md-3 mb-3">
                     <form:label path="addressByDeliveryAddressId.state">State</form:label>
-                    <form:input path="addressByDeliveryAddressId.state" class="form-control" required="required"/>
+                    <form:input path="addressByDeliveryAddressId.state" class="form-control" maxlength="45" required="required"/>
                     <div class="invalid-feedback">
                         State is required.
                     </div>
@@ -170,7 +170,7 @@
 
                 <div class="col-md-3 mb-3">
                     <form:label path="addressByDeliveryAddressId.postalCode">Postal code</form:label>
-                    <form:input path="addressByDeliveryAddressId.postalCode" class="form-control" required="required"/>
+                    <form:input path="addressByDeliveryAddressId.postalCode" class="form-control" maxlength="10" required="required"/>
                     <div class="invalid-feedback">
                         Postal code is required.
                     </div>
