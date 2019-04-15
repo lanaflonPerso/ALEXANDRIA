@@ -147,7 +147,7 @@
                         <option disabled>Select one</option>
                         <c:forEach var="country" items="${countries}" varStatus="status">
                             <option value="${status.index}"
-                                    <c:if test="${client.addressByDeliveryAddressId.countryByCountryId.idCountry == country.idCountry}"> selected </c:if>
+                                <c:if test="${client.addressByDeliveryAddressId.countryByCountryId.idCountry == country.idCountry}"> selected </c:if>
                             >${country.description}</option>
                         </c:forEach>
                     </select>
@@ -207,7 +207,9 @@
                     <select class="custom-select form-control" name="paymentMethod" id="paymentMethod" required>
                         <option disabled>Select one</option>
                         <c:forEach var="paymentMethod" items="${paymentMethods}" varStatus="status">
-                            <option value="${status.index}">${paymentMethod.description}</option>
+                            <option value="${status.index}"
+                                <c:if test="${client.paymentMethodByPaymentMethodId.idPaymentMethod == paymentMethod.idPaymentMethod}"> selected </c:if>
+                            >${paymentMethod.description}</option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">
