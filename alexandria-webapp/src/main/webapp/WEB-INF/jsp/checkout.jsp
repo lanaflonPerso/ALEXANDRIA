@@ -78,8 +78,8 @@
         <div class="form-row">
 
             <div class="col-md-3 mb-3">
-                <label for="country">Country</label>
-                <select class="custom-select form-control" name="country" id="country" required>
+                <label for="countryInvoice">Country</label>
+                <select class="custom-select form-control" name="countryInvoice" id="countryInvoice" required>
                     <option disabled>Select one</option>
                     <c:forEach var="country" items="${countries}" varStatus="status">
                         <option value="${status.index}">${country.description}</option>
@@ -140,8 +140,8 @@
             <div class="form-row">
 
                 <div class="col-md-3 mb-3">
-                    <label for="country">Country</label>
-                    <select class="custom-select form-control" name="country" id="countryDelivery" required>
+                    <label for="countryDelivery">Country</label>
+                    <select class="custom-select form-control" name="countryDelivery" id="countryDelivery" required>
                         <option disabled>Select one</option>
                         <c:forEach var="country" items="${countries}" varStatus="status">
                             <option value="${status.index}">${country.description}</option>
