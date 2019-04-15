@@ -25,7 +25,7 @@
                 <c:forEach var="cart" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
 <%--                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150"/></h6>--%>
-                        <h6 class="my-0"><a href="<c:url value="/product${cart.productByProductId.idProduct}"/>"><img src="data:image/jpg;base64,${cart.productByProductId.base64Image}" width="50" height="50"/></a></h6>
+                        <h6 class="my-0"><a href="<c:url value="/product"><c:param name="productId" value="${cart.productByProductId.idProduct}"/></c:url> "><img src="data:image/jpg;base64,${cart.productByProductId.base64Image}" width="50" height="50"/></a></h6>
 
                         ${cart.productByProductId.name}<br>
                         <fmt:formatNumber value="${cart.productByProductId.priceExVat}" type="currency"/>
@@ -38,7 +38,7 @@
                     <br>
                         <span class="text-muted"><fmt:formatNumber value="${cart.productByProductId.priceExVat}" type="currency"/></span>
 
-                        <a href="<c:url value="/remProduct?idProduct=${cart.productByProductId.idProduct}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="<c:url value="/remProduct"><c:param name="idProduct" value="${cart.productByProductId.idProduct}"/></c:url> "><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
                 </c:forEach>
             </ul>

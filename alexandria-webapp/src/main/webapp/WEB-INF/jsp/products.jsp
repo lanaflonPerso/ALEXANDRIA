@@ -73,7 +73,7 @@
                                     <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-6 text-right product-add-cart">
-                                    <a href="<c:url value="/addProduct?code=${product.idProduct}"/>" class="btn btn-secondary">ADD TO CART</a>
+                                    <a href="<c:url value="/addProduct"><c:param name="code" value="${product.idProduct}"/></c:url> " class="btn btn-secondary">ADD TO CART</a>
                                 </div>
                             </div>
                         </div>
