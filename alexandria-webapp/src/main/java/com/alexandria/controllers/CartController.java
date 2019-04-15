@@ -141,7 +141,10 @@ public class CartController {
         if (idProduct  > 0) {
             ProductEntity product = productManager.findProductFromId(idProduct);
 
-            if (product != null) {
+            // TODO : Check the available product stock in the jsp (product & products)
+            //  but since the products (all categories) are read once at startup their stocks are not updated
+            //  whereas the products(specifics categories) are read from database when selected and so are updated with the actual stocks.
+            if (product != null && product.getStock() >= 1) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.addLineItem(product);
             }
