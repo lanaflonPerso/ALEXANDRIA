@@ -90,7 +90,7 @@ public class RegistrationController {
             "", "", "", "", "", dummyCountry);
 
         AddressEntity deliveryAddress = new AddressEntity(
-                "", "", "", "", "", dummyCountry);
+                "Line1", "Line2", "City", "State", "PostalCode", dummyCountry);
 
         client.setAddressByInvoiceAddressId(invoiceAddress);
         client.setAddressByDeliveryAddressId(deliveryAddress);
