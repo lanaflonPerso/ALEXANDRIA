@@ -89,7 +89,8 @@ public class RegistrationController {
         AddressEntity invoiceAddress = new AddressEntity(
             "line1", "line2", "city", "state", "postalCode", dummyCountry);
 
-        AddressEntity deliveryAddress = invoiceAddress;
+        AddressEntity deliveryAddress = new AddressEntity(
+                "line1", "line2", "city", "state", "postalCode", dummyCountry);
 
         client.setAddressByInvoiceAddressId(invoiceAddress);
         client.setAddressByDeliveryAddressId(deliveryAddress);
