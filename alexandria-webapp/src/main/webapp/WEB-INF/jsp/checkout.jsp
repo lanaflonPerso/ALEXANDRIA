@@ -70,7 +70,7 @@
 
             <div class="col-md-6 mb-3">
                 <form:label path="addressByInvoiceAddressId.addressLine2">Address 2 <span class="text-muted">(Optional)</span></form:label>
-                <form:input path="addressByInvoiceAddressId.addressLine2" class="form-control" placeholder="Apartment or suite" required="required"/>
+                <form:input path="addressByInvoiceAddressId.addressLine2" class="form-control" placeholder="Apartment or suite"/>
             </div>
 
         </div>
@@ -132,7 +132,7 @@
 
                 <div class="col-md-6 mb-3">
                     <form:label path="addressByDeliveryAddressId.addressLine2">Address 2 <span class="text-muted">(Optional)</span></form:label>
-                    <form:input path="addressByDeliveryAddressId.addressLine2" class="form-control" placeholder="Apartment or suite" required="required"/>
+                    <form:input path="addressByDeliveryAddressId.addressLine2" class="form-control" placeholder="Apartment or suite"/>
                 </div>
 
             </div>
