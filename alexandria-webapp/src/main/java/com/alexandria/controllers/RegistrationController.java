@@ -84,12 +84,13 @@ public class RegistrationController {
         CountryEntity dummyCountry = clientManager.getCountriesListRange(0, 1).get(0);
         PaymentMethodEntity dummyPaymentMethod = clientManager.getPaymentMethodsListRange(0, 1).get(0);
 
-        client.setPhone("phone");
+        client.setPhone("");
 
         AddressEntity invoiceAddress = new AddressEntity(
-            "line1", "line2", "city", "state", "postalCode", dummyCountry);
+            "", "", "", "", "", dummyCountry);
 
-        AddressEntity deliveryAddress = invoiceAddress;
+        AddressEntity deliveryAddress = new AddressEntity(
+                "Line1", "Line2", "City", "State", "PostalCode", dummyCountry);
 
         client.setAddressByInvoiceAddressId(invoiceAddress);
         client.setAddressByDeliveryAddressId(deliveryAddress);

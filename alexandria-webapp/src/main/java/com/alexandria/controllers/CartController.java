@@ -96,13 +96,15 @@ public class CartController {
                                         @ModelAttribute("client") ClientEntity client, // From session (@SessionAttributes("client"))
                                         @RequestParam("gender") Integer iTitle,
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
-                                        @RequestParam("country") Integer iCountry,
+                                        @RequestParam("countryInvoice") Integer iCountryInvoice,
+                                        @RequestParam("countryDelivery") Integer iCountryDelivery,
                                         SessionStatus status) {
 
         // Set values from combobox
         client.setTitleByTitleId(titles.get(iTitle));
         client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
-        client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountry));
+        client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountryInvoice));
+        client.getAddressByDeliveryAddressId().setCountryByCountryId(countries.get(iCountryDelivery));
 
         // Update client in database
         clientManager.updateClient(client);
