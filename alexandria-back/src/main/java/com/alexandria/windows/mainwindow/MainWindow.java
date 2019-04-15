@@ -26,11 +26,13 @@ public class MainWindow extends JFrame {
 
     private void clientsMouseClicked(MouseEvent e) {
 
+        // refresh clientsList from database in case database is updated outside this thread
+        // Do not refresh when instantiate otherwise side effect
+        if(clientsView != null)
+            clientsView.doClientsList();
+
         if(clientsView == null)
             clientsView = new ClientsView();
-
-        // refresh clientsList from database in case database is updated outside this thread
-        clientsView.doClientsList();
 
         refreshAll(clientsView);
     }
@@ -46,11 +48,14 @@ public class MainWindow extends JFrame {
     }
 
     private void ordersButtonMouseClicked(MouseEvent e) {
-        if(ordersView == null)
-            ordersView = new OrdersView();
 
         // refresh ordersList from database in case database is updated outside this thread
-        ordersView.doOrdersList();
+        // Do not refresh when instantiate otherwise side effect
+        if(ordersView != null)
+            ordersView.doOrdersList();
+
+        if(ordersView == null)
+            ordersView = new OrdersView();
 
         refreshAll(ordersView);
     }
