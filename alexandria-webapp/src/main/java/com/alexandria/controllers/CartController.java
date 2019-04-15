@@ -132,20 +132,19 @@ public class CartController {
 
     @RequestMapping({"/addProduct"})
     public ModelAndView listProductHandler(HttpServletRequest request,
-                                           @RequestParam(value = "code", defaultValue = "") Integer code) {
+                                           @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
+
         String referer = request.getHeader("Referer");
         referer = referer.substring(referer.lastIndexOf('/') + 1);
         ModelAndView mav = new ModelAndView("redirect:/" + referer);
 
-        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+        if (idProduct  > 0) {
+            ProductEntity product = productManager.findProductFromId(idProduct);
 
-        ProductEntity product=null;
-        if (code  > 0) {
-            product = productManager.findProductFromId(code);
-        }
-        if (product != null) {
-
-            userCartSession.addLineItem(product);
+            if (product != null) {
+                Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+                userCartSession.addLineItem(product);
+            }
         }
         return mav;
     }
