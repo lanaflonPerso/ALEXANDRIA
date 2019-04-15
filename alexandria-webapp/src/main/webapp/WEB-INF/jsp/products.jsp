@@ -9,7 +9,7 @@
             <c:forEach var="catLvl1" items="${categoryList}">
                 <c:set var="parent" value="${catLvl1.categoryByParent.idCategory}"/>
                 <c:if test="${parent == null}">
-                    <input type="checkbox" name="${catLvl1.description}" checked>
+                    <input type="checkbox" name="${catLvl1.description}" id="${catLvl1.description}"checked>
                     <label for="${catLvl1.description}"><a href="<c:url value="/products"/>">All categories</a></label>
                 </c:if>
             </c:forEach>
@@ -28,7 +28,7 @@
                                     <i class="fas fa-bars"></i>
                                 </c:if>
                             </c:forEach>
-                            <a href="<c:url value="/products${catLvl2.idCategory}"/>">${catLvl2.idCategory}-${catLvl2.description}</a>
+                            <a href="<c:url value="/products"><c:param name="categoryId" value="${catLvl2.idCategory}"/></c:url> ">${catLvl2.idCategory}-${catLvl2.description}</a>
                         </span>
                     </label>
                     <ul>
@@ -36,7 +36,7 @@
                             <c:set var="parent" value="${catLvl2.idCategory}"/>
                             <c:if test="${parent == catLvl3.categoryByParent.idCategory}">
                                 <li>
-                                    <a href="<c:url value="/products${catLvl3.idCategory}"/>">${catLvl3.idCategory}-${catLvl3.description}</a>
+                                    <a href="<c:url value="/products"><c:param name="categoryId" value="${catLvl3.idCategory}"/></c:url> ">${catLvl3.idCategory}-${catLvl3.description}</a>
                                 </li>
                             </c:if>
                         </c:forEach>
@@ -57,7 +57,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12 product">
                     <div class="row product-part">
                         <div class="col-md-12 col-sm-12 colxs-12 img-section">
-                            <a href="<c:url value="/product${product.idProduct}"/>"><img src="data:image/jpg;base64,${product.base64Image}"/></a>
+                            <a href="<c:url value="/product"><c:param name="productId" value="${product.idProduct}"/></c:url> "><img src="data:image/jpg;base64,${product.base64Image}"/></a>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 product-title">
                             <h1>${product.idProduct} - ${product.name}</h1>
@@ -85,14 +85,16 @@
         <%--pagination--%>
         <div class="row">
             <div class="col-offset-5 col-sm-2">
-                <c:url value="/products${category}" var="prev">
+                <c:url value="/products" var="prev">
                     <c:param name="page" value="${page-1}"/>
+                    <c:param name="category" value="${category}"/>
                 </c:url>
                 <c:if test="${page > 1}">
                     <a href="<c:out value="${prev}" />"><i class="fas fa-arrow-circle-left"></i></a>
                 </c:if>
-                <c:url value="/products${category}" var="next">
+                <c:url value="/products" var="next">
                     <c:param name="page" value="${page + 1}"/>
+                    <c:param name="category" value="${category}"/>
                 </c:url>
                 <c:if test="${page + 1 <= maxPages}">
                     <a href="<c:out value="${next}"/>"><i class="fas fa-arrow-circle-right"></i></a>

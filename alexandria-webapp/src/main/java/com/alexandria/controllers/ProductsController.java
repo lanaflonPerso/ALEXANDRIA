@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static jdk.nashorn.internal.objects.NativeArray.lastIndexOf;
-
 @Controller
 public class ProductsController {
 
@@ -39,9 +37,7 @@ public class ProductsController {
 
     //    categoryTree returns the param category (the selected one) and its children (if it has some)
     private List<CategoryEntity> categoryTree(int categoryId) {
-//        CategoryEntity category = productManager.findCategoryFromId(categoryId);
 
-        // useful ?
         CategoryEntity category = categoryList.stream()
                 .filter(cate -> categoryId == cate.getIdCategory())
                 .findFirst().orElse(null);
@@ -58,9 +54,9 @@ public class ProductsController {
         }
 
 
-    @RequestMapping(value = "/products{catId}")
-
-    public ModelAndView productList(@RequestParam(required = false) Integer page, @PathVariable(value = "catId") Integer id) {
+    @RequestMapping(value = "/products")
+    public ModelAndView productList(@RequestParam(required = false) Integer page,
+                                    @RequestParam(required = false) Integer categoryId) {
         ModelAndView mav = new ModelAndView("products");
 
         mav.addObject("categoryList", categoryList);
@@ -68,10 +64,10 @@ public class ProductsController {
 
         List<ProductEntity> products = null;
 
-        if (id == null || id == 1) {
+        if (categoryId == null || categoryId == 1) {
             products = productsList;
         } else {
-            List<CategoryEntity> categories = categoryTree(id);
+            List<CategoryEntity> categories = categoryTree(categoryId);
             products = productManager.findProductsFromCategoriesId(categories);
         }
 
@@ -90,12 +86,13 @@ public class ProductsController {
             mav.addObject("productsList", pagedListHolder.getPageList());
         }
 
-        mav.addObject("category", id);
+        mav.addObject("category", categoryId);
         return mav;
     }
 
     @RequestMapping({"/addProduct"})
-    public ModelAndView listProductHandler(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
+    public ModelAndView listProductHandler(HttpServletRequest request,
+                                           @RequestParam(value = "code", defaultValue = "") Integer code) {
         String referer = request.getHeader("Referer");
         referer = referer.substring(referer.lastIndexOf('/') + 1);
         ModelAndView mav = new ModelAndView("redirect:/" + referer);
@@ -113,8 +110,9 @@ public class ProductsController {
         return mav;
     }
 
-    @RequestMapping(value = "/product{productId}")
-    public ModelAndView productList(@PathVariable(value = "productId") int productId, HttpServletRequest request ) {
+    @RequestMapping(value = "/product")
+    public ModelAndView productList(HttpServletRequest request,
+                                    @RequestParam("productId") Integer productId ) {
         ModelAndView mav = new ModelAndView("product");
 
 //        seeking productId in productList
