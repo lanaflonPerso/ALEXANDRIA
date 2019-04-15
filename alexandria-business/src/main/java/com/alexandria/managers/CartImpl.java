@@ -213,7 +213,10 @@ public class CartImpl implements Cart {
     public void clearOrderLines() {
 
         List<OrderLineEntity> orderLines = order.getOrderLinesByIdOrderHeader();
-        
+
+        // As we remove the first item of the list orderlines at each iteration of the loop,
+        // the size of this list also decreases by 1 at each iteration
+        // so that this loop ends when the size is equal to zero.
         for( int i = 0; i < orderLines.size(); i++ ) {
             OrderLineEntity orderLine = orderLines.get( i );
             removeLineItem(orderLine.getProductByProductId());
