@@ -228,6 +228,11 @@ public class CartImpl implements Cart {
     }
 
     @Override
+    public OrderHeaderEntity getOrder() {
+        return this.order;
+    }
+
+    @Override
     public BigDecimal getShippingTax() {
         return order.getShippingMethodByShippingMethodId().getCharges();
     }

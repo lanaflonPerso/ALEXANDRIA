@@ -1,9 +1,6 @@
 package com.alexandria.managers;
 
-import com.alexandria.entities.ClientEntity;
-import com.alexandria.entities.OrderLineEntity;
-import com.alexandria.entities.ProductEntity;
-import com.alexandria.entities.ShippingMethodEntity;
+import com.alexandria.entities.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -30,6 +27,8 @@ public interface Cart {
     void removeLineItem(ProductEntity product);
 
     void clearOrderLines();
+
+    OrderHeaderEntity getOrder();
 
     List<OrderLineEntity> getOrderLines();
 
