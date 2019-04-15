@@ -2,14 +2,15 @@
 
 <div id="wrapper" class="container">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
             <div class="breadcrumb">
                 <a href="#" class="active">Cart overview</a>
                 <a>Delivery & Payment</a>
+                <a>Order resume</a>
             </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="row">
