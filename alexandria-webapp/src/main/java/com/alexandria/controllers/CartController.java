@@ -146,5 +146,12 @@ public class CartController {
 
         return new ModelAndView("redirect:/cartView");
     }
+
+    @RequestMapping({"/emptycart"})
+    public ModelAndView clearProducts(HttpServletRequest request){
+        Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+        userCartSession.clearOrderLines();
+        return new ModelAndView("redirect:/cartView");
+    }
 }
 

@@ -13,6 +13,7 @@
 
     <bean id="productManager" class="com.alexandria.managers.ProductManagerImpl" />
     <bean id="clientManager" class="com.alexandria.managers.ClientManagerImpl" />
+    <bean id="orderManager" class="com.alexandria.managers.AccountManagerImpl" />
     <bean id="clientDao" class="com.alexandria.dao.ClientDaoImpl" />
     <bean id="titleDao" class="com.alexandria.dao.TitleDaoImpl" />
     <bean id="countryDao" class="com.alexandria.dao.CountryDaoImpl" />

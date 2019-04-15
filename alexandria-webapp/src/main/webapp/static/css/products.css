@@ -1,3 +1,43 @@
+.product{
+    margin-bottom:5px;
+}
+.product-part{
+    margin:0px;
+    border:1px solid #DDDDDD;
+    background-color: #fff;
+    padding-bottom: 20px;
+}
+.img-section{
+    padding: 0px;
+}
+.img-section img{
+    width: 100%;
+}
+.product-title h1{
+    margin:0px;
+    color:#4C4C4C;
+    font-size:23px;
+    padding: 5px 0px;
+}
+.product-description{
+    padding: 3px 15px;
+}
+.product-description p{
+    color:#848484;
+}
+.product-cart p{
+    font-size:20px;
+    color:#4C4C4C;
+}
+.product-add-cart a{
+    border-radius:0px;
+    font-size: 11px;
+}
+
+
+
+
+/**/
 .cd-accordion-menu input[type=checkbox] {
     /* hide native checkbox */
     position: absolute;

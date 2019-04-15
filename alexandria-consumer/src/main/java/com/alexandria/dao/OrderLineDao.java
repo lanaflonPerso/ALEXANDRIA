@@ -1,5 +1,6 @@
 package com.alexandria.dao;
 
+import com.alexandria.entities.OrderHeaderEntity;
 import com.alexandria.entities.OrderLineEntity;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface OrderLineDao extends AbstractDao<OrderLineEntity> {
     List<OrderLineEntity> findAll();
 
     List<OrderLineEntity> findRange(int iMin, int nb);
+
+    List<OrderLineEntity> findFromOrderHeader(OrderHeaderEntity orderHeader);
 
     int count();
 }

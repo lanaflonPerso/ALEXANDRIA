@@ -11,6 +11,7 @@
         </div>
         <div class="col-md-3"></div>
     </div>
+    </div>
 
     <div class="row">
         <div class="col-md-8">
@@ -20,22 +21,23 @@
 
             <ul class="list-group mb-3">
 
-                <c:forEach var="i" items="${userCartSession.orderLines}">
+                <c:forEach var="cart" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150"/></h6>
+<%--                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150"/></h6>--%>
+                        <h6 class="my-0"><a href="<c:url value="/product${cart.productByProductId.idProduct}"/>"><img src="data:image/jpg;base64,${cart.productByProductId.base64Image}" width="50" height="50"/></a></h6>
 
-                        ${i.productByProductId.name}<br>
-                        <fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/>
+                        ${cart.productByProductId.name}<br>
+                        <fmt:formatNumber value="${cart.productByProductId.priceExVat}" type="currency"/>
                     <br>
-                        Stock : ${i.productByProductId.stock}
+                        Stock : ${cart.productByProductId.stock}
 
                         <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="${i.quantity}" name="quantity" min="1" max="${i.productByProductId.stock + i.quantity}"
-                               onchange="updateOrderLine(${i.productByProductId.idProduct}, this.value)"/>
+                        <input id="quantity" type="number" value="${cart.quantity}" name="quantity" min="1" max="${cart.productByProductId.stock + cart.quantity}"
+                               onchange="updateOrderLine(${cart.productByProductId.idProduct}, this.value)"/>
                     <br>
-                        <span class="text-muted"><fmt:formatNumber value="${i.productByProductId.priceExVat}" type="currency"/></span>
+                        <span class="text-muted"><fmt:formatNumber value="${cart.productByProductId.priceExVat}" type="currency"/></span>
 
-                        <a href="<c:url value="/remProduct?idProduct=${i.productByProductId.idProduct}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="<c:url value="/remProduct?idProduct=${cart.productByProductId.idProduct}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
                 </c:forEach>
             </ul>
@@ -62,10 +64,15 @@
                 </li>
 
             </ul>
-
+<div class="row">
             <form action="checkout" method="get">
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
+    &nbsp;
+            <form action="emptycart" method="get">
+                <button type="submit" class="btn btn-danger">Empty cart</button>
+            </form>
+</div>
         </div>
     </div>
 </div>

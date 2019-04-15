@@ -1,5 +1,4 @@
 package com.alexandria.controllers;
-
 import com.alexandria.entities.CategoryEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.managers.Cart;
@@ -8,20 +7,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static jdk.nashorn.internal.objects.NativeArray.lastIndexOf;
+
 @Controller
-@Scope("session")
 public class ProductsController {
 
     private static final Logger logger = LogManager.getLogger(ProductsController.class);
@@ -31,32 +28,39 @@ public class ProductsController {
 
     List<CategoryEntity> categoryList;
     Set<CategoryEntity> categoryParent;
+    List<ProductEntity> productsList;
 
     @PostConstruct
     public void init() {
         categoryList = productManager.getCategoriesList();
         categoryParent = productManager.getCategoryParents();
+        productsList = productManager.getProductsList();
     }
 
-    //    déplacer
+    //    categoryTree returns the param category (the selected one) and its children (if it has some)
     private List<CategoryEntity> categoryTree(int categoryId) {
-        CategoryEntity category = productManager.findCategoryFromId(categoryId);
-        List<CategoryEntity> cateTree = new ArrayList<>();
+//        CategoryEntity category = productManager.findCategoryFromId(categoryId);
 
+        // useful ?
+        CategoryEntity category = categoryList.stream()
+                .filter(cate -> categoryId == cate.getIdCategory())
+                .findFirst().orElse(null);
+         //
+
+        List<CategoryEntity> cateTree = new ArrayList<>();
         List<CategoryEntity> categories = productManager.findCategoriesFromParent(category);
 
         if (categories != null) {
-            cateTree.addAll(categories);
+            cateTree.addAll(categories); //adds each item of categories in cateTree
         }
-            cateTree.add(category);
-
+            cateTree.add(category); // adds the selected category in cateTree
             return cateTree;
         }
 
 
     @RequestMapping(value = "/products{catId}")
 
-    public ModelAndView productList(@RequestParam(required = false) Integer page, @PathVariable(value = "catId") Integer id, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView productList(@RequestParam(required = false) Integer page, @PathVariable(value = "catId") Integer id) {
         ModelAndView mav = new ModelAndView("products");
 
         mav.addObject("categoryList", categoryList);
@@ -65,7 +69,7 @@ public class ProductsController {
         List<ProductEntity> products = null;
 
         if (id == null || id == 1) {
-            products = productManager.getProductsList();
+            products = productsList;
         } else {
             List<CategoryEntity> categories = categoryTree(id);
             products = productManager.findProductsFromCategoriesId(categories);
@@ -92,8 +96,9 @@ public class ProductsController {
 
     @RequestMapping({"/addProduct"})
     public ModelAndView listProductHandler(HttpServletRequest request, @RequestParam(value = "code", defaultValue = "") Integer code) {
-
-        ModelAndView mav = new ModelAndView("redirect:/products");
+        String referer = request.getHeader("Referer");
+        referer = referer.substring(referer.lastIndexOf('/') + 1);
+        ModelAndView mav = new ModelAndView("redirect:/" + referer);
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
@@ -105,6 +110,25 @@ public class ProductsController {
 
             userCartSession.addLineItem(product);
         }
+        return mav;
+    }
+
+    @RequestMapping(value = "/product{productId}")
+    public ModelAndView productList(@PathVariable(value = "productId") int productId, HttpServletRequest request ) {
+        ModelAndView mav = new ModelAndView("product");
+
+//        seeking productId in productList
+//        findFirst to stop looking for it if found
+//        orElse in case ze wouldn't find it
+        ProductEntity product = productsList.stream()
+                                            .filter(prod -> productId == prod.getIdProduct())
+                                            .findFirst().orElse(null);
+
+//        gets the parent page to feed the "back" link
+        String referer = request.getHeader("Referer");
+
+        mav.addObject("referer", referer);
+        mav.addObject("product", product);
         return mav;
     }
 }

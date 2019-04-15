@@ -5,6 +5,8 @@
 <c:url value="/signout" var="URL_SIGNOUT"/>
 <c:url value="/products" var="URL_PRODUCTS"/>
 <c:url value="/cartView" var="URL_CART"/>
+<c:url value="/orders" var="URL_ORDERS"/>
+<c:url value="/account" var="URL_ACCOUNT"/>
 
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -45,8 +47,8 @@
                             <c:out value="${sessionScope.userSession.firstName} ${sessionScope.userSession.lastName}"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">Your Account</a>
-                            <a class="dropdown-item" href="#">Your Orders</a>
+                            <a class="dropdown-item" href="${URL_ACCOUNT}">Your Account</a>
+                            <a class="dropdown-item" href="${URL_ORDERS}">Your Orders</a>
                             <a class="dropdown-item" href="${URL_SIGNOUT}"><i class="fas fa-sign-out-alt"></i>Sign Out</a>
                         </div>
                     </li>

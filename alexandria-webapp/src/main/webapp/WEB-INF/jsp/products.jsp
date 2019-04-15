@@ -6,37 +6,37 @@
     <div class="vnav col-sm-2">
         <ul class="cd-accordion-menu">
             <li class="has-children">
-            <c:forEach var="j" items="${categoryList}">
-                <c:set var="parent" value="${j.categoryByParent.idCategory}"/>
+            <c:forEach var="catLvl1" items="${categoryList}">
+                <c:set var="parent" value="${catLvl1.categoryByParent.idCategory}"/>
                 <c:if test="${parent == null}">
-                    <input type="checkbox" name="${j.description}" id="${i.description}" checked>
-                    <label for="${j.description}"><a href="<c:url value="/products"/>">All categories</a></label>
+                    <input type="checkbox" name="${catLvl1.description}" checked>
+                    <label for="${catLvl1.description}"><a href="<c:url value="/products"/>">All categories</a></label>
                 </c:if>
             </c:forEach>
 
             <ul>
 
-            <c:forEach var="c" items="${categoryList}">
-                <c:set var="parent" value="${c.categoryByParent.idCategory}"/>
+            <c:forEach var="catLvl2" items="${categoryList}">
+                <c:set var="parent" value="${catLvl2.categoryByParent.idCategory}"/>
                 <c:if test="${parent == 1}">
                     <li class="has-children">
-                    <input type="checkbox" name="${c.description}" id="${c.description}">
-                    <label for="${c.description}">
+                    <input type="checkbox" name="${catLvl2.description}" id="${catLvl2.description}">
+                    <label for="${catLvl2.description}">
                         <span>
-                            <c:forEach var="b" items="${categoryParent}">
-                                <c:if test="${c == b}">
-                                    <i class="fas fa-plus"></i>&nbsp;
+                            <c:forEach var="categoryParent" items="${categoryParent}">
+                                <c:if test="${catLvl2 == categoryParent}">
+                                    <i class="fas fa-bars"></i>
                                 </c:if>
                             </c:forEach>
-                            <a href="<c:url value="/products${c.idCategory}"/>">${c.idCategory}-${c.description}</a>
+                            <a href="<c:url value="/products${catLvl2.idCategory}"/>">${catLvl2.idCategory}-${catLvl2.description}</a>
                         </span>
                     </label>
                     <ul>
-                        <c:forEach var="k" items="${categoryList}">
-                            <c:set var="parent" value="${c.idCategory}"/>
-                            <c:if test="${parent == k.categoryByParent.idCategory}">
+                        <c:forEach var="catLvl3" items="${categoryList}">
+                            <c:set var="parent" value="${catLvl2.idCategory}"/>
+                            <c:if test="${parent == catLvl3.categoryByParent.idCategory}">
                                 <li>
-                                    <a href="<c:url value="/products${k.idCategory}"/>">${k.idCategory}-${k.description}</a>
+                                    <a href="<c:url value="/products${catLvl3.idCategory}"/>">${catLvl3.idCategory}-${catLvl3.description}</a>
                                 </li>
                             </c:if>
                         </c:forEach>
@@ -48,58 +48,55 @@
         </ul>
             </li>
         </ul>
-    </div><!-- cd-accordion-menu -->
+    </div>
 
-
-    <%-- liste de produits--%>
-    <div class="container col-sm-9">
-        <div class="row">
-            <ul class="list-group mb-3">
-            <c:forEach var="i" items="${productsList}">
-
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <p>
-                        <header>${i.idProduct} - ${i.name}</header>
-                            <br/>
-                        <img src="data:image/jpg;base64,${i.base64Image}" width="150" height="150"/>
-                        </p>
-                    <br/>
-                        <article>Description : ${i.bookByIdProduct.authorByAuthorId.bio}</article>  <%--c'est la bio de l'auteur mais ça fait le job en desc d'article--%>
-                    <br/>
-                        <p><h6>Book title : ${i.bookByIdProduct.title}</h6>
-                        <em>isbn : ${i.bookByIdProduct.isbn}</em>
-                        </p>
-                    <br/>
-                        <p> Author : ${i.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${i.bookByIdProduct.authorByAuthorId.lastName}
-                            Publisher : ${i.bookByIdProduct.publisherByPublisherId.name}
-                            Price : <fmt:formatNumber value="${i.priceExVat}" type="currency"/>
-                        </p>
-                    <br/>
-                    </li>
-                    <li>
-                        <a href="<c:url value="/addProduct?code=${i.idProduct}"/>"><button class="btn btn-secondary">Add to cart</button></a>
-                    </li>
-
-            </c:forEach>
-            </ul>
+<%--liste de produits--%>
+        <div class="container main-section">
+            <div class="row">
+<c:forEach var="product" items="${productsList}">
+                <div class="col-md-3 col-sm-6 col-xs-12 product">
+                    <div class="row product-part">
+                        <div class="col-md-12 col-sm-12 colxs-12 img-section">
+                            <a href="<c:url value="/product${product.idProduct}"/>"><img src="data:image/jpg;base64,${product.base64Image}"/></a>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 product-title">
+                            <h1>${product.idProduct} - ${product.name}</h1>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 product-description">
+                            <p>
+                                ${product.bookByIdProduct.title} by ${product.bookByIdProduct.authorByAuthorId.firstName} ${product.bookByIdProduct.authorByAuthorId.lastName}
+                            </p>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 product-cart">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-6">
+                                    <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/></p>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-6 text-right product-add-cart">
+                                    <a href="<c:url value="/addProduct?code=${product.idProduct}"/>" class="btn btn-secondary">ADD TO CART</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</c:forEach>
+            </div>
         </div>
-    </div>
-        <br/>
-    <%--pagination--%>
-    <div class="row">
-    <div class="col-offset-5 col-sm-2">
-        <c:url value="/products${category}" var="prev">
-            <c:param name="page" value="${page-1}"/>
-        </c:url>
-        <c:if test="${page > 1}">
-            <a href="<c:out value="${prev}" />">Previous Page</a>
-        </c:if>
-        <c:url value="/products${category}" var="next">
-            <c:param name="page" value="${page + 1}"/>
-        </c:url>
-        <c:if test="${page + 1 <= maxPages}">
-            <a href="<c:out value="${next}"/>">Next Page</a>
-        </c:if>
-    </div>
-</div>
+        <%--pagination--%>
+        <div class="row">
+            <div class="col-offset-5 col-sm-2">
+                <c:url value="/products${category}" var="prev">
+                    <c:param name="page" value="${page-1}"/>
+                </c:url>
+                <c:if test="${page > 1}">
+                    <a href="<c:out value="${prev}" />"><i class="fas fa-arrow-circle-left"></i></a>
+                </c:if>
+                <c:url value="/products${category}" var="next">
+                    <c:param name="page" value="${page + 1}"/>
+                </c:url>
+                <c:if test="${page + 1 <= maxPages}">
+                    <a href="<c:out value="${next}"/>"><i class="fas fa-arrow-circle-right"></i></a>
+                </c:if>
+            </div>
+        </div>
 </div>

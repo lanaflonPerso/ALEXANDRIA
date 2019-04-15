@@ -7,6 +7,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "order_line", schema = "dbo", catalog = "DB_ALEXANDRIA")
+@NamedQueries({
+        @NamedQuery(
+                name = "OrderLineEntity.findFromOrderHeader",
+                query = "from OrderLineEntity as o where o.orderHeaderByOrderHeaderId = :orderHeader"
+        )
+})
 @IdClass(OrderLineEntityPK.class)
 public class OrderLineEntity extends AbstractModelObject {
     private Integer orderHeaderId;
