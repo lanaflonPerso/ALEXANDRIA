@@ -22,7 +22,7 @@
             <td>${order.dateDelivered}</td>
             <td>${order.nbOrderLines}</td>
             <td>${order.shippingMethodByShippingMethodId.description}</td>
-            <td>${order.totalCostExVat}</td>
+            <td><fmt:formatNumber value="${order.totalCostExVat}" type="currency"/></td>
             <td>${order.comment}</td>
             <td><a href="<c:url value="/orderLines"><c:param name="orderIndex" value="${status.index}"/></c:url> ">display order ${order.idOrderHeader} detail</a></td>
 
