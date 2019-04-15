@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label for="gender">Gender</label>
 								<select class="custom-select form-control" id="gender" name="gender" required autofocus>
-									<option disabled>Select one</option>
+									<option value="" selected disabled>Select one</option>
 									<c:forEach var="item" items="${titles}" varStatus="status">
 										<option value="${status.index}">${item.description}</option>
 									</c:forEach>
