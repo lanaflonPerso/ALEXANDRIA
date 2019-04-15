@@ -82,7 +82,9 @@
                 <select class="custom-select form-control" name="countryInvoice" id="countryInvoice" required>
                     <option disabled>Select one</option>
                     <c:forEach var="country" items="${countries}" varStatus="status">
-                        <option value="${status.index}">${country.description}</option>
+                        <option value="${status.index}"
+                            <c:if test="${client.addressByInvoiceAddressId.countryByCountryId.idCountry == country.idCountry}"> selected </c:if>
+                        >${country.description}</option>
                     </c:forEach>
                 </select>
                 <div class="invalid-feedback">
@@ -144,7 +146,9 @@
                     <select class="custom-select form-control" name="countryDelivery" id="countryDelivery" required>
                         <option disabled>Select one</option>
                         <c:forEach var="country" items="${countries}" varStatus="status">
-                            <option value="${status.index}">${country.description}</option>
+                            <option value="${status.index}"
+                                    <c:if test="${client.addressByDeliveryAddressId.countryByCountryId.idCountry == country.idCountry}"> selected </c:if>
+                            >${country.description}</option>
                         </c:forEach>
                     </select>
                     <div class="invalid-feedback">
