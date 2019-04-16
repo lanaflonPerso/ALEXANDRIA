@@ -3,21 +3,23 @@
 <div class="container bg-light">
 
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-7">
-            <div class="breadcrumb">
-                <a href="#" class="active">Cart overview</a>
-                <a href="#" class="active">Delivery & Payment</a>
-                <a>Order resume</a>
+        <div class="col-md-12">
+            <div class="col text-center">
+                <div class="breadcrumb">
+                    <a href="#" class="active">Cart overview</a>
+                    <a href="#" class="active">Delivery & Payment</a>
+                    <a>Order resume</a>
+                </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 
-    <div class="py-5 text-center">
-        <%--<img class="d-block mx-auto mb-4" src="<c:url value="/static/images/logo.png"/>" alt="" width="72" height="72">--%>
-        <h2>Checkout form</h2>
-    </div>
+            <div class="py-5 text-center">
+            <%--<img class="d-block mx-auto mb-4" src="<c:url value="/static/images/logo.png"/>" alt="" width="72" height="72">--%>
+                <h2>Checkout form</h2>
+            </div>
+
+<hr>
 
     <form:form method="POST" class="needs-validation" action="checkoutProcess" modelAttribute="client" novalidate="novalidate">
 
@@ -272,12 +274,13 @@
         </div>
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="FillBilling(this.checked);">Continue to checkout</button>
 
+        <hr>
     </form:form>
 
 </div>
-
+</div>
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
@@ -306,6 +309,15 @@
             document.getElementById("deliveryAddress").style.display = "block";
         }
     }
+
+    function FillBilling() {
+        if(document.getElementById("same-address").checked === true) {
+            document.getElementById("addressByDeliveryAddressId.addressLine1").value = document.getElementById("addressByInvoiceAddressId.addressLine1").value;
+            document.getElementById("addressByDeliveryAddressId.addressLine2").value = document.getElementById("addressByInvoiceAddressId.addressLine2").value;
+            document.getElementById("countryDelivery").value = document.getElementById("countryInvoice").value;
+            document.getElementById("addressByDeliveryAddressId.city").value = document.getElementById("addressByInvoiceAddressId.city").value;
+            document.getElementById("addressByDeliveryAddressId.state").value = document.getElementById("addressByInvoiceAddressId.state").value;
+            document.getElementById("addressByDeliveryAddressId.postalCode").value = document.getElementById("addressByInvoiceAddressId.postalCode").value;
+        }
+    }
 </script>
-
-
