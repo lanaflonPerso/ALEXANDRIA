@@ -129,8 +129,10 @@ public class ProductsController {
 
         for(ProductEntity product : productsList)
             for(ProductCategoryEntity productCategory : product.getProductCategoriesByIdProduct())
-                if(categories.contains(productCategory.getCategoryByCategoryId()))
+                if(categories.contains(productCategory.getCategoryByCategoryId())) {
                     products.add(product);
+                    break;
+                }
 
         return products;
     }
