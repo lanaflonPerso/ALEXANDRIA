@@ -34,10 +34,7 @@
                             </li>
                             <li>Collection : ${product.bookByIdProduct.collectionByCollectionId.description}</li>
                         </ul>
-
-
                     </p>
-
 
                     <a class="btn btn-danger" role="button" href="<c:url value="${referer}"/>">back</a>
                 </div>
