@@ -2,7 +2,6 @@ package com.alexandria.controllers;
 import com.alexandria.entities.CategoryEntity;
 import com.alexandria.entities.ProductCategoryEntity;
 import com.alexandria.entities.ProductEntity;
-import com.alexandria.managers.Cart;
 import com.alexandria.managers.ProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
