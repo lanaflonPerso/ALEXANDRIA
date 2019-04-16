@@ -25,6 +25,21 @@
 
         <%@include file="checkoutForm.jsp" %>
 
+        <div class="col-md-3 mb-3">
+            <label for="shippingMethod">Shipping method</label>
+            <select class="custom-select form-control" name="shippingMethod" id="shippingMethod" required>
+                <option disabled>Select one</option>
+                <c:forEach var="shippingMethod" items="${shippingMethods}" varStatus="status">
+                    <option value="${status.index}"
+                            <c:if test="${sessionScope.userCartSession.order.shippingMethodByShippingMethodId.idShippingMethod == shippingMethod.idShippingMethod}"> selected </c:if>
+                    >${shippingMethod.description} - <fmt:formatNumber value="${shippingMethod.charges}" type="currency"/></option>
+                </c:forEach>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid shipping method.
+            </div>
+        </div>
+
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="FillBilling(this.checked);">Continue to checkout</button>
 

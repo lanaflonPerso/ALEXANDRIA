@@ -3,18 +3,19 @@
 
 <%--pagination--%>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-2"><%--pour centrer la pagination--%></div>
+    <div class="col-md-10">
         <div class="col text-center">
             <c:url value="/products" var="prev">
                 <c:param name="page" value="${page-1}"/>
-                <c:param name="category" value="${category}"/>
+                <c:param name="categoryId" value="${category}"/>
             </c:url>
             <c:if test="${page > 1}">
                 <a href="<c:out value="${prev}" />">Previous page &nbsp;<i class="fas fa-arrow-circle-left"></i></a>
             </c:if>
             <c:url value="/products" var="next">
                 <c:param name="page" value="${page + 1}"/>
-                <c:param name="category" value="${category}"/>
+                <c:param name="categoryId" value="${category}"/>
             </c:url>
             <c:if test="${page + 1 <= maxPages}">
                 <a href="<c:out value="${next}"/>"><i class="fas fa-arrow-circle-right"></i>&nbsp; Next page</a>
@@ -86,7 +87,7 @@
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 product-description">
                             <p>
-                                ${product.bookByIdProduct.title} <br> by ${product.bookByIdProduct.authorByAuthorId.firstName} ${product.bookByIdProduct.authorByAuthorId.lastName}
+                                ${product.bookByIdProduct.title} by ${product.bookByIdProduct.authorByAuthorId.firstName} ${product.bookByIdProduct.authorByAuthorId.lastName}
 <%--                                cat : ${product.productCategoriesByIdProduct.get(0).categoryId}, parent : ${product.productCategoriesByIdProduct.get(0).categoryByCategoryId.categoryByParent.idCategory}--%>
                             </p>
                         </div>
@@ -97,11 +98,12 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-6 text-right product-add-cart">
                                     <c:if test="${product.stock >= 1}">
-                                        <c:out value="Stock: ${product.stock} "/>
+<%--                                        <c:out value="Stock: ${product.stock} "/>--%>
                                         <a href="<c:url value="/addProduct"><c:param name="idProduct" value="${product.idProduct}"/></c:url> " class="btn btn-secondary">ADD TO CART</a>
                                     </c:if>
                                     <c:if test="${product.stock < 1}">
-                                        <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>
+                                        <a class="btn btn-danger disabled" role="button" href="<c:url value="#"/>">OUT OF STOCK</a>
+<%--                                        <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>--%>
                                     </c:if>
                                 </div>
                             </div>
@@ -109,25 +111,6 @@
                     </div>
                 </div>
 </c:forEach>
-            </div>
-        </div>
-        <%--pagination--%>
-        <div class="row">
-            <div class="col-offset-5 col-sm-2">
-                <c:url value="/products" var="prev">
-                    <c:param name="categoryId" value="${category}"/>
-                    <c:param name="page" value="${page-1}"/>
-                </c:url>
-                <c:if test="${page > 1}">
-                    <a href="<c:out value="${prev}" />"><i class="fas fa-arrow-circle-left"></i></a>
-                </c:if>
-                <c:url value="/products" var="next">
-                    <c:param name="categoryId" value="${category}"/>
-                    <c:param name="page" value="${page + 1}"/>
-                </c:url>
-                <c:if test="${page + 1 <= maxPages}">
-                    <a href="<c:out value="${next}"/>"><i class="fas fa-arrow-circle-right"></i></a>
-                </c:if>
             </div>
         </div>
 </div>

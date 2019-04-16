@@ -156,6 +156,7 @@ public class CartController {
                 userCartSession.addLineItem(product); // product stock is updated in this method
             }
         }
+        mav.addObject("addP", 1);
         return mav;
     }
 

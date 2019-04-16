@@ -27,4 +27,15 @@
             document.getElementById("deliveryAddress").style.display = "block";
         }
     }
+
+    function FillBilling() {
+        if(document.getElementById("same-address").checked === true) {
+            document.getElementById("addressByDeliveryAddressId.addressLine1").value = document.getElementById("addressByInvoiceAddressId.addressLine1").value;
+            document.getElementById("addressByDeliveryAddressId.addressLine2").value = document.getElementById("addressByInvoiceAddressId.addressLine2").value;
+            document.getElementById("countryDelivery").value = document.getElementById("countryInvoice").value;
+            document.getElementById("addressByDeliveryAddressId.city").value = document.getElementById("addressByInvoiceAddressId.city").value;
+            document.getElementById("addressByDeliveryAddressId.state").value = document.getElementById("addressByInvoiceAddressId.state").value;
+            document.getElementById("addressByDeliveryAddressId.postalCode").value = document.getElementById("addressByInvoiceAddressId.postalCode").value;
+        }
+    }
 </script>

@@ -98,7 +98,8 @@ public class ProductsController {
 
     @RequestMapping(value = "/product")
     public ModelAndView productList(HttpServletRequest request,
-                                    @RequestParam("productId") Integer productId ) {
+                                    @RequestParam("productId") Integer productId,
+                                    @RequestParam(required = false) Integer addP ) {
         ModelAndView mav = new ModelAndView("product");
 
 //        seeking productId in productList
@@ -110,7 +111,9 @@ public class ProductsController {
 
 //        gets the parent page to feed the "back" link
         String referer = request.getHeader("Referer");
-
+        if (addP != null) {
+            referer = "/";
+        }
         mav.addObject("referer", referer);
         mav.addObject("product", product);
         return mav;

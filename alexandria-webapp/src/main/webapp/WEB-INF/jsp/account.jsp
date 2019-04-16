@@ -1,11 +1,7 @@
+<div class="container bg-light">
 <form:form method="POST" class="needs-validation" action="accountUpdate" modelAttribute="client" novalidate="novalidate">
 
-    <div class="col-md-4 mb-3">
-    <form:label path="idClient">numéro de client${userCartSession.client.idClient}</form:label>
-    <form:input path="idClient" class="form-control" value="${userCartSession.client.idClient}" required="required" disabled="disabled"/>
-    <div class="invalid-feedback">
-        Valid first name is required.
-    </div>
+
 <%@include file="checkoutForm.jsp" %>
 
 <div class="row">
@@ -34,7 +30,13 @@
 
     <hr class="mb-4">
     <button class="btn btn-primary btn-lg btn-block" type="submit">Save changes</button>
-<%--prevoir cancel ?--%>
+    <div class="col-md-4 mb-3" style="visibility: hidden">
+        <form:label path="idClient">numéro de client</form:label>
+        <form:input path="idClient" class="form-control" value="${userCartSession.client.idClient}" required="required" disabled="disabled"/>
+        <div class="invalid-feedback">
+            Valid first name is required.
+        </div>
+    </div>
 </form:form>
-
+</div>
 <%@include file="checkoutScript.jsp" %>
