@@ -12,7 +12,16 @@
                         <p class="text-dark" href="#">by ${product.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${product.bookByIdProduct.authorByAuthorId.lastName}</p>
                     </h6>
                     <div class="mb-1 text-muted small"><p class="text-dark" href="#">${product.bookByIdProduct.authorByAuthorId.bio}</p></div>
-                    <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/> &nbsp; <a class="btn btn-secondary" role="button" href="<c:url value="/addProduct?idProduct=${product.idProduct}"/>">ADD TO CART</a></p>
+                    <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/> &nbsp;
+                        <c:out value="Stock: ${product.stock} "/>
+                        <c:if test="${product.stock >= 1}">
+                            <a class="btn btn-secondary" role="button" href="<c:url value="/addProduct?idProduct=${product.idProduct}"/>">ADD TO CART</a>
+                        </c:if>
+                        <c:if test="${product.stock < 1}">
+                            <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>
+                        </c:if>
+                    </p>
+
                     <p class="card-text mb-auto">Additional information :
                         <ul>
                             <li>Publisher : ${product.bookByIdProduct.publisherByPublisherId.name}</li>

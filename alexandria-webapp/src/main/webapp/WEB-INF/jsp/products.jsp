@@ -73,7 +73,13 @@
                                     <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-6 text-right product-add-cart">
-                                    <a href="<c:url value="/addProduct"><c:param name="idProduct" value="${product.idProduct}"/></c:url> " class="btn btn-secondary">ADD TO CART</a>
+                                    <c:out value="Stock: ${product.stock} "/>
+                                    <c:if test="${product.stock >= 1}">
+                                        <a href="<c:url value="/addProduct"><c:param name="idProduct" value="${product.idProduct}"/></c:url> " class="btn btn-secondary">ADD TO CART</a>
+                                    </c:if>
+                                    <c:if test="${product.stock < 1}">
+                                        <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
