@@ -98,8 +98,7 @@ public class ProductsController {
 
     @RequestMapping(value = "/product")
     public ModelAndView productList(HttpServletRequest request,
-                                    @RequestParam("productId") Integer productId,
-                                    @RequestParam(required = false) Integer addP ) {
+                                    @RequestParam("productId") Integer productId) {
         ModelAndView mav = new ModelAndView("product");
 
 //        seeking productId in productList
