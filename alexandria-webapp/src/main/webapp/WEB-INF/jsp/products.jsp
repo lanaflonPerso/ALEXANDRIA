@@ -64,7 +64,8 @@
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 product-description">
                             <p>
-                                ${product.bookByIdProduct.title} by ${product.bookByIdProduct.authorByAuthorId.firstName} ${product.bookByIdProduct.authorByAuthorId.lastName}
+                                ${product.bookByIdProduct.title} <br> by ${product.bookByIdProduct.authorByAuthorId.firstName} ${product.bookByIdProduct.authorByAuthorId.lastName}
+<%--                                cat : ${product.productCategoriesByIdProduct.get(0).categoryId}, parent : ${product.productCategoriesByIdProduct.get(0).categoryByCategoryId.categoryByParent.idCategory}--%>
                             </p>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 product-cart">
@@ -86,15 +87,15 @@
         <div class="row">
             <div class="col-offset-5 col-sm-2">
                 <c:url value="/products" var="prev">
+                    <c:param name="categoryId" value="${category}"/>
                     <c:param name="page" value="${page-1}"/>
-                    <c:param name="category" value="${category}"/>
                 </c:url>
                 <c:if test="${page > 1}">
                     <a href="<c:out value="${prev}" />"><i class="fas fa-arrow-circle-left"></i></a>
                 </c:if>
                 <c:url value="/products" var="next">
+                    <c:param name="categoryId" value="${category}"/>
                     <c:param name="page" value="${page + 1}"/>
-                    <c:param name="category" value="${category}"/>
                 </c:url>
                 <c:if test="${page + 1 <= maxPages}">
                     <a href="<c:out value="${next}"/>"><i class="fas fa-arrow-circle-right"></i></a>

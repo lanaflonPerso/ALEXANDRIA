@@ -56,19 +56,23 @@ public class ProductsController {
 
     @RequestMapping(value = "/products")
     public ModelAndView productList(@RequestParam(required = false) Integer page,
-                                    @RequestParam(required = false) Integer categoryId) {
+                                    @RequestParam(required = false) Integer categoryId
+                                    ) {
         ModelAndView mav = new ModelAndView("products");
 
-        mav.addObject("categoryList", categoryList);
-        mav.addObject("categoryParent", categoryParent);
+        // information to build the category menu
+        mav.addObject("categoryList", categoryList); //list of all categories
+        mav.addObject("categoryParent", categoryParent); // list of categories with at least one child
 
         List<ProductEntity> products = null;
 
         if (categoryId == null || categoryId == 1) {
+            // if no category is selected or category 1 is selected (the top one) all the products will be displayed
             products = productsList;
         } else {
-            List<CategoryEntity> categories = categoryTree(categoryId);
-            products = productManager.findProductsFromCategoriesId(categories);
+            // else we get all the products belonging to the selected category or its children
+            List<CategoryEntity> categories = categoryTree(categoryId); // the selected category + its children
+            products = productManager.findProductsFromCategoriesId(categories); // the products to show
         }
 
         PagedListHolder<ProductEntity> pagedListHolder = new PagedListHolder<>(products);
