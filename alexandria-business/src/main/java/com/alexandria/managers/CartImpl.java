@@ -164,7 +164,8 @@ public class CartImpl implements Cart {
         Integer delta = after - before;
 
         // Update order line in database
-        orderLineDao.update(orderLine);
+        // orderLineDao.update(orderLine);
+        orderLineDao.updateQuantity(orderLine); // More efficient : do not retrieve all the eager associations
 
         // Update the stock in the model (in product and in orderline)
         product.setStock(product.getStock() - delta);

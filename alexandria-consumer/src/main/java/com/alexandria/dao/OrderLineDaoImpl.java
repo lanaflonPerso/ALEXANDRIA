@@ -8,11 +8,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-import static com.alexandria.persistence.PersistenceUtils.closeEntityManager;
-import static com.alexandria.persistence.PersistenceUtils.getEntityManager;
+import static com.alexandria.persistence.PersistenceUtils.*;
+import static com.alexandria.persistence.PersistenceUtils.commitTransaction;
 
 public class OrderLineDaoImpl extends AbstractDaoImpl<OrderLineEntity> implements OrderLineDao {
 
@@ -50,4 +51,22 @@ public class OrderLineDaoImpl extends AbstractDaoImpl<OrderLineEntity> implement
         logger.info("DB FIND_FROM_ORDERHEADER END");
         return searchOrderLinesList;
     }
+
+    @Override
+    public void updateQuantity(OrderLineEntity entity) {
+        logger.info("DB_UPDATE_QUANTITY BEGIN");
+
+        EntityManager em = beginTransaction();
+
+        Query query = em.createNamedQuery("OrderLineEntity.updateQuantity");
+        query.setParameter("productId", entity.getProductId());
+        query.setParameter("orderHeaderId", entity.getOrderHeaderId());
+        query.setParameter("quantity", entity.getQuantity());
+        query.executeUpdate();
+
+        commitTransaction();
+
+        logger.info("DB_UPDATE_QUANTITY END");
+    }
+
 }
