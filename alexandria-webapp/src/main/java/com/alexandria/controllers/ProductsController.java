@@ -111,7 +111,6 @@ public class ProductsController {
         return mav;
     }
 
-    // TODO : Workaround (disgusting!!) to update stocks in productsList which is read once at startup and so not updated with new stocks
     //  cf. comments in CartController : addProduct & remProduct
     static void updateProductStock(Integer IdProduct, Integer stock) {
 
