@@ -15,7 +15,10 @@
                     <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/> &nbsp;
                         <c:if test="${product.stock >= 1}">
 <%--                            <c:out value="Stock: ${product.stock} "/>--%>
-                        <a class="btn btn-secondary" role="button" href="<c:url value="/addProduct?idProduct=${product.idProduct}"/>">ADD TO CART</a>
+                        <a class="btn btn-secondary" role="button" href="
+                            <c:url value="/addProduct">
+                                <c:param name="idProduct" value="${product.idProduct}"/>
+                            </c:url> ">ADD TO CART</a>
                         </c:if>
                         <c:if test="${product.stock < 1}">
                         <a class="btn btn-danger disabled" role="button" href="<c:url value="#"/>">OUT OF STOCK</a>
