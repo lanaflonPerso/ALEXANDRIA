@@ -111,17 +111,6 @@ public class ProductsController {
         return mav;
     }
 
-    // TODO : Workaround (disgusting!!) to update stocks in productsList which is read once at startup and so not updated with new stocks
-    //  cf. comments in CartController : addProduct & remProduct
-    static void updateProductStock(Integer IdProduct, Integer stock) {
-
-        // Look for product from Id from productsList and set the stock
-        ProductEntity product = findProductFromId(IdProduct);
-
-        if(product != null)
-            product.setStock(stock);
-    }
-
     @Nullable
     static ProductEntity findProductFromId(Integer IdProduct) {
 
