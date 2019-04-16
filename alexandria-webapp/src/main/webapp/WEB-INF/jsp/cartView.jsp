@@ -2,18 +2,16 @@
 
 <div id="wrapper" class="container">
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-7">
-            <div class="breadcrumb">
-                <a href="#" class="active">Cart overview</a>
-                <a>Delivery & Payment</a>
-                <a>Order resume</a>
+        <div class="col-md-12">
+            <div class="col text-center">
+                <div class="breadcrumb">
+                    <a href="#" class="active">Cart overview</a>
+                    <a>Delivery & Payment</a>
+                    <a>Order resume</a>
+                </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
-    </div>
-
     <div class="row">
         <div class="col-md-8">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -24,21 +22,19 @@
 
                 <c:forEach var="orderLine" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
-<%--                        <h6 class="my-0"><img src="data:image/jpg;base64,${i.productByProductId.base64Image}" width="150" height="150"/></h6>--%>
-                        <h6 class="my-0"><a href="<c:url value="/product"><c:param name="productId" value="${orderLine.productByProductId.idProduct}"/></c:url> "><img src="data:image/jpg;base64,${orderLine.productByProductId.base64Image}" width="50" height="50"/></a></h6>
+                        <h6 class="my-0"><img src="data:image/jpg;base64,${orderLine.productByProductId.base64Image}" width="150" height="150"/></h6>
 
                         ${orderLine.productByProductId.name}<br>
                         <fmt:formatNumber value="${orderLine.productByProductId.priceExVat}" type="currency"/>
                     <br>
                         Stock : ${orderLine.productByProductId.stock}
 
-                        <label for="quantity">Quantity</label>
-                        <input id="quantity" type="number" value="${orderLine.quantity}" name="quantity" min="1" max="${orderLine.productByProductId.stock + orderLine.quantity}"
+                        <label for="input-spinner">Quantity</label>
+                        <input id="input-spinner" type="number" value="${orderLine.quantity}" name="quantity" min="1" max="${orderLine.productByProductId.stock + orderLine.quantity}"
                                onchange="updateOrderLine(${orderLine.productByProductId.idProduct}, this.value)"/>
                     <br>
-                        <span class="text-muted"><fmt:formatNumber value="${orderLine.productByProductId.priceExVat}" type="currency"/></span>
 
-                        <a href="<c:url value="/remProduct"><c:param name="idProduct" value="${orderLine.productByProductId.idProduct}"/></c:url> "><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="<c:url value="/remProduct?idProduct=${orderLine.productByProductId.idProduct}"/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </li>
                 </c:forEach>
             </ul>
@@ -52,10 +48,10 @@
             </h4>
             <ul class="list-group mb-3">
 
-                <c:forEach var="i" items="${userCartSession.orderLines}">
+                <c:forEach var="orderLine" items="${userCartSession.orderLines}">
                     <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <small class="text-muted">${i.productByProductId.name}</small>
-                        <span class="text-muted"><fmt:formatNumber value="${i.quantity * i.productByProductId.priceExVat}" type="currency"/></span>
+                        <small class="text-muted">${orderLine.productByProductId.name} &nbsp; x ${orderLine.quantity}</small>
+                        <span class="text-muted"><fmt:formatNumber value="${orderLine.quantity * orderLine.productByProductId.priceExVat}" type="currency"/></span>
                     </li>
                 </c:forEach>
 
@@ -65,7 +61,7 @@
                 </li>
 
             </ul>
-<div class="row">
+
             <form action="checkout" method="get">
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
@@ -76,7 +72,6 @@
 </div>
         </div>
     </div>
-</div>
 
 <script>
     function updateOrderLine(idProduct, quantity) {
@@ -84,3 +79,7 @@
     }
 </script>
 
+<script src="<c:url value="/static/js/bootstrap-input-spinner.js"/>"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
