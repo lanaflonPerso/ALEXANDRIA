@@ -1,5 +1,6 @@
 package com.alexandria.controllers;
 import com.alexandria.entities.CategoryEntity;
+import com.alexandria.entities.ProductCategoryEntity;
 import com.alexandria.entities.ProductEntity;
 import com.alexandria.managers.Cart;
 import com.alexandria.managers.ProductManager;
@@ -120,6 +121,18 @@ public class ProductsController {
                 return productItem;
         }
         return null;
+    }
+
+    private List<ProductEntity> findProductsFromCategoriesId(List<CategoryEntity> categories) {
+
+        List<ProductEntity> products = new ArrayList<>();
+
+        for(ProductEntity product : productsList)
+            for(ProductCategoryEntity productCategory : product.getProductCategoriesByIdProduct())
+                if(categories.contains(productCategory.getCategoryByCategoryId()))
+                    products.add(product);
+
+        return products;
     }
 }
 
