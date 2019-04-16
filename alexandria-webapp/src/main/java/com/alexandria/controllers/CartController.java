@@ -149,12 +149,15 @@ public class CartController {
         if (idProduct  > 0) {
             ProductEntity product = productManager.findProductFromId(idProduct);
 
-            // TODO : Check the available product stock in the jsp (product & products)
-            //  but since the products (all categories) are read once at startup their stocks are not updated
-            //  whereas the products(specifics categories) are read from database when selected and so are updated with the actual stocks.
             if (product != null && product.getStock() >= 1) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.addLineItem(product);
+
+                // TODO : The available product stock is checked in the jsp (product & products)
+                //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
+                //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
+                //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
+                ProductsController.updateProductStock(idProduct, product.getStock());
             }
         }
         return mav;
@@ -169,6 +172,13 @@ public class CartController {
             if( product != null ) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.removeLineItem(product);
+
+                // TODO : The available product stock is checked in the jsp (product & products)
+                //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
+                //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
+                //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
+                ProductsController.updateProductStock(idProduct, product.getStock());
+
             } else {
                 logger.warn("Product not found from id " + idProduct);
             }

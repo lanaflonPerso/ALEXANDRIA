@@ -26,7 +26,7 @@ public class ProductsController {
 
     List<CategoryEntity> categoryList;
     Set<CategoryEntity> categoryParent;
-    List<ProductEntity> productsList;
+    static List<ProductEntity> productsList;
 
     @PostConstruct
     public void init() {
@@ -108,6 +108,16 @@ public class ProductsController {
         mav.addObject("referer", referer);
         mav.addObject("product", product);
         return mav;
+    }
+
+    static void updateProductStock(Integer IdProduct, Integer stock) {
+        // Look for product by Id from productsList and set the stock
+        for(ProductEntity productItem : productsList) {
+            if(productItem.getIdProduct() == IdProduct) {
+                productItem.setStock(stock);
+                break;
+            }
+        }
     }
 }
 
