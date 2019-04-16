@@ -44,3 +44,5 @@
                 <img class="card-img-right flex-auto d-none d-lg-block" style="width: 150px; height: 150px; margin-left: 10px;" src="data:image/jpg;base64,${product.base64Image}" alt="${product.name}"/>
             </div>
         </div>
+    </div>
+</div>
