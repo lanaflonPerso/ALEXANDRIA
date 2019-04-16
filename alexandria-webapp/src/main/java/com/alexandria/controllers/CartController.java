@@ -64,21 +64,17 @@ public class CartController {
                                        @RequestParam("idProduct") Integer idProduct,
                                        @RequestParam("quantity") Integer quantity) {
 
-        //ProductEntity product = productManager.findProductFromId(idProduct);
-        ProductEntity product = ProductsController.findProductFromId(idProduct);  // More efficient : no access in database, use static products list
+        ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
+
+        if(product == null) logger.error("No product found from id : idProduct");
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
-        userCartSession.updateLineItem(product, quantity);
+        userCartSession.updateLineItem(product, quantity); // product stock is updated in this method
 
         ModelAndView mav = new ModelAndView("cartView");
 
         mav.addObject("userCartSession", userCartSession);
-
-        //  The available products' stocks are checked in the jsp (product & products)
-        //  but since the products are read once at startup (ProductsController) their stocks are not updated
-        //  -> Use a static method to update the stock in ProductsController
-        ProductsController.updateProductStock(idProduct, product.getStock());
 
         return mav;
     }
@@ -153,17 +149,11 @@ public class CartController {
         ModelAndView mav = new ModelAndView("redirect:/" + referer);
 
         if (idProduct  > 0) {
-            //ProductEntity product = productManager.findProductFromId(idProduct);
-            ProductEntity product = ProductsController.findProductFromId(idProduct);  // More efficient : no access in database, use static products list
+            ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
 
             if (product != null && product.getStock() >= 1) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-                userCartSession.addLineItem(product);
-
-                //  The available products' stocks are checked in the jsp (product & products)
-                //  but since the products are read once at startup (ProductsController) their stocks are not updated
-                //  -> Use a static method to update the stock in ProductsController
-                ProductsController.updateProductStock(idProduct, product.getStock());
+                userCartSession.addLineItem(product); // product stock is updated in this method
             }
         }
         return mav;
@@ -174,17 +164,11 @@ public class CartController {
                                    @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         if(idProduct > 0) {
-            // ProductEntity product = productManager.findProductFromId(idProduct);
-            ProductEntity product = ProductsController.findProductFromId(idProduct); // More efficient : no access in database, use static products list
+            ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
 
             if( product != null ) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-                userCartSession.removeLineItem(product);
-
-                //  The available products' stocks are checked in the jsp (product & products)
-                //  but since the products are read once at startup (ProductsController) their stocks are not updated
-                //  -> Use a static method to update the stock in ProductsController
-                ProductsController.updateProductStock(idProduct, product.getStock());
+                userCartSession.removeLineItem(product); // product stock is updated in this method
 
             } else {
                 logger.warn("Product not found from id " + idProduct);
