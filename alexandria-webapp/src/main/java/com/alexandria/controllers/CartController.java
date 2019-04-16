@@ -153,7 +153,8 @@ public class CartController {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.addLineItem(product);
 
-                // TODO : The available product stock is checked in the jsp (product & products)
+                // TODO : Workaround (disgusting!!) to update stocks in productsList (ProductsController) which is read once at startup and so not updated with new stocks
+                //  The available products' stocks are checked in the jsp (product & products)
                 //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
                 //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
                 //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
@@ -174,7 +175,8 @@ public class CartController {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.removeLineItem(product);
 
-                // TODO : The available product stock is checked in the jsp (product & products)
+                // TODO : Workaround (disgusting!!) to update stocks in productsList (ProductsController) which is read once at startup and so not updated with new stocks
+                //  The available products' stocks are checked in the jsp (product & products)
                 //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
                 //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
                 //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
