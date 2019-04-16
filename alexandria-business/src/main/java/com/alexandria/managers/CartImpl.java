@@ -134,7 +134,8 @@ public class CartImpl implements Cart {
             orderLine.getProductByProductId().setStock(product.getStock());
 
             // Update the stock in database
-            productDao.update(product);
+            // productDao.update(product);
+            productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
 
         } else {
             updateLineItem(orderLine, product, (1 + orderLine.getQuantity())); // If order line exists just increase quantity by 1
@@ -170,7 +171,8 @@ public class CartImpl implements Cart {
         orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
-        productDao.update(product);
+        // productDao.update(product);
+        productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
     }
 
     @Nullable

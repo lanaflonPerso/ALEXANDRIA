@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -53,4 +54,22 @@ public class ProductDaoImpl extends AbstractDaoImpl<ProductEntity> implements Pr
 
         return searchProductsList;
     }
+
+    @Override
+    public void updateStock(ProductEntity entity) {
+
+        logger.info("DB_UPDATE_STOCK BEGIN");
+
+        EntityManager em = beginTransaction();
+
+        Query query = em.createNamedQuery("ProductEntity.updateStock");
+        query.setParameter("idProduct", entity.getIdProduct());
+        query.setParameter("stock", entity.getStock());
+        query.executeUpdate();
+
+        commitTransaction();
+
+        logger.info("DB_UPDATE_STOCK END");
+    }
+
 }
