@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -113,13 +114,23 @@ public class ProductsController {
     // TODO : Workaround (disgusting!!) to update stocks in productsList which is read once at startup and so not updated with new stocks
     //  cf. comments in CartController : addProduct & remProduct
     static void updateProductStock(Integer IdProduct, Integer stock) {
-        // Look for product by Id from productsList and set the stock
+
+        // Look for product from Id from productsList and set the stock
+        ProductEntity product = findProductFromId(IdProduct);
+
+        if(product != null)
+            product.setStock(stock);
+    }
+
+    @Nullable
+    static ProductEntity findProductFromId(Integer IdProduct) {
+
+        // Look for product by Id from local productsList
         for(ProductEntity productItem : productsList) {
-            if(productItem.getIdProduct() == IdProduct) {
-                productItem.setStock(stock);
-                break;
-            }
+            if(productItem.getIdProduct() == IdProduct)
+                return productItem;
         }
+        return null;
     }
 }
 

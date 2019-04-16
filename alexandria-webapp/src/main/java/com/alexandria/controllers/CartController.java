@@ -64,7 +64,9 @@ public class CartController {
                                        @RequestParam("idProduct") Integer idProduct,
                                        @RequestParam("quantity") Integer quantity) {
 
-        ProductEntity product = productManager.findProductFromId(idProduct);
+        //ProductEntity product = productManager.findProductFromId(idProduct);
+
+        ProductEntity product = ProductsController.findProductFromId(idProduct);
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
@@ -154,7 +156,9 @@ public class CartController {
         ModelAndView mav = new ModelAndView("redirect:/" + referer);
 
         if (idProduct  > 0) {
-            ProductEntity product = productManager.findProductFromId(idProduct);
+            //ProductEntity product = productManager.findProductFromId(idProduct);
+
+            ProductEntity product = ProductsController.findProductFromId(idProduct);
 
             if (product != null && product.getStock() >= 1) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
@@ -176,7 +180,9 @@ public class CartController {
                                    @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         if(idProduct > 0) {
-            ProductEntity product = productManager.findProductFromId(idProduct);
+            // ProductEntity product = productManager.findProductFromId(idProduct);
+
+            ProductEntity product = ProductsController.findProductFromId(idProduct);
 
             if( product != null ) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
