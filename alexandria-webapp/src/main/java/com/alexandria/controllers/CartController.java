@@ -1,5 +1,6 @@
 package com.alexandria.controllers;
 
+import com.alexandria.dao.DAOFactory;
 import com.alexandria.entities.*;
 import com.alexandria.managers.Cart;
 import com.alexandria.managers.CartImpl;
@@ -36,6 +37,7 @@ public class CartController {
     List<TitleEntity> titles;
     List<PaymentMethodEntity> paymentMethods;
     List<CountryEntity> countries;
+    List<ShippingMethodEntity> shippingMethods;
 
     @PostConstruct
     public void init() {
@@ -43,6 +45,7 @@ public class CartController {
         titles = clientManager.getTitlesList();
         paymentMethods = clientManager.getPaymentMethodsList();
         countries = clientManager.getCountriesList();
+        shippingMethods = new DAOFactory().getShippingMethodDao().findAll(); // TODO : should use a manager that does not exist yet
     }
 
     @RequestMapping(value = "/cartView")
@@ -61,11 +64,13 @@ public class CartController {
                                        @RequestParam("idProduct") Integer idProduct,
                                        @RequestParam("quantity") Integer quantity) {
 
-        ProductEntity product = productManager.findProductFromId(idProduct);
+        ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
+
+        if(product == null) logger.error("No product found from id : idProduct");
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
-        userCartSession.updateLineItem(product, quantity);
+        userCartSession.updateLineItem(product, quantity); // product stock is updated in this method
 
         ModelAndView mav = new ModelAndView("cartView");
 
@@ -87,6 +92,7 @@ public class CartController {
         mav.addObject("titles", titles);
         mav.addObject("paymentMethods", paymentMethods);
         mav.addObject("countries", countries);
+        mav.addObject("shippingMethods", shippingMethods);
 
         return mav;
     }
@@ -98,6 +104,7 @@ public class CartController {
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
                                         @RequestParam("countryInvoice") Integer iCountryInvoice,
                                         @RequestParam("countryDelivery") Integer iCountryDelivery,
+                                        @RequestParam("shippingMethod") Integer iShippingMethod,
                                         SessionStatus status) {
 
         // Set values from combobox
@@ -112,6 +119,9 @@ public class CartController {
         /* Set order placed date that indicate the order is no more active */
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
         userCartSession.setDatePlaced( new java.sql.Date(System.currentTimeMillis()) );
+
+        // Set shipping method from combobox
+        userCartSession.setShippingMethod(shippingMethods.get(iShippingMethod));
 
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
@@ -130,15 +140,36 @@ public class CartController {
         return mav;
     }
 
+    @RequestMapping({"/addProduct"})
+    public ModelAndView addProduct(HttpServletRequest request,
+                                   @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
+
+        String referer = request.getHeader("Referer");
+        referer = referer.substring(referer.lastIndexOf('/') + 1);
+        ModelAndView mav = new ModelAndView("redirect:/" + referer);
+
+        if (idProduct  > 0) {
+            ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
+
+            if (product != null && product.getStock() >= 1) {
+                Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
+                userCartSession.addLineItem(product); // product stock is updated in this method
+            }
+        }
+        return mav;
+    }
+
     @RequestMapping({"/remProduct"})
-    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
+    public ModelAndView remProduct(HttpServletRequest request,
+                                   @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         if(idProduct > 0) {
-            ProductEntity product = productManager.findProductFromId(idProduct);
+            ProductEntity product = ProductsController.findProductFromId(idProduct); // No access in database, static products list is used
 
             if( product != null ) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
-                userCartSession.removeLineItem(product);
+                userCartSession.removeLineItem(product); // product stock is updated in this method
+
             } else {
                 logger.warn("Product not found from id " + idProduct);
             }

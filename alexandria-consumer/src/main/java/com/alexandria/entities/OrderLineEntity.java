@@ -11,6 +11,10 @@ import java.util.Objects;
         @NamedQuery(
                 name = "OrderLineEntity.findFromOrderHeader",
                 query = "from OrderLineEntity as o where o.orderHeaderByOrderHeaderId = :orderHeader"
+        ),
+        @NamedQuery(
+                name = "OrderLineEntity.updateQuantity",
+                query = "update OrderLineEntity as o set o.quantity = :quantity where o.productId = :productId and o.orderHeaderId = :orderHeaderId"
         )
 })
 @IdClass(OrderLineEntityPK.class)

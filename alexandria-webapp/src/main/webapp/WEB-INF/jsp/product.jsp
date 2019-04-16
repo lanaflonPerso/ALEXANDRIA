@@ -12,7 +12,16 @@
                         <p class="text-dark" href="#">by ${product.bookByIdProduct.authorByAuthorId.firstName} &nbsp; ${product.bookByIdProduct.authorByAuthorId.lastName}</p>
                     </h6>
                     <div class="mb-1 text-muted small"><p class="text-dark" href="#">${product.bookByIdProduct.authorByAuthorId.bio}</p></div>
-                    <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/> &nbsp; <a class="btn btn-secondary" role="button" href="<c:url value="/addProduct?code=${product.idProduct}"/>">ADD TO CART</a></p>
+                    <p><fmt:formatNumber value="${product.priceExVat}" type="currency"/> &nbsp;
+                        <c:if test="${product.stock >= 1}">
+                            <c:out value="Stock: ${product.stock} "/>
+                        <a class="btn btn-secondary" role="button" href="<c:url value="/addProduct?idProduct=${product.idProduct}"/>">ADD TO CART</a>
+                        </c:if>
+                        <c:if test="${product.stock < 1}">
+                            <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>
+                        </c:if>
+                    </p>
+
                     <p class="card-text mb-auto">Additional information :
                         <ul>
                             <li>Publisher : ${product.bookByIdProduct.publisherByPublisherId.name}</li>
@@ -25,13 +34,12 @@
                             </li>
                             <li>Collection : ${product.bookByIdProduct.collectionByCollectionId.description}</li>
                         </ul>
-
-
                     </p>
-
 
                     <a class="btn btn-danger" role="button" href="<c:url value="${referer}"/>">back</a>
                 </div>
                 <img class="card-img-right flex-auto d-none d-lg-block" style="width: 150px; height: 150px; margin-left: 10px;" src="data:image/jpg;base64,${product.base64Image}" alt="${product.name}"/>
             </div>
         </div>
+    </div>
+</div>

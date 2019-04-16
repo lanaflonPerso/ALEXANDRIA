@@ -134,7 +134,8 @@ public class CartImpl implements Cart {
             orderLine.getProductByProductId().setStock(product.getStock());
 
             // Update the stock in database
-            productDao.update(product);
+            // productDao.update(product);
+            productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
 
         } else {
             updateLineItem(orderLine, product, (1 + orderLine.getQuantity())); // If order line exists just increase quantity by 1
@@ -163,14 +164,16 @@ public class CartImpl implements Cart {
         Integer delta = after - before;
 
         // Update order line in database
-        orderLineDao.update(orderLine);
+        // orderLineDao.update(orderLine);
+        orderLineDao.updateQuantity(orderLine); // More efficient : do not retrieve all the eager associations
 
         // Update the stock in the model (in product and in orderline)
         product.setStock(product.getStock() - delta);
         orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
-        productDao.update(product);
+        // productDao.update(product);
+        productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
     }
 
     @Nullable
@@ -200,7 +203,8 @@ public class CartImpl implements Cart {
         orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
-        productDao.update(product);
+        // productDao.update(product);
+        productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
 
         // Remove order line in database
         orderLineDao.remove(orderLine);
@@ -212,16 +216,16 @@ public class CartImpl implements Cart {
     @Override
     public void clearOrderLines() {
 
-
         List<OrderLineEntity> orderLines = order.getOrderLinesByIdOrderHeader();
 
+        // As we remove the first item of the list orderlines at each iteration of the loop,
+        // the size of this list also decreases by 1 at each iteration
+        // so that this loop ends when the size is equal to zero.
         for( int i = 0; i < orderLines.size(); i++ ) {
             OrderLineEntity orderLine = orderLines.get( i );
             removeLineItem(orderLine.getProductByProductId());
             i--;
         }
-
-
     }
 
     @Override

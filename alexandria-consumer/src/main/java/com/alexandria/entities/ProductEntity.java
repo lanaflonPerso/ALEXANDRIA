@@ -25,6 +25,10 @@ import java.util.*;
         @NamedQuery(
                 name = "ProductEntity.findAllFromCategoryId",
                 query = "select p.productByProductId from ProductCategoryEntity as p where p.categoryByCategoryId in ( :categories )"
+        ),
+        @NamedQuery(
+                name = "ProductEntity.updateStock",
+                query = "update ProductEntity as p set p.stock = :stock where p.idProduct = :idProduct"
         )
 })
 public class ProductEntity extends AbstractModelObject implements Serializable {
