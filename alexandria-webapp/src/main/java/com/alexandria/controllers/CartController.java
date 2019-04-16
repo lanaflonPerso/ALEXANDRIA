@@ -65,8 +65,7 @@ public class CartController {
                                        @RequestParam("quantity") Integer quantity) {
 
         //ProductEntity product = productManager.findProductFromId(idProduct);
-
-        ProductEntity product = ProductsController.findProductFromId(idProduct);
+        ProductEntity product = ProductsController.findProductFromId(idProduct);  // More efficient : no access in database, use static products list
 
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
@@ -76,11 +75,9 @@ public class CartController {
 
         mav.addObject("userCartSession", userCartSession);
 
-        // TODO : Workaround (disgusting!!) to update stocks in productsList (ProductsController) which is read once at startup and so not updated with new stocks
         //  The available products' stocks are checked in the jsp (product & products)
-        //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
-        //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
-        //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
+        //  but since the products are read once at startup (ProductsController) their stocks are not updated
+        //  -> Use a static method to update the stock in ProductsController
         ProductsController.updateProductStock(idProduct, product.getStock());
 
         return mav;
@@ -157,18 +154,15 @@ public class CartController {
 
         if (idProduct  > 0) {
             //ProductEntity product = productManager.findProductFromId(idProduct);
-
-            ProductEntity product = ProductsController.findProductFromId(idProduct);
+            ProductEntity product = ProductsController.findProductFromId(idProduct);  // More efficient : no access in database, use static products list
 
             if (product != null && product.getStock() >= 1) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.addLineItem(product);
 
-                // TODO : Workaround (disgusting!!) to update stocks in productsList (ProductsController) which is read once at startup and so not updated with new stocks
                 //  The available products' stocks are checked in the jsp (product & products)
-                //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
-                //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
-                //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
+                //  but since the products are read once at startup (ProductsController) their stocks are not updated
+                //  -> Use a static method to update the stock in ProductsController
                 ProductsController.updateProductStock(idProduct, product.getStock());
             }
         }
@@ -181,18 +175,15 @@ public class CartController {
 
         if(idProduct > 0) {
             // ProductEntity product = productManager.findProductFromId(idProduct);
-
-            ProductEntity product = ProductsController.findProductFromId(idProduct);
+            ProductEntity product = ProductsController.findProductFromId(idProduct); // More efficient : no access in database, use static products list
 
             if( product != null ) {
                 Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
                 userCartSession.removeLineItem(product);
 
-                // TODO : Workaround (disgusting!!) to update stocks in productsList (ProductsController) which is read once at startup and so not updated with new stocks
                 //  The available products' stocks are checked in the jsp (product & products)
-                //  but since the products (all categories) are read once at startup (ProductsController) their stocks are not updated
-                //  -> Use a static method to update the stock in ProductsController --> Disgusting !!!
-                //  Rmk : the products (specifics categories) are read from database when selected and so are updated with the actual stocks.
+                //  but since the products are read once at startup (ProductsController) their stocks are not updated
+                //  -> Use a static method to update the stock in ProductsController
                 ProductsController.updateProductStock(idProduct, product.getStock());
 
             } else {
