@@ -111,9 +111,7 @@ public class ProductsController {
 
 //        gets the parent page to feed the "back" link
         String referer = request.getHeader("Referer");
-        if (addP != null) {
-            referer = "/";
-        }
+
         mav.addObject("referer", referer);
         mav.addObject("product", product);
         return mav;
