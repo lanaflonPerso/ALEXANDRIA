@@ -69,7 +69,8 @@ public class ProductsController {
             products = productsList;
         } else {
             List<CategoryEntity> categories = categoryTree(categoryId);
-            products = productManager.findProductsFromCategoriesId(categories);
+            //products = productManager.findProductsFromCategoriesId(categories);
+            products = findProductsFromCategoriesId(categories); // More efficient : no database access
         }
 
         PagedListHolder<ProductEntity> pagedListHolder = new PagedListHolder<>(products);
