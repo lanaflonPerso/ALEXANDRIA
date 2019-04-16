@@ -191,6 +191,23 @@
             <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
         </div>
 
+        <br>
+
+        <div class="col-md-3 mb-3">
+            <label for="shippingMethod">Shipping method</label>
+            <select class="custom-select form-control" name="shippingMethod" id="shippingMethod" required>
+                <option disabled>Select one</option>
+                <c:forEach var="shippingMethod" items="${shippingMethods}" varStatus="status">
+                    <option value="${status.index}"
+                            <c:if test="${sessionScope.userCartSession.order.shippingMethodByShippingMethodId.idShippingMethod == shippingMethod.idShippingMethod}"> selected </c:if>
+                    >${shippingMethod.description} - <fmt:formatNumber value="${shippingMethod.charges}" type="currency"/></option>
+                </c:forEach>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid country.
+            </div>
+        </div>
+
         <hr class="mb-4">
 
         <h4 class="mb-3">Payment</h4>

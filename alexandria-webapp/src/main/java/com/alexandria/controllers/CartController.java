@@ -1,5 +1,6 @@
 package com.alexandria.controllers;
 
+import com.alexandria.dao.DAOFactory;
 import com.alexandria.entities.*;
 import com.alexandria.managers.Cart;
 import com.alexandria.managers.CartImpl;
@@ -36,6 +37,7 @@ public class CartController {
     List<TitleEntity> titles;
     List<PaymentMethodEntity> paymentMethods;
     List<CountryEntity> countries;
+    List<ShippingMethodEntity> shippingMethods;
 
     @PostConstruct
     public void init() {
@@ -43,6 +45,7 @@ public class CartController {
         titles = clientManager.getTitlesList();
         paymentMethods = clientManager.getPaymentMethodsList();
         countries = clientManager.getCountriesList();
+        shippingMethods = new DAOFactory().getShippingMethodDao().findAll(); // TODO : should use a manager that does not exist yet
     }
 
     @RequestMapping(value = "/cartView")
@@ -87,6 +90,7 @@ public class CartController {
         mav.addObject("titles", titles);
         mav.addObject("paymentMethods", paymentMethods);
         mav.addObject("countries", countries);
+        mav.addObject("shippingMethods", shippingMethods);
 
         return mav;
     }
@@ -98,6 +102,7 @@ public class CartController {
                                         @RequestParam("paymentMethod") Integer iPaymentMethod,
                                         @RequestParam("countryInvoice") Integer iCountryInvoice,
                                         @RequestParam("countryDelivery") Integer iCountryDelivery,
+                                        @RequestParam("shippingMethod") Integer iShippingMethod,
                                         SessionStatus status) {
 
         // Set values from combobox
@@ -112,6 +117,9 @@ public class CartController {
         /* Set order placed date that indicate the order is no more active */
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
         userCartSession.setDatePlaced( new java.sql.Date(System.currentTimeMillis()) );
+
+        // Set shipping method from combobox
+        userCartSession.setShippingMethod(shippingMethods.get(iShippingMethod));
 
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));

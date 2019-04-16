@@ -101,7 +101,7 @@
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line text-center"><strong>Shipping</strong></td>
-                                <td class="no-line text-right"><fmt:formatNumber value="${userCartSession.shippingTax}" type="currency"/></td>
+                                <td class="no-line text-right">(${userCartSession.order.shippingMethodByShippingMethodId.description}) <fmt:formatNumber value="${userCartSession.shippingTax}" type="currency"/></td>
 
                             </tr>
                             <tr>
