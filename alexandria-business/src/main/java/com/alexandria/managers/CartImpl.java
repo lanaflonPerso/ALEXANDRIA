@@ -202,7 +202,8 @@ public class CartImpl implements Cart {
         orderLine.getProductByProductId().setStock(product.getStock());
 
         // Update the stock in database
-        productDao.update(product);
+        // productDao.update(product);
+        productDao.updateStock(product); // More efficient : do not retrieve all the eager associations
 
         // Remove order line in database
         orderLineDao.remove(orderLine);
