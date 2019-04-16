@@ -1,23 +1,29 @@
 package com.alexandria.controllers;
 
-import com.alexandria.entities.ClientEntity;
-import com.alexandria.entities.OrderHeaderEntity;
-import com.alexandria.entities.OrderLineEntity;
-import com.alexandria.managers.Cart;
+import com.alexandria.entities.*;
 import com.alexandria.managers.AccountManager;
+import com.alexandria.managers.Cart;
+import com.alexandria.managers.CartImpl;
 import com.alexandria.managers.ClientManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
 @Controller
 public class AccountController {
+
+    private static final Logger logger = LogManager.getLogger(ProductsController.class);
 
     @Autowired
     AccountManager orderManager;
@@ -27,17 +33,30 @@ public class AccountController {
 
     List<OrderHeaderEntity> clientOrders;
 
+    // Combobox
+    List<TitleEntity> titles;
+    List<PaymentMethodEntity> paymentMethods;
+    List<CountryEntity> countries;
+
     @PostConstruct
     public void init() {
 
+        titles = clientManager.getTitlesList();
+        paymentMethods = clientManager.getPaymentMethodsList();
+        countries = clientManager.getCountriesList();
     }
 
     @RequestMapping(value = "/account")
-    public ModelAndView showAccount(HttpServletRequest request) {
+    public ModelAndView account(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("account");
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
-        mav.addObject("userCartSession", userCartSession);
+        mav.addObject("client", userCartSession.getClient());
+
+        mav.addObject("titles", titles);
+        mav.addObject("paymentMethods", paymentMethods);
+        mav.addObject("countries", countries);
+
         return mav;
     }
 
@@ -48,7 +67,6 @@ public class AccountController {
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
 
         clientOrders = orderManager.getOrdersList(userCartSession.getClient());
-
         mav.addObject("orders", clientOrders);
 
         return mav;
@@ -63,6 +81,36 @@ public class AccountController {
 
         List<OrderLineEntity> orderLines = orderManager.getOrderLines(clientOrder);
         mav.addObject("orderLines", orderLines);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/accountUpdate", method = RequestMethod.POST)
+    public ModelAndView accountUpdate(HttpServletRequest request, HttpServletResponse response,
+                                      @ModelAttribute("client") ClientEntity client, // From session (@SessionAttributes("client"))
+                                      @RequestParam("gender") Integer iTitle,
+                                      @RequestParam("paymentMethod") Integer iPaymentMethod,
+                                      @RequestParam("countryInvoice") Integer iCountryInvoice,
+                                      @RequestParam("countryDelivery") Integer iCountryDelivery
+    ) {
+
+        // Set values from combobox
+        client.setTitleByTitleId(titles.get(iTitle));
+        client.setPaymentMethodByPaymentMethodId(paymentMethods.get(iPaymentMethod));
+        client.getAddressByInvoiceAddressId().setCountryByCountryId(countries.get(iCountryInvoice));
+        client.getAddressByDeliveryAddressId().setCountryByCountryId(countries.get(iCountryDelivery));
+
+        // Update client in database
+        clientManager.updateClient(client);
+
+        // Create a new user cart session that replaces the previous one
+        request.getSession().setAttribute("userSession", client);
+        request.getSession().setAttribute("userCartSession", new CartImpl(client));
+
+
+        // Set model & view
+        ModelAndView mav = new ModelAndView("redirect:/products");
+
 
         return mav;
     }
