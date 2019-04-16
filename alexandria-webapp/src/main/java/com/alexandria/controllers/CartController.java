@@ -139,8 +139,8 @@ public class CartController {
     }
 
     @RequestMapping({"/addProduct"})
-    public ModelAndView listProductHandler(HttpServletRequest request,
-                                           @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
+    public ModelAndView addProduct(HttpServletRequest request,
+                                   @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         String referer = request.getHeader("Referer");
         referer = referer.substring(referer.lastIndexOf('/') + 1);
@@ -164,7 +164,8 @@ public class CartController {
     }
 
     @RequestMapping({"/remProduct"})
-    public ModelAndView remProduct(HttpServletRequest request, @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
+    public ModelAndView remProduct(HttpServletRequest request,
+                                   @RequestParam(value = "idProduct", defaultValue = "") Integer idProduct) {
 
         if(idProduct > 0) {
             ProductEntity product = productManager.findProductFromId(idProduct);
