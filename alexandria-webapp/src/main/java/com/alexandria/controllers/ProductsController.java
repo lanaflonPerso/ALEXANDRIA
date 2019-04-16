@@ -51,7 +51,7 @@ public class ProductsController {
         }
             cateTree.add(category); // adds the selected category in cateTree
             return cateTree;
-        }
+    }
 
 
     @RequestMapping(value = "/products")
