@@ -103,7 +103,7 @@ public class AccountController {
         // Update client in database
         clientManager.updateClient(client);
 
-        // Create a new user cart session that replaces the previous one
+        //Update client in session
         request.getSession().setAttribute("userSession", client);
 
         //Mark Session Complete
