@@ -1,4 +1,6 @@
 
+<link type="text/css" rel="stylesheet" href="<c:url value="/static/css/cart.css"/>"/>
+
 <div class="container bg-light">
 
     <div class="row">
@@ -51,4 +53,4 @@
 
 </div>
 
-<%@include file="_include/checkoutScript.jspf" %>
+<script src="<c:url value="/static/js/checkout.js"/>"></script>

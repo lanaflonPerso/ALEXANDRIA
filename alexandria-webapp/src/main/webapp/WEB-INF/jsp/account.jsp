@@ -1,3 +1,4 @@
+
 <div class="container bg-light">
     <form:form method="POST" class="needs-validation" action="accountUpdate" modelAttribute="client" novalidate="novalidate">
 
@@ -48,4 +49,4 @@
     </form:form>
 </div>
 
-<%@include file="_include/checkoutScript.jspf" %>
+<script src="<c:url value="/static/js/checkout.js"/>"></script>
