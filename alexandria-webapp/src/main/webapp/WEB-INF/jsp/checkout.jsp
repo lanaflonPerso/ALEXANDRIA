@@ -1,4 +1,5 @@
 
+<!-- For "le fil d'Ariane" -->
 <link type="text/css" rel="stylesheet" href="<c:url value="/static/css/cart.css"/>"/>
 
 <div class="container bg-light">
