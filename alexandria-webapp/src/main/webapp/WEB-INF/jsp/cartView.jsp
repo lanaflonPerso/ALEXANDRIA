@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
     &nbsp;
-            <form action="emptycart" method="get">
+            <form action="emptyCart" method="get">
                 <button type="submit" class="btn btn-danger">Empty cart</button>
             </form>
 </div>

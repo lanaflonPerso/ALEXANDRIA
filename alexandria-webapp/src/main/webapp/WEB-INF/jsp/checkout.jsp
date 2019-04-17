@@ -24,7 +24,8 @@
     <form:form method="POST" class="needs-validation" action="checkoutProcess" modelAttribute="client" novalidate="novalidate">
 
         <%@include file="checkoutForm.jsp" %>
-
+        <hr>
+        <div class="row">
         <div class="col-md-3 mb-3">
             <label for="shippingMethod">Shipping method</label>
             <select class="custom-select form-control" name="shippingMethod" id="shippingMethod" required>
@@ -39,6 +40,8 @@
                 Please select a valid shipping method.
             </div>
         </div>
+        </div>
+
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="FillBilling(this.checked);">Continue to checkout</button>

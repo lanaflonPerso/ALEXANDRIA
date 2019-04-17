@@ -9,10 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +19,7 @@ import java.util.List;
 
 
 @Controller
+@SessionAttributes("client")
 public class AccountController {
 
     private static final Logger logger = LogManager.getLogger(ProductsController.class);
@@ -91,8 +90,9 @@ public class AccountController {
                                       @RequestParam("gender") Integer iTitle,
                                       @RequestParam("paymentMethod") Integer iPaymentMethod,
                                       @RequestParam("countryInvoice") Integer iCountryInvoice,
-                                      @RequestParam("countryDelivery") Integer iCountryDelivery
-    ) {
+                                      @RequestParam("countryDelivery") Integer iCountryDelivery,
+                                      SessionStatus status
+                                        ) {
 
         // Set values from combobox
         client.setTitleByTitleId(titles.get(iTitle));
@@ -105,8 +105,9 @@ public class AccountController {
 
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute("userSession", client);
-        request.getSession().setAttribute("userCartSession", new CartImpl(client));
 
+        //Mark Session Complete
+        status.setComplete();
 
         // Set model & view
         ModelAndView mav = new ModelAndView("redirect:/products");

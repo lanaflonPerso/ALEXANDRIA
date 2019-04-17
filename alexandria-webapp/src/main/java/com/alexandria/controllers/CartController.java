@@ -123,6 +123,9 @@ public class CartController {
         // Set shipping method from combobox
         userCartSession.setShippingMethod(shippingMethods.get(iShippingMethod));
 
+        //Update client in session
+        request.getSession().setAttribute("userSession", client);
+
         // Create a new user cart session that replaces the previous one
         request.getSession().setAttribute( "userCartSession", (Cart)new CartImpl(client));
 
@@ -181,7 +184,7 @@ public class CartController {
         return new ModelAndView("redirect:/cartView");
     }
 
-    @RequestMapping({"/emptycart"})
+    @RequestMapping({"/emptyCart"})
     public ModelAndView clearProducts(HttpServletRequest request){
         Cart userCartSession = (Cart) request.getSession().getAttribute("userCartSession");
         userCartSession.clearOrderLines();

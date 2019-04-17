@@ -4,6 +4,7 @@
 
 <%@include file="checkoutForm.jsp" %>
 
+    <hr>
 <div class="row">
     <div class="col-md-4 mb-3">
         <form:label path="email">Email</form:label>
@@ -14,7 +15,7 @@
     </div>
     <div class="col-md-4 mb-3">
         <form:label path="password">Password</form:label>
-        <form:input path="password" class="form-control" value="${userCartSession.client.password}" required="required" data-eye="data-eye"/>
+        <form:input type="password" path="password" class="form-control" value="${userCartSession.client.password}" required="required" data-eye="data-eye"/>
         <div class="invalid-feedback">
             Valid first name is required.
         </div>
@@ -30,13 +31,7 @@
 
     <hr class="mb-4">
     <button class="btn btn-primary btn-lg btn-block" type="submit">Save changes</button>
-    <div class="col-md-4 mb-3" style="visibility: hidden">
-        <form:label path="idClient">numéro de client</form:label>
-        <form:input path="idClient" class="form-control" value="${userCartSession.client.idClient}" required="required" disabled="disabled"/>
-        <div class="invalid-feedback">
-            Valid first name is required.
-        </div>
-    </div>
+    <hr>
 </form:form>
 </div>
 <%@include file="checkoutScript.jsp" %>
