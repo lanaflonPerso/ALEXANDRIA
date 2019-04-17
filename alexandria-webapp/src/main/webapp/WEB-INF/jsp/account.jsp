@@ -43,7 +43,7 @@
         </div>
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Save changes</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="FillBilling(this.checked);">Save changes</button>
         <hr>
 
     </form:form>
