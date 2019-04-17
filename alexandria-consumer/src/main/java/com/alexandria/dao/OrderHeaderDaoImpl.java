@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import java.util.List;
@@ -70,5 +71,37 @@ public class OrderHeaderDaoImpl extends AbstractDaoImpl<OrderHeaderEntity> imple
         super.remove__(orderHeader.getIdOrderHeader());
 
         logger.info("DB_REMOVE_OVERRIDE END");
+    }
+
+    @Override
+    public void updateShippingMethod(OrderHeaderEntity entity) {
+        logger.info("DB_UPDATE_SHIPPING_METHOD BEGIN");
+
+        EntityManager em = beginTransaction();
+
+        Query query = em.createNamedQuery("OrderHeaderEntity.updateShippingMethod");
+        query.setParameter("idOrderHeader", entity.getIdOrderHeader());
+        query.setParameter("shippingMethod", entity.getShippingMethodByShippingMethodId());
+        query.executeUpdate();
+
+        commitTransaction();
+
+        logger.info("DB_UPDATE_SHIPPING_METHOD END");
+    }
+
+    @Override
+    public void updateDatePlaced(OrderHeaderEntity entity) {
+        logger.info("DB_UPDATE_DATE_PLACED BEGIN");
+
+        EntityManager em = beginTransaction();
+
+        Query query = em.createNamedQuery("OrderHeaderEntity.updateDatePlaced");
+        query.setParameter("idOrderHeader", entity.getIdOrderHeader());
+        query.setParameter("datePlaced", entity.getDatePlaced());
+        query.executeUpdate();
+
+        commitTransaction();
+
+        logger.info("DB_UPDATE_DATE_PLACED END");
     }
 }

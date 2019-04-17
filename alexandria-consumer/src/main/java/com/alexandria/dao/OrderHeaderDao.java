@@ -11,6 +11,10 @@ public interface OrderHeaderDao extends AbstractDao<OrderHeaderEntity> {
 
     void update(OrderHeaderEntity entity);
 
+    void updateShippingMethod(OrderHeaderEntity entity);
+
+    void updateDatePlaced(OrderHeaderEntity entity);
+
     void remove(OrderHeaderEntity entity);
 
     OrderHeaderEntity find(Object id);

@@ -72,7 +72,7 @@ public class CartImpl implements Cart {
         order.setDatePlaced(date);
 
         // Update in database
-        orderHeaderDao.update(order);
+        orderHeaderDao.updateDatePlaced(order);
     }
     @Override
     public void setDateShipped(Date date) {
@@ -103,7 +103,7 @@ public class CartImpl implements Cart {
         order.setShippingMethodByShippingMethodId(shippingMethod);
 
         // Update in database
-        orderHeaderDao.update(order);
+        orderHeaderDao.updateShippingMethod(order);
     }
 
     @Override

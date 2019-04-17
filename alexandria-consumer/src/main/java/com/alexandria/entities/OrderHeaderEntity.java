@@ -16,6 +16,14 @@ import java.util.Objects;
         @NamedQuery(
                 name = "OrderHeaderEntity.findFromClient",
                 query = "from OrderHeaderEntity as o where o.clientByClientId = :client"
+        ),
+        @NamedQuery(
+                name = "OrderHeaderEntity.updateShippingMethod",
+                query = "update OrderHeaderEntity as o set o.shippingMethodByShippingMethodId = :shippingMethod where o.idOrderHeader = :idOrderHeader"
+        ),
+        @NamedQuery(
+                name = "OrderHeaderEntity.updateDatePlaced",
+                query = "update OrderHeaderEntity as o set o.datePlaced = :datePlaced where o.idOrderHeader = :idOrderHeader"
         )
 })
 public class OrderHeaderEntity extends AbstractModelObject {
