@@ -22,7 +22,6 @@
                         </c:if>
                         <c:if test="${product.stock < 1}">
                             <a class="btn btn-danger disabled" role="button" href="<c:url value="#"/>">OUT OF STOCK</a>
-<%--                        <p style="font-style: italic; color: red;"><c:out value="Stock exhausted"/></p>--%>
                         </c:if>
                     </p>
 
