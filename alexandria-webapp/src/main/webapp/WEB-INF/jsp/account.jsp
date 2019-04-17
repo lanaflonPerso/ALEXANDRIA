@@ -3,7 +3,7 @@
                novalidate="novalidate">
 
 
-        <%@include file="checkoutForm.jsp" %>
+        <%@include file="_include/checkoutForm.jspf" %>
 
         <hr>
         <div class="row">
@@ -38,4 +38,4 @@
         <hr>
     </form:form>
 </div>
-<%@include file="checkoutScript.jsp" %>
+<%@include file="_include/checkoutScript.jspf" %>

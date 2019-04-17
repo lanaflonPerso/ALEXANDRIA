@@ -23,7 +23,7 @@
 
     <form:form method="POST" class="needs-validation" action="checkoutProcess" modelAttribute="client" novalidate="novalidate">
 
-        <%@include file="checkoutForm.jsp" %>
+        <%@include file="_include/checkoutForm.jspf" %>
         <hr>
         <div class="row">
         <div class="col-md-3 mb-3">
@@ -51,4 +51,4 @@
 
 </div>
 
-<%@include file="checkoutScript.jsp" %>
+<%@include file="_include/checkoutScript.jspf" %>
